@@ -1,0 +1,328 @@
+version: 1
+
+build:
+  id: BUILD-0001
+  timestamp: 2026-07-14T16:59:00+03:00
+  phase: Phase-1 (Foundations)
+  commit: cb5c3a4
+  branch: main
+
+summary:
+  total_documents: 151
+  completed_documents: 9
+  pending_documents: 142
+  blocked_documents: 0
+  completion_percentage: 6.0
+
+review_status:
+  status: Ready for Review
+  reviewed_by: null
+  review_date: null
+
+review_order:
+  - path: docs/10-product/10-vision-and-scope.md
+    priority: Critical
+    reason: Root product intent; everything traces to it.
+  - path: docs/10-product/12-functional-requirements.md
+    priority: Critical
+    reason: Scope baseline for all feature work.
+  - path: docs/10-product/13-non-functional-requirements.md
+    priority: Critical
+    reason: Drives scalability, performance, and security targets.
+  - path: docs/20-architecture/20-architecture-overview.md
+    priority: Critical
+    reason: Solution strategy the whole build follows.
+  - path: docs/20-architecture/29-architecture-principles.md
+    priority: Critical
+    reason: Non-negotiable design principles.
+  - path: docs/20-architecture/29.5-system-invariants.md
+    priority: Critical
+    reason: Absolute runtime rules incl. backend-never-decrypts.
+  - path: docs/10-product/11-personas-and-use-cases.md
+    priority: High
+    reason: Personas and journeys requirements trace to.
+  - path: docs/00-README.md
+    priority: Medium
+    reason: Documentation standards and navigation.
+  - path: docs/00-glossary/00-glossary-overview.md
+    priority: Medium
+    reason: Ubiquitous language and core terms.
+
+critical_documents:
+  - path: docs/20-architecture/29.5-system-invariants.md
+    reason: Encodes absolute rules including backend-never-decrypts (INV-01).
+  - path: docs/20-architecture/20-architecture-overview.md
+    reason: The solution strategy for the entire platform.
+  - path: docs/10-product/13-non-functional-requirements.md
+    reason: Drives scalability, performance, and security.
+  - path: docs/10-product/12-functional-requirements.md
+    reason: Scope baseline for all features.
+
+new_documents:
+  - path: docs/document-manifest.yaml
+  - path: docs/00-README.md
+  - path: docs/00-glossary/00-glossary-overview.md
+  - path: docs/10-product/10-vision-and-scope.md
+  - path: docs/10-product/11-personas-and-use-cases.md
+  - path: docs/10-product/12-functional-requirements.md
+  - path: docs/10-product/13-non-functional-requirements.md
+  - path: docs/20-architecture/20-architecture-overview.md
+  - path: docs/20-architecture/29-architecture-principles.md
+  - path: docs/20-architecture/29.5-system-invariants.md
+
+updated_documents: []
+
+removed_documents: []
+
+pending_documents:
+  - path: docs/00-glossary/01-business-terms.md
+  - path: docs/00-glossary/02-technical-terms.md
+  - path: docs/00-glossary/03-acronyms.md
+  - path: docs/00-glossary/04-protocol-terms.md
+  - path: docs/00-glossary/05-cryptography-terms.md
+  - path: docs/10-product/14-requirements-traceability-matrix.md
+  - path: docs/20-architecture/21-c4-context.md
+  - path: docs/20-architecture/22-c4-container.md
+  - path: docs/20-architecture/23-c4-component.md
+  - path: docs/20-architecture/24-modular-monolith-blueprint.md
+  - path: docs/20-architecture/25-vertical-slice-and-cqrs.md
+  - path: docs/20-architecture/26-event-driven-architecture.md
+  - path: docs/20-architecture/27-cross-cutting-concerns.md
+  - path: docs/20-architecture/28-quality-scenarios.md
+  - path: docs/30-domain/30-domain-model-overview.md
+  - path: docs/30-domain/31-bounded-contexts-and-modules.md
+  - path: docs/30-domain/32-aggregates-and-invariants.md
+  - path: docs/30-domain/33-domain-events-catalog.md
+  - path: docs/30-domain/34-context-map.md
+  - path: docs/30-domain/36-message-lifecycle.md
+  - path: docs/40-security/40-security-architecture.md
+  - path: docs/40-security/41-e2ee-design.md
+  - path: docs/40-security/42-authn-authz.md
+  - path: docs/40-security/43-key-management-and-devices.md
+  - path: docs/40-security/44-threat-model.md
+  - path: docs/40-security/45-data-privacy-and-compliance.md
+  - path: docs/40-security/46-zero-trust-and-tls-policy.md
+  - path: docs/40-security/47-abuse-spam-and-rate-limiting.md
+  - path: docs/40-security/48-attack-mitigations.md
+  - path: docs/40-security/49-key-compromise-recovery.md
+  - path: docs/50-data/50-data-architecture.md
+  - path: docs/50-data/51-postgres-schema-and-migrations.md
+  - path: docs/50-data/52-read-model-and-dapper.md
+  - path: docs/50-data/53-redis-usage.md
+  - path: docs/50-data/54-message-sync-and-storage.md
+  - path: docs/50-data/55-search-architecture.md
+  - path: docs/50-data/56-partitioning-and-sharding.md
+  - path: docs/50-data/57-retention-ttl-and-backup.md
+  - path: docs/60-realtime/60-realtime-architecture.md
+  - path: docs/60-realtime/61-presence-and-typing.md
+  - path: docs/60-realtime/62-delivery-and-read-receipts.md
+  - path: docs/60-realtime/63-push-notifications.md
+  - path: docs/60-realtime/64-backpressure-and-fanout.md
+  - path: docs/70-features/70-feature-spec-template.md
+  - path: docs/70-features/FS-01-one-to-one-chat.md
+  - path: docs/70-features/FS-02-group-chat.md
+  - path: docs/70-features/FS-03-channels.md
+  - path: docs/70-features/FS-04-media-and-files.md
+  - path: docs/70-features/FS-05-voice-notes.md
+  - path: docs/70-features/FS-06-reactions.md
+  - path: docs/70-features/FS-07-replies.md
+  - path: docs/70-features/FS-08-forwarding.md
+  - path: docs/70-features/FS-09-edit-and-delete.md
+  - path: docs/70-features/FS-10-search.md
+  - path: docs/70-features/FS-11-contact-discovery-and-blocking.md
+  - path: docs/80-api/80-api-design-guidelines.md
+  - path: docs/80-api/81-rest-contract.md
+  - path: docs/80-api/82-signalr-hub-contract.md
+  - path: docs/80-api/83-error-model-and-versioning.md
+  - path: docs/80-api/84-client-sdk-crypto-contract.md
+  - path: docs/85-protocol/85-protocol-overview.md
+  - path: docs/85-protocol/85.1-packet-format.md
+  - path: docs/85-protocol/85.2-client-server-protocol.md
+  - path: docs/85-protocol/85.3-signalr-event-catalog.md
+  - path: docs/85-protocol/85.4-encryption-envelope.md
+  - path: docs/85-protocol/85.5-delivery-state-machine.md
+  - path: docs/85-protocol/85.6-message-metadata.md
+  - path: docs/85-protocol/85.7-presence-protocol.md
+  - path: docs/85-protocol/85.8-typing-protocol.md
+  - path: docs/85-protocol/85.9-synchronization-protocol.md
+  - path: docs/90-infrastructure/90-deployment-architecture.md
+  - path: docs/90-infrastructure/91-docker-and-local-dev.md
+  - path: docs/90-infrastructure/92-background-workers.md
+  - path: docs/90-infrastructure/93-observability.md
+  - path: docs/90-infrastructure/94-scalability-and-capacity.md
+  - path: docs/90-infrastructure/95-ci-cd.md
+  - path: docs/90-infrastructure/96-config-and-feature-flags.md
+  - path: docs/90-infrastructure/97-multi-region-and-residency.md
+  - path: docs/95-quality/95-testing-strategy.md
+  - path: docs/95-quality/96-performance-and-load-testing.md
+  - path: docs/95-quality/96-performance-budget.md
+  - path: docs/95-quality/97-definition-of-done.md
+  - path: docs/95-quality/98-crypto-test-vectors-and-conformance.md
+  - path: docs/98-operations/98-runbooks.md
+  - path: docs/98-operations/99-sre-slo-sli.md
+  - path: docs/98-operations/99-incident-and-dr.md
+  - path: docs/98-operations/OPS-01-capacity-planning.md
+  - path: docs/98-operations/OPS-02-chaos-engineering.md
+  - path: docs/98-operations/OPS-03-load-testing-strategy.md
+  - path: docs/98-operations/OPS-04-dr-validation.md
+  - path: docs/98-operations/OPS-05-secret-rotation.md
+  - path: docs/98-operations/OPS-06-certificate-rotation.md
+  - path: docs/98-operations/OPS-07-key-rotation.md
+  - path: docs/98-operations/OPS-08-operational-checklists.md
+  - path: docs/ADR/adr-template.md
+  - path: docs/ADR/ADR-0001-modular-monolith-over-microservices.md
+  - path: docs/ADR/ADR-0002-vertical-slice-architecture.md
+  - path: docs/ADR/ADR-0003-cqrs-with-ef-and-dapper.md
+  - path: docs/ADR/ADR-0004-e2ee-client-only-encryption.md
+  - path: docs/ADR/ADR-0005-signalr-for-realtime.md
+  - path: docs/ADR/ADR-0006-postgres-as-primary-store.md
+  - path: docs/ADR/ADR-0007-redis-roles.md
+  - path: docs/ADR/ADR-0008-message-id-and-ordering-strategy.md
+  - path: docs/ADR/ADR-0009-search-engine-choice.md
+  - path: docs/ADR/ADR-0010-message-ordering.md
+  - path: docs/ADR/ADR-0011-cursor-pagination.md
+  - path: docs/ADR/ADR-0012-soft-delete.md
+  - path: docs/ADR/ADR-0013-message-versioning.md
+  - path: docs/ADR/ADR-0014-presence-architecture.md
+  - path: docs/ADR/ADR-0015-attachment-storage.md
+  - path: docs/ADR/ADR-0016-offline-synchronization.md
+  - path: docs/ADR/ADR-0017-event-versioning.md
+  - path: docs/ADR/ADR-0018-idempotency.md
+  - path: docs/ADR/ADR-0019-multi-device.md
+  - path: docs/ADR/ADR-0020-group-encryption.md
+  - path: docs/ADR/ADR-0021-rate-limiting.md
+  - path: docs/ADR/ADR-0022-distributed-locking.md
+  - path: docs/ADR/ADR-0023-retry-policy.md
+  - path: docs/ADR/ADR-0024-outbox-pattern.md
+  - path: docs/ADR/ADR-0025-inbox-pattern.md
+  - path: docs/ADR/ADR-0026-circuit-breakers.md
+  - path: docs/ADR/ADR-0027-caching-strategy.md
+  - path: docs/ADR/ADR-0028-search-architecture.md
+  - path: docs/ADR/ADR-0029-feature-flags.md
+  - path: docs/ADR/ADR-0030-api-versioning.md
+  - path: docs/ZZ-migration/ZZ-monolith-to-microservices.md
+
+blocked_documents: []
+
+pending_adrs:
+  - id: ADR-0004
+    title: E2EE Client-Only Encryption
+    reason: Cryptographic protocol/library not yet selected.
+    impacts: [DOC-047, DOC-049, DOC-090, DOC-085, DOC-108, DOC-140]
+  - id: ADR-0008
+    title: Message ID and Ordering Strategy
+    reason: Global ID scheme and ordering not yet chosen.
+    impacts: [DOC-045, DOC-060, DOC-091, DOC-095]
+  - id: ADR-0010
+    title: Message Ordering
+    reason: Depends on ADR-0008; total-order guarantee to be finalized.
+    impacts: [DOC-045, DOC-060]
+  - id: ADR-0020
+    title: Group Encryption
+    reason: Sender-keys vs. MLS decision pending.
+    impacts: [DOC-071, DOC-035]
+  - id: ADR-0009
+    title: Search Engine Choice
+    reason: Metadata search engine not finalized.
+    impacts: [DOC-061, DOC-079]
+
+architecture_decisions:
+  completed: []
+  pending:
+    - ADR-0001
+    - ADR-0002
+    - ADR-0003
+    - ADR-0004
+    - ADR-0005
+    - ADR-0006
+    - ADR-0007
+    - ADR-0008
+    - ADR-0009
+    - ADR-0010
+    - ADR-0011
+    - ADR-0012
+    - ADR-0013
+    - ADR-0014
+    - ADR-0015
+    - ADR-0016
+    - ADR-0017
+    - ADR-0018
+    - ADR-0019
+    - ADR-0020
+    - ADR-0021
+    - ADR-0022
+    - ADR-0023
+    - ADR-0024
+    - ADR-0025
+    - ADR-0026
+    - ADR-0027
+    - ADR-0028
+    - ADR-0029
+    - ADR-0030
+
+quality_summary:
+  average_score: 9.32
+  lowest_score: 9.0
+  highest_score: 9.6
+
+cross_reference_status:
+  broken_links: 0
+  missing_dependencies: 0
+  circular_dependencies: 0
+  duplicate_definitions: 0
+
+validation:
+  markdown: PASS
+  mermaid: PASS
+  references: PASS
+  dependency_graph: PASS
+  architecture_rules: PASS
+  security_rules: PASS
+  e2ee_rules: PASS
+
+known_risks:
+  - id: RISK-01
+    description: E2EE limits server-side features (search, moderation, recovery).
+    severity: High
+  - id: RISK-02
+    description: Module boundary erosion would block microservice extraction.
+    severity: Medium
+  - id: RISK-03
+    description: Fan-out at large group scale is the primary performance bottleneck.
+    severity: High
+  - id: RISK-04
+    description: Availability vs. E2EE tension; no server recovery of content.
+    severity: Medium
+
+open_questions:
+  - id: OQ-NFR-01
+    description: Confirmed launch availability SLO and error budget.
+    owner: SRE + Product
+  - id: OQ-INV-02
+    description: Authoritative global ordering scheme (ULID/Snowflake/HLC).
+    owner: Architecture
+  - id: OQ-ARCH-02
+    description: Selected E2EE protocol/library and audit status.
+    owner: Security
+  - id: OQ-PER-01
+    description: Concurrent devices per user to support at launch.
+    owner: Product + Architecture
+  - id: OQ-FR-01
+    description: Delete-for-everyone time window.
+    owner: Product
+
+next_review:
+  recommended_documents:
+    - path: docs/ADR/adr-template.md
+    - path: docs/20-architecture/21-c4-context.md
+    - path: docs/20-architecture/22-c4-container.md
+    - path: docs/30-domain/30-domain-model-overview.md
+    - path: docs/10-product/14-requirements-traceability-matrix.md
+
+next_build_phase:
+  phase: Phase-2 (Core Architecture & Domain)
+  description: >-
+    Generate ADR template and foundational ADRs (0001-0003), C4 Context and
+    Container, Domain Model Overview and Bounded Contexts, Modular Monolith
+    Blueprint and Vertical Slice & CQRS, plus the Requirements Traceability
+    Matrix and remaining glossary term files.
