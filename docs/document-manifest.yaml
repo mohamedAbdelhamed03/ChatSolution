@@ -1,0 +1,2174 @@
+version: 1
+
+# =============================================================================
+# Documentation Build Manifest
+# Single source of truth for the documentation build pipeline.
+# No other document may define dependency order. All build work uses this file.
+#
+# status values:  Completed | Pending | Blocked
+# priority:       Critical | High | Medium | Low
+# phase:          Phase-1 (Foundations) | Phase-2 (Core Architecture & Domain)
+#                 Phase-3 (Security & Data) | Phase-4 (Realtime, Protocol & Features)
+#                 Phase-5 (API, Infra, Quality, Ops) | Phase-6 (ADRs & Migration)
+# =============================================================================
+
+documents:
+
+  # ---------------------------------------------------------------------------
+  # Foundation
+  # ---------------------------------------------------------------------------
+  - id: DOC-002
+    title: Documentation README and Reading Order
+    path: docs/00-README.md
+    category: Foundation
+    phase: Phase-1
+    priority: Critical
+    status: Completed
+    owner: Architecture
+    dependencies: []
+    blocks: [DOC-003]
+    blocked_by: []
+    related_documents: [DOC-001]
+    estimated_complexity: Low
+
+  - id: DOC-003
+    title: Glossary Overview
+    path: docs/00-glossary/00-glossary-overview.md
+    category: Foundation
+    phase: Phase-1
+    priority: High
+    status: Completed
+    owner: Architecture
+    dependencies: []
+    blocks: [DOC-004, DOC-005, DOC-006, DOC-007, DOC-008]
+    blocked_by: []
+    related_documents: [DOC-001, DOC-024]
+    estimated_complexity: Low
+
+  - id: DOC-004
+    title: Business Terms
+    path: docs/00-glossary/01-business-terms.md
+    category: Foundation
+    phase: Phase-1
+    priority: Medium
+    status: Pending
+    owner: Product
+    dependencies: [DOC-003]
+    blocks: []
+    blocked_by: [DOC-003]
+    related_documents: [DOC-001, DOC-024]
+    estimated_complexity: Low
+
+  - id: DOC-005
+    title: Technical Terms
+    path: docs/00-glossary/02-technical-terms.md
+    category: Foundation
+    phase: Phase-1
+    priority: Medium
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-003]
+    blocks: []
+    blocked_by: [DOC-003]
+    related_documents: [DOC-013, DOC-018]
+    estimated_complexity: Low
+
+  - id: DOC-006
+    title: Acronyms
+    path: docs/00-glossary/03-acronyms.md
+    category: Foundation
+    phase: Phase-1
+    priority: Low
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-003]
+    blocks: []
+    blocked_by: [DOC-003]
+    related_documents: []
+    estimated_complexity: Low
+
+  - id: DOC-007
+    title: Protocol Terms
+    path: docs/00-glossary/04-protocol-terms.md
+    category: Foundation
+    phase: Phase-1
+    priority: Medium
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-003]
+    blocks: []
+    blocked_by: [DOC-003]
+    related_documents: [DOC-086]
+    estimated_complexity: Low
+
+  - id: DOC-008
+    title: Cryptography Terms
+    path: docs/00-glossary/05-cryptography-terms.md
+    category: Foundation
+    phase: Phase-1
+    priority: High
+    status: Pending
+    owner: Security
+    dependencies: [DOC-003]
+    blocks: []
+    blocked_by: [DOC-003]
+    related_documents: [DOC-047, DOC-049]
+    estimated_complexity: Low
+
+  # ---------------------------------------------------------------------------
+  # Product
+  # ---------------------------------------------------------------------------
+  - id: DOC-001
+    title: Vision and Scope
+    path: docs/10-product/10-vision-and-scope.md
+    category: Product
+    phase: Phase-1
+    priority: Critical
+    status: Completed
+    owner: Architecture
+    dependencies: []
+    blocks: [DOC-009, DOC-010, DOC-011, DOC-013]
+    blocked_by: []
+    related_documents: [DOC-013, DOC-047]
+    estimated_complexity: Medium
+
+  - id: DOC-009
+    title: Personas and Use Cases
+    path: docs/10-product/11-personas-and-use-cases.md
+    category: Product
+    phase: Phase-1
+    priority: High
+    status: Completed
+    owner: Product
+    dependencies: [DOC-001]
+    blocks: [DOC-010]
+    blocked_by: []
+    related_documents: [DOC-010, DOC-029]
+    estimated_complexity: Medium
+
+  - id: DOC-010
+    title: Functional Requirements
+    path: docs/10-product/12-functional-requirements.md
+    category: Product
+    phase: Phase-1
+    priority: Critical
+    status: Completed
+    owner: Product
+    dependencies: [DOC-001, DOC-009]
+    blocks: [DOC-012, DOC-013, DOC-069]
+    blocked_by: []
+    related_documents: [DOC-012, DOC-069]
+    estimated_complexity: High
+
+  - id: DOC-011
+    title: Non-Functional Requirements
+    path: docs/10-product/13-non-functional-requirements.md
+    category: Product
+    phase: Phase-1
+    priority: Critical
+    status: Completed
+    owner: Architecture
+    dependencies: [DOC-001]
+    blocks: [DOC-013, DOC-021, DOC-022, DOC-106]
+    blocked_by: []
+    related_documents: [DOC-021, DOC-106, DOC-110]
+    estimated_complexity: High
+
+  - id: DOC-012
+    title: Requirements Traceability Matrix
+    path: docs/10-product/14-requirements-traceability-matrix.md
+    category: Product
+    phase: Phase-2
+    priority: High
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-010, DOC-011]
+    blocks: []
+    blocked_by: [DOC-010, DOC-011]
+    related_documents: [DOC-107]
+    estimated_complexity: Medium
+
+  # ---------------------------------------------------------------------------
+  # Architecture
+  # ---------------------------------------------------------------------------
+  - id: DOC-013
+    title: Architecture Overview
+    path: docs/20-architecture/20-architecture-overview.md
+    category: Architecture
+    phase: Phase-1
+    priority: Critical
+    status: Completed
+    owner: Architecture
+    dependencies: [DOC-001, DOC-010, DOC-011]
+    blocks: [DOC-014, DOC-015, DOC-017, DOC-018, DOC-024]
+    blocked_by: []
+    related_documents: [DOC-022, DOC-023]
+    estimated_complexity: High
+
+  - id: DOC-014
+    title: C4 Context Diagram
+    path: docs/20-architecture/21-c4-context.md
+    category: Architecture
+    phase: Phase-2
+    priority: High
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-013]
+    blocks: [DOC-015]
+    blocked_by: [DOC-013]
+    related_documents: [DOC-050]
+    estimated_complexity: Medium
+
+  - id: DOC-015
+    title: C4 Container Diagram
+    path: docs/20-architecture/22-c4-container.md
+    category: Architecture
+    phase: Phase-2
+    priority: High
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-013, DOC-014, DOC-011]
+    blocks: [DOC-016, DOC-064, DOC-096]
+    blocked_by: [DOC-013, DOC-014]
+    related_documents: [DOC-056, DOC-064]
+    estimated_complexity: High
+
+  - id: DOC-016
+    title: C4 Component Diagram
+    path: docs/20-architecture/23-c4-component.md
+    category: Architecture
+    phase: Phase-2
+    priority: Medium
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-015, DOC-025]
+    blocks: [DOC-069]
+    blocked_by: [DOC-015, DOC-025]
+    related_documents: [DOC-018]
+    estimated_complexity: Medium
+
+  - id: DOC-017
+    title: Modular Monolith Blueprint
+    path: docs/20-architecture/24-modular-monolith-blueprint.md
+    category: Architecture
+    phase: Phase-2
+    priority: Critical
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-013, DOC-025]
+    blocks: [DOC-018, DOC-151]
+    blocked_by: [DOC-013, DOC-025]
+    related_documents: [DOC-023, DOC-151]
+    estimated_complexity: High
+
+  - id: DOC-018
+    title: Vertical Slice and CQRS
+    path: docs/20-architecture/25-vertical-slice-and-cqrs.md
+    category: Architecture
+    phase: Phase-2
+    priority: Critical
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-017, DOC-024, DOC-056]
+    blocks: [DOC-069]
+    blocked_by: [DOC-017, DOC-024, DOC-056]
+    related_documents: [DOC-058]
+    estimated_complexity: High
+
+  - id: DOC-019
+    title: Event-Driven Architecture
+    path: docs/20-architecture/26-event-driven-architecture.md
+    category: Architecture
+    phase: Phase-2
+    priority: Critical
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-017, DOC-027]
+    blocks: [DOC-098, DOC-066]
+    blocked_by: [DOC-017, DOC-027]
+    related_documents: [DOC-027, DOC-098]
+    estimated_complexity: High
+
+  - id: DOC-020
+    title: Cross-Cutting Concerns
+    path: docs/20-architecture/27-cross-cutting-concerns.md
+    category: Architecture
+    phase: Phase-2
+    priority: High
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-018]
+    blocks: [DOC-019, DOC-084, DOC-099]
+    blocked_by: [DOC-018]
+    related_documents: [DOC-099, DOC-084]
+    estimated_complexity: Medium
+
+  - id: DOC-021
+    title: Quality Scenarios
+    path: docs/20-architecture/28-quality-scenarios.md
+    category: Architecture
+    phase: Phase-2
+    priority: High
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-011, DOC-013]
+    blocks: [DOC-105, DOC-110]
+    blocked_by: [DOC-011, DOC-013]
+    related_documents: [DOC-100, DOC-106]
+    estimated_complexity: Medium
+
+  - id: DOC-022
+    title: Architecture Principles
+    path: docs/20-architecture/29-architecture-principles.md
+    category: Architecture
+    phase: Phase-1
+    priority: Critical
+    status: Completed
+    owner: Architecture
+    dependencies: [DOC-001, DOC-011]
+    blocks: [DOC-023, DOC-017, DOC-018, DOC-107]
+    blocked_by: []
+    related_documents: [DOC-023, DOC-046]
+    estimated_complexity: Medium
+
+  - id: DOC-023
+    title: System Invariants
+    path: docs/20-architecture/29.5-system-invariants.md
+    category: Architecture
+    phase: Phase-1
+    priority: Critical
+    status: Completed
+    owner: Architecture
+    dependencies: [DOC-001, DOC-022]
+    blocks: [DOC-026, DOC-045, DOC-086, DOC-107]
+    blocked_by: []
+    related_documents: [DOC-047, DOC-099]
+    estimated_complexity: Medium
+
+  # ---------------------------------------------------------------------------
+  # Domain
+  # ---------------------------------------------------------------------------
+  - id: DOC-024
+    title: Domain Model Overview
+    path: docs/30-domain/30-domain-model-overview.md
+    category: Domain
+    phase: Phase-2
+    priority: Critical
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-003, DOC-010, DOC-013]
+    blocks: [DOC-025, DOC-018]
+    blocked_by: [DOC-003, DOC-010, DOC-013]
+    related_documents: [DOC-004]
+    estimated_complexity: High
+
+  - id: DOC-025
+    title: Bounded Contexts and Modules
+    path: docs/30-domain/31-bounded-contexts-and-modules.md
+    category: Domain
+    phase: Phase-2
+    priority: Critical
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-024, DOC-017]
+    blocks: [DOC-026, DOC-016, DOC-028]
+    blocked_by: [DOC-024, DOC-017]
+    related_documents: [DOC-028]
+    estimated_complexity: High
+
+  - id: DOC-026
+    title: Aggregates and Invariants
+    path: docs/30-domain/32-aggregates-and-invariants.md
+    category: Domain
+    phase: Phase-3
+    priority: High
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-025, DOC-047]
+    blocks: [DOC-057]
+    blocked_by: [DOC-025, DOC-047]
+    related_documents: [DOC-023]
+    estimated_complexity: High
+
+  - id: DOC-027
+    title: Domain Events Catalog
+    path: docs/30-domain/33-domain-events-catalog.md
+    category: Domain
+    phase: Phase-3
+    priority: Critical
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-026, DOC-019]
+    blocks: [DOC-098, DOC-066, DOC-067]
+    blocked_by: [DOC-026, DOC-019]
+    related_documents: [DOC-137]
+    estimated_complexity: High
+
+  - id: DOC-028
+    title: Context Map
+    path: docs/30-domain/34-context-map.md
+    category: Domain
+    phase: Phase-3
+    priority: Medium
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-025, DOC-027]
+    blocks: [DOC-151]
+    blocked_by: [DOC-025, DOC-027]
+    related_documents: [DOC-151]
+    estimated_complexity: Medium
+
+  - id: DOC-029
+    title: Sequence Conventions
+    path: docs/30-domain/35-sequences/SQ-00-sequence-conventions.md
+    category: Domain
+    phase: Phase-4
+    priority: Medium
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-027]
+    blocks: [DOC-030, DOC-031, DOC-032, DOC-033, DOC-034, DOC-035, DOC-036, DOC-037, DOC-038, DOC-039, DOC-040, DOC-041, DOC-042, DOC-043, DOC-044]
+    blocked_by: [DOC-027]
+    related_documents: [DOC-086]
+    estimated_complexity: Low
+
+  - id: DOC-030
+    title: SQ-01 User Registration
+    path: docs/30-domain/35-sequences/SQ-01-user-registration.md
+    category: Domain
+    phase: Phase-4
+    priority: High
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-029, DOC-048]
+    blocks: []
+    blocked_by: [DOC-029, DOC-048]
+    related_documents: [DOC-048, DOC-049]
+    estimated_complexity: Medium
+
+  - id: DOC-031
+    title: SQ-02 Login
+    path: docs/30-domain/35-sequences/SQ-02-login.md
+    category: Domain
+    phase: Phase-4
+    priority: High
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-029, DOC-048]
+    blocks: []
+    blocked_by: [DOC-029, DOC-048]
+    related_documents: [DOC-048]
+    estimated_complexity: Medium
+
+  - id: DOC-032
+    title: SQ-03 Device Registration
+    path: docs/30-domain/35-sequences/SQ-03-device-registration.md
+    category: Domain
+    phase: Phase-4
+    priority: High
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-029, DOC-049]
+    blocks: []
+    blocked_by: [DOC-029, DOC-049]
+    related_documents: [DOC-049]
+    estimated_complexity: Medium
+
+  - id: DOC-033
+    title: SQ-04 Send Message
+    path: docs/30-domain/35-sequences/SQ-04-send-message.md
+    category: Domain
+    phase: Phase-4
+    priority: Critical
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-029, DOC-047, DOC-060]
+    blocks: []
+    blocked_by: [DOC-029, DOC-047, DOC-060]
+    related_documents: [DOC-045, DOC-090]
+    estimated_complexity: Medium
+
+  - id: DOC-034
+    title: SQ-05 Receive Message
+    path: docs/30-domain/35-sequences/SQ-05-receive-message.md
+    category: Domain
+    phase: Phase-4
+    priority: Critical
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-029, DOC-047, DOC-064]
+    blocks: []
+    blocked_by: [DOC-029, DOC-047, DOC-064]
+    related_documents: [DOC-045]
+    estimated_complexity: Medium
+
+  - id: DOC-035
+    title: SQ-06 Group Message
+    path: docs/30-domain/35-sequences/SQ-06-group-message.md
+    category: Domain
+    phase: Phase-4
+    priority: High
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-029, DOC-047, DOC-071]
+    blocks: []
+    blocked_by: [DOC-029, DOC-047, DOC-071]
+    related_documents: [DOC-068]
+    estimated_complexity: High
+
+  - id: DOC-036
+    title: SQ-07 Read Receipt
+    path: docs/30-domain/35-sequences/SQ-07-read-receipt.md
+    category: Domain
+    phase: Phase-4
+    priority: Medium
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-029, DOC-066]
+    blocks: []
+    blocked_by: [DOC-029, DOC-066]
+    related_documents: [DOC-066]
+    estimated_complexity: Medium
+
+  - id: DOC-037
+    title: SQ-08 Message Synchronization
+    path: docs/30-domain/35-sequences/SQ-08-message-synchronization.md
+    category: Domain
+    phase: Phase-4
+    priority: High
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-029, DOC-060, DOC-095]
+    blocks: []
+    blocked_by: [DOC-029, DOC-060, DOC-095]
+    related_documents: [DOC-095]
+    estimated_complexity: High
+
+  - id: DOC-038
+    title: SQ-09 Key Exchange
+    path: docs/30-domain/35-sequences/SQ-09-key-exchange.md
+    category: Domain
+    phase: Phase-4
+    priority: Critical
+    status: Pending
+    owner: Security
+    dependencies: [DOC-029, DOC-047, DOC-049]
+    blocks: []
+    blocked_by: [DOC-029, DOC-047, DOC-049]
+    related_documents: [DOC-090]
+    estimated_complexity: High
+
+  - id: DOC-039
+    title: SQ-10 Upload Media
+    path: docs/30-domain/35-sequences/SQ-10-upload-media.md
+    category: Domain
+    phase: Phase-4
+    priority: High
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-029, DOC-047, DOC-073]
+    blocks: []
+    blocked_by: [DOC-029, DOC-047, DOC-073]
+    related_documents: [DOC-135]
+    estimated_complexity: Medium
+
+  - id: DOC-040
+    title: SQ-11 Download Media
+    path: docs/30-domain/35-sequences/SQ-11-download-media.md
+    category: Domain
+    phase: Phase-4
+    priority: High
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-029, DOC-047, DOC-073]
+    blocks: []
+    blocked_by: [DOC-029, DOC-047, DOC-073]
+    related_documents: [DOC-135]
+    estimated_complexity: Medium
+
+  - id: DOC-041
+    title: SQ-12 Voice Note
+    path: docs/30-domain/35-sequences/SQ-12-voice-note.md
+    category: Domain
+    phase: Phase-4
+    priority: Medium
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-029, DOC-047, DOC-074]
+    blocks: []
+    blocked_by: [DOC-029, DOC-047, DOC-074]
+    related_documents: [DOC-073]
+    estimated_complexity: Medium
+
+  - id: DOC-042
+    title: SQ-13 Push Notification
+    path: docs/30-domain/35-sequences/SQ-13-push-notification.md
+    category: Domain
+    phase: Phase-4
+    priority: High
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-029, DOC-067]
+    blocks: []
+    blocked_by: [DOC-029, DOC-067]
+    related_documents: [DOC-067]
+    estimated_complexity: Medium
+
+  - id: DOC-043
+    title: SQ-14 Reconnect
+    path: docs/30-domain/35-sequences/SQ-14-reconnect.md
+    category: Domain
+    phase: Phase-4
+    priority: Medium
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-029, DOC-064]
+    blocks: []
+    blocked_by: [DOC-029, DOC-064]
+    related_documents: [DOC-095]
+    estimated_complexity: Medium
+
+  - id: DOC-044
+    title: SQ-15 Offline Recovery
+    path: docs/30-domain/35-sequences/SQ-15-offline-recovery.md
+    category: Domain
+    phase: Phase-4
+    priority: High
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-029, DOC-060, DOC-095]
+    blocks: []
+    blocked_by: [DOC-029, DOC-060, DOC-095]
+    related_documents: [DOC-045]
+    estimated_complexity: High
+
+  - id: DOC-045
+    title: Message Lifecycle
+    path: docs/30-domain/36-message-lifecycle.md
+    category: Domain
+    phase: Phase-4
+    priority: Critical
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-023, DOC-060, DOC-091]
+    blocks: [DOC-070, DOC-078]
+    blocked_by: [DOC-023, DOC-060, DOC-091]
+    related_documents: [DOC-091, DOC-066]
+    estimated_complexity: High
+
+  # ---------------------------------------------------------------------------
+  # Security
+  # ---------------------------------------------------------------------------
+  - id: DOC-046
+    title: Security Architecture
+    path: docs/40-security/40-security-architecture.md
+    category: Security
+    phase: Phase-3
+    priority: Critical
+    status: Pending
+    owner: Security
+    dependencies: [DOC-013, DOC-011]
+    blocks: [DOC-047, DOC-048, DOC-050, DOC-052]
+    blocked_by: [DOC-013, DOC-011]
+    related_documents: [DOC-022, DOC-023]
+    estimated_complexity: High
+
+  - id: DOC-047
+    title: E2EE Design
+    path: docs/40-security/41-e2ee-design.md
+    category: Security
+    phase: Phase-3
+    priority: Critical
+    status: Pending
+    owner: Security
+    dependencies: [DOC-046, DOC-049]
+    blocks: [DOC-026, DOC-033, DOC-060, DOC-061, DOC-090, DOC-085]
+    blocked_by: [DOC-046, DOC-049]
+    related_documents: [DOC-090, DOC-085, DOC-149]
+    estimated_complexity: High
+
+  - id: DOC-048
+    title: Authentication and Authorization
+    path: docs/40-security/42-authn-authz.md
+    category: Security
+    phase: Phase-3
+    priority: Critical
+    status: Pending
+    owner: Security
+    dependencies: [DOC-046, DOC-049]
+    blocks: [DOC-030, DOC-031, DOC-083]
+    blocked_by: [DOC-046, DOC-049]
+    related_documents: [DOC-083]
+    estimated_complexity: High
+
+  - id: DOC-049
+    title: Key Management and Devices
+    path: docs/40-security/43-key-management-and-devices.md
+    category: Security
+    phase: Phase-3
+    priority: Critical
+    status: Pending
+    owner: Security
+    dependencies: [DOC-046]
+    blocks: [DOC-047, DOC-048, DOC-060, DOC-055]
+    blocked_by: [DOC-046]
+    related_documents: [DOC-139, DOC-118]
+    estimated_complexity: High
+
+  - id: DOC-050
+    title: Threat Model
+    path: docs/40-security/44-threat-model.md
+    category: Security
+    phase: Phase-3
+    priority: Critical
+    status: Pending
+    owner: Security
+    dependencies: [DOC-046, DOC-047, DOC-014]
+    blocks: [DOC-054, DOC-107, DOC-111]
+    blocked_by: [DOC-046, DOC-047, DOC-014]
+    related_documents: [DOC-054]
+    estimated_complexity: High
+
+  - id: DOC-051
+    title: Data Privacy and Compliance
+    path: docs/40-security/45-data-privacy-and-compliance.md
+    category: Security
+    phase: Phase-3
+    priority: High
+    status: Pending
+    owner: Security
+    dependencies: [DOC-047, DOC-056, DOC-011]
+    blocks: [DOC-063, DOC-103]
+    blocked_by: [DOC-047, DOC-056, DOC-011]
+    related_documents: [DOC-063]
+    estimated_complexity: High
+
+  - id: DOC-052
+    title: Zero Trust and TLS Policy
+    path: docs/40-security/46-zero-trust-and-tls-policy.md
+    category: Security
+    phase: Phase-3
+    priority: High
+    status: Pending
+    owner: Security
+    dependencies: [DOC-046]
+    blocks: [DOC-117]
+    blocked_by: [DOC-046]
+    related_documents: [DOC-117, DOC-096]
+    estimated_complexity: Medium
+
+  - id: DOC-053
+    title: Abuse, Spam and Rate Limiting
+    path: docs/40-security/47-abuse-spam-and-rate-limiting.md
+    category: Security
+    phase: Phase-3
+    priority: High
+    status: Pending
+    owner: Security
+    dependencies: [DOC-046, DOC-059]
+    blocks: [DOC-141]
+    blocked_by: [DOC-046, DOC-059]
+    related_documents: [DOC-141, DOC-080]
+    estimated_complexity: Medium
+
+  - id: DOC-054
+    title: Attack Mitigations
+    path: docs/40-security/48-attack-mitigations.md
+    category: Security
+    phase: Phase-3
+    priority: High
+    status: Pending
+    owner: Security
+    dependencies: [DOC-050]
+    blocks: []
+    blocked_by: [DOC-050]
+    related_documents: [DOC-048, DOC-052]
+    estimated_complexity: High
+
+  - id: DOC-055
+    title: Key Compromise Recovery
+    path: docs/40-security/49-key-compromise-recovery.md
+    category: Security
+    phase: Phase-3
+    priority: High
+    status: Pending
+    owner: Security
+    dependencies: [DOC-049, DOC-047]
+    blocks: [DOC-118]
+    blocked_by: [DOC-049, DOC-047]
+    related_documents: [DOC-118, DOC-111]
+    estimated_complexity: High
+
+  # ---------------------------------------------------------------------------
+  # Data
+  # ---------------------------------------------------------------------------
+  - id: DOC-056
+    title: Data Architecture
+    path: docs/50-data/50-data-architecture.md
+    category: Data
+    phase: Phase-3
+    priority: Critical
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-017, DOC-047, DOC-026]
+    blocks: [DOC-057, DOC-058, DOC-059, DOC-018, DOC-051]
+    blocked_by: [DOC-017, DOC-047, DOC-026]
+    related_documents: [DOC-062]
+    estimated_complexity: High
+
+  - id: DOC-057
+    title: PostgreSQL Schema and Migrations
+    path: docs/50-data/51-postgres-schema-and-migrations.md
+    category: Data
+    phase: Phase-3
+    priority: Critical
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-056, DOC-026]
+    blocks: [DOC-058, DOC-062, DOC-060]
+    blocked_by: [DOC-056, DOC-026]
+    related_documents: [DOC-062]
+    estimated_complexity: High
+
+  - id: DOC-058
+    title: Read Model and Dapper
+    path: docs/50-data/52-read-model-and-dapper.md
+    category: Data
+    phase: Phase-3
+    priority: High
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-057, DOC-018]
+    blocks: [DOC-131]
+    blocked_by: [DOC-057, DOC-018]
+    related_documents: [DOC-127]
+    estimated_complexity: Medium
+
+  - id: DOC-059
+    title: Redis Usage
+    path: docs/50-data/53-redis-usage.md
+    category: Data
+    phase: Phase-3
+    priority: Critical
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-056, DOC-064]
+    blocks: [DOC-065, DOC-053, DOC-146]
+    blocked_by: [DOC-056, DOC-064]
+    related_documents: [DOC-134, DOC-147]
+    estimated_complexity: Medium
+
+  - id: DOC-060
+    title: Message Sync and Storage
+    path: docs/50-data/54-message-sync-and-storage.md
+    category: Data
+    phase: Phase-3
+    priority: Critical
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-057, DOC-049, DOC-047]
+    blocks: [DOC-033, DOC-037, DOC-045, DOC-070]
+    blocked_by: [DOC-057, DOC-049, DOC-047]
+    related_documents: [DOC-095, DOC-136]
+    estimated_complexity: High
+
+  - id: DOC-061
+    title: Search Architecture
+    path: docs/50-data/55-search-architecture.md
+    category: Data
+    phase: Phase-3
+    priority: High
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-047, DOC-056]
+    blocks: [DOC-079, DOC-148]
+    blocked_by: [DOC-047, DOC-056]
+    related_documents: [DOC-148]
+    estimated_complexity: High
+
+  - id: DOC-062
+    title: Partitioning and Sharding
+    path: docs/50-data/56-partitioning-and-sharding.md
+    category: Data
+    phase: Phase-5
+    priority: High
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-057, DOC-100]
+    blocks: []
+    blocked_by: [DOC-057, DOC-100]
+    related_documents: [DOC-100, DOC-103]
+    estimated_complexity: High
+
+  - id: DOC-063
+    title: Retention, TTL and Backup
+    path: docs/50-data/57-retention-ttl-and-backup.md
+    category: Data
+    phase: Phase-5
+    priority: High
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-051, DOC-026]
+    blocks: [DOC-115]
+    blocked_by: [DOC-051, DOC-026]
+    related_documents: [DOC-115, DOC-111]
+    estimated_complexity: Medium
+
+  # ---------------------------------------------------------------------------
+  # Realtime
+  # ---------------------------------------------------------------------------
+  - id: DOC-064
+    title: Realtime Architecture
+    path: docs/60-realtime/60-realtime-architecture.md
+    category: Realtime
+    phase: Phase-4
+    priority: Critical
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-015, DOC-048]
+    blocks: [DOC-059, DOC-065, DOC-066, DOC-067, DOC-083]
+    blocked_by: [DOC-015, DOC-048]
+    related_documents: [DOC-086, DOC-068]
+    estimated_complexity: High
+
+  - id: DOC-065
+    title: Presence and Typing
+    path: docs/60-realtime/61-presence-and-typing.md
+    category: Realtime
+    phase: Phase-4
+    priority: High
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-064, DOC-059]
+    blocks: [DOC-093, DOC-094]
+    blocked_by: [DOC-064, DOC-059]
+    related_documents: [DOC-093, DOC-094]
+    estimated_complexity: Medium
+
+  - id: DOC-066
+    title: Delivery and Read Receipts
+    path: docs/60-realtime/62-delivery-and-read-receipts.md
+    category: Realtime
+    phase: Phase-4
+    priority: High
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-060, DOC-027, DOC-064]
+    blocks: [DOC-036, DOC-045]
+    blocked_by: [DOC-060, DOC-027, DOC-064]
+    related_documents: [DOC-091]
+    estimated_complexity: Medium
+
+  - id: DOC-067
+    title: Push Notifications
+    path: docs/60-realtime/63-push-notifications.md
+    category: Realtime
+    phase: Phase-4
+    priority: High
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-047, DOC-098, DOC-027]
+    blocks: [DOC-042]
+    blocked_by: [DOC-047, DOC-098, DOC-027]
+    related_documents: [DOC-042]
+    estimated_complexity: Medium
+
+  - id: DOC-068
+    title: Backpressure and Fan-out
+    path: docs/60-realtime/64-backpressure-and-fanout.md
+    category: Realtime
+    phase: Phase-5
+    priority: High
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-064, DOC-100]
+    blocks: []
+    blocked_by: [DOC-064, DOC-100]
+    related_documents: [DOC-100, DOC-098]
+    estimated_complexity: High
+
+  # ---------------------------------------------------------------------------
+  # Features
+  # ---------------------------------------------------------------------------
+  - id: DOC-069
+    title: Feature Spec Template
+    path: docs/70-features/70-feature-spec-template.md
+    category: Features
+    phase: Phase-4
+    priority: High
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-018, DOC-020, DOC-010, DOC-016]
+    blocks: [DOC-070, DOC-071, DOC-072, DOC-073, DOC-074, DOC-075, DOC-076, DOC-077, DOC-078, DOC-079, DOC-080]
+    blocked_by: [DOC-018, DOC-020, DOC-010, DOC-016]
+    related_documents: []
+    estimated_complexity: Low
+
+  - id: DOC-070
+    title: FS-01 One-to-One Chat
+    path: docs/70-features/FS-01-one-to-one-chat.md
+    category: Features
+    phase: Phase-4
+    priority: Critical
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-069, DOC-060, DOC-066, DOC-047]
+    blocks: [DOC-071, DOC-075, DOC-076, DOC-077, DOC-078]
+    blocked_by: [DOC-069, DOC-060, DOC-066, DOC-047]
+    related_documents: [DOC-045]
+    estimated_complexity: High
+
+  - id: DOC-071
+    title: FS-02 Group Chat
+    path: docs/70-features/FS-02-group-chat.md
+    category: Features
+    phase: Phase-4
+    priority: Critical
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-070, DOC-049, DOC-047]
+    blocks: [DOC-072, DOC-035]
+    blocked_by: [DOC-070, DOC-049, DOC-047]
+    related_documents: [DOC-140]
+    estimated_complexity: High
+
+  - id: DOC-072
+    title: FS-03 Channels (Future)
+    path: docs/70-features/FS-03-channels.md
+    category: Features
+    phase: Phase-6
+    priority: Low
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-071]
+    blocks: []
+    blocked_by: [DOC-071]
+    related_documents: [DOC-151]
+    estimated_complexity: Medium
+
+  - id: DOC-073
+    title: FS-04 Media and Files
+    path: docs/70-features/FS-04-media-and-files.md
+    category: Features
+    phase: Phase-4
+    priority: High
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-069, DOC-047, DOC-056]
+    blocks: [DOC-074, DOC-039, DOC-040]
+    blocked_by: [DOC-069, DOC-047, DOC-056]
+    related_documents: [DOC-135]
+    estimated_complexity: High
+
+  - id: DOC-074
+    title: FS-05 Voice Notes
+    path: docs/70-features/FS-05-voice-notes.md
+    category: Features
+    phase: Phase-4
+    priority: Medium
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-073]
+    blocks: [DOC-041]
+    blocked_by: [DOC-073]
+    related_documents: [DOC-041]
+    estimated_complexity: Medium
+
+  - id: DOC-075
+    title: FS-06 Reactions
+    path: docs/70-features/FS-06-reactions.md
+    category: Features
+    phase: Phase-4
+    priority: Medium
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-070, DOC-027]
+    blocks: []
+    blocked_by: [DOC-070, DOC-027]
+    related_documents: []
+    estimated_complexity: Medium
+
+  - id: DOC-076
+    title: FS-07 Replies
+    path: docs/70-features/FS-07-replies.md
+    category: Features
+    phase: Phase-4
+    priority: Medium
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-070]
+    blocks: []
+    blocked_by: [DOC-070]
+    related_documents: []
+    estimated_complexity: Low
+
+  - id: DOC-077
+    title: FS-08 Forwarding
+    path: docs/70-features/FS-08-forwarding.md
+    category: Features
+    phase: Phase-4
+    priority: Medium
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-070, DOC-047]
+    blocks: []
+    blocked_by: [DOC-070, DOC-047]
+    related_documents: [DOC-047]
+    estimated_complexity: Medium
+
+  - id: DOC-078
+    title: FS-09 Edit and Delete
+    path: docs/70-features/FS-09-edit-and-delete.md
+    category: Features
+    phase: Phase-4
+    priority: High
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-070, DOC-045, DOC-063]
+    blocks: []
+    blocked_by: [DOC-070, DOC-045, DOC-063]
+    related_documents: [DOC-133, DOC-132]
+    estimated_complexity: Medium
+
+  - id: DOC-079
+    title: FS-10 Search
+    path: docs/70-features/FS-10-search.md
+    category: Features
+    phase: Phase-4
+    priority: Medium
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-069, DOC-061]
+    blocks: []
+    blocked_by: [DOC-069, DOC-061]
+    related_documents: [DOC-148]
+    estimated_complexity: Medium
+
+  - id: DOC-080
+    title: FS-11 Contact Discovery and Blocking
+    path: docs/70-features/FS-11-contact-discovery-and-blocking.md
+    category: Features
+    phase: Phase-4
+    priority: Medium
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-069, DOC-053]
+    blocks: []
+    blocked_by: [DOC-069, DOC-053]
+    related_documents: [DOC-053]
+    estimated_complexity: Medium
+
+  # ---------------------------------------------------------------------------
+  # API
+  # ---------------------------------------------------------------------------
+  - id: DOC-081
+    title: API Design Guidelines
+    path: docs/80-api/80-api-design-guidelines.md
+    category: API
+    phase: Phase-5
+    priority: High
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-013, DOC-020]
+    blocks: [DOC-082, DOC-083, DOC-084]
+    blocked_by: [DOC-013, DOC-020]
+    related_documents: [DOC-150]
+    estimated_complexity: Medium
+
+  - id: DOC-082
+    title: REST Contract
+    path: docs/80-api/81-rest-contract.md
+    category: API
+    phase: Phase-5
+    priority: High
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-081, DOC-069, DOC-048]
+    blocks: []
+    blocked_by: [DOC-081, DOC-069, DOC-048]
+    related_documents: [DOC-104]
+    estimated_complexity: High
+
+  - id: DOC-083
+    title: SignalR Hub Contract
+    path: docs/80-api/82-signalr-hub-contract.md
+    category: API
+    phase: Phase-5
+    priority: High
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-064, DOC-048, DOC-027, DOC-088]
+    blocks: []
+    blocked_by: [DOC-064, DOC-048, DOC-027, DOC-088]
+    related_documents: [DOC-088]
+    estimated_complexity: High
+
+  - id: DOC-084
+    title: Error Model and Versioning
+    path: docs/80-api/83-error-model-and-versioning.md
+    category: API
+    phase: Phase-5
+    priority: Medium
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-020, DOC-081]
+    blocks: []
+    blocked_by: [DOC-020, DOC-081]
+    related_documents: [DOC-150]
+    estimated_complexity: Medium
+
+  - id: DOC-085
+    title: Client SDK Crypto Contract
+    path: docs/80-api/84-client-sdk-crypto-contract.md
+    category: API
+    phase: Phase-4
+    priority: Critical
+    status: Pending
+    owner: Security
+    dependencies: [DOC-047, DOC-020]
+    blocks: [DOC-108]
+    blocked_by: [DOC-047, DOC-020]
+    related_documents: [DOC-090, DOC-108]
+    estimated_complexity: High
+
+  # ---------------------------------------------------------------------------
+  # Protocol
+  # ---------------------------------------------------------------------------
+  - id: DOC-086
+    title: Protocol Overview
+    path: docs/85-protocol/85-protocol-overview.md
+    category: Protocol
+    phase: Phase-4
+    priority: Critical
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-023, DOC-064]
+    blocks: [DOC-087, DOC-088, DOC-089, DOC-090, DOC-091, DOC-092, DOC-093, DOC-094, DOC-095]
+    blocked_by: [DOC-023, DOC-064]
+    related_documents: [DOC-083]
+    estimated_complexity: Medium
+
+  - id: DOC-087
+    title: Packet Format
+    path: docs/85-protocol/85.1-packet-format.md
+    category: Protocol
+    phase: Phase-4
+    priority: High
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-086]
+    blocks: [DOC-088]
+    blocked_by: [DOC-086]
+    related_documents: [DOC-092]
+    estimated_complexity: Medium
+
+  - id: DOC-088
+    title: Client-Server Protocol
+    path: docs/85-protocol/85.2-client-server-protocol.md
+    category: Protocol
+    phase: Phase-4
+    priority: High
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-086, DOC-087]
+    blocks: [DOC-083, DOC-089]
+    blocked_by: [DOC-086, DOC-087]
+    related_documents: [DOC-083]
+    estimated_complexity: High
+
+  - id: DOC-089
+    title: SignalR Event Catalog
+    path: docs/85-protocol/85.3-signalr-event-catalog.md
+    category: Protocol
+    phase: Phase-4
+    priority: High
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-088]
+    blocks: []
+    blocked_by: [DOC-088]
+    related_documents: [DOC-083]
+    estimated_complexity: Medium
+
+  - id: DOC-090
+    title: Encryption Envelope
+    path: docs/85-protocol/85.4-encryption-envelope.md
+    category: Protocol
+    phase: Phase-4
+    priority: Critical
+    status: Pending
+    owner: Security
+    dependencies: [DOC-086, DOC-047]
+    blocks: [DOC-085]
+    blocked_by: [DOC-086, DOC-047]
+    related_documents: [DOC-047, DOC-085]
+    estimated_complexity: High
+
+  - id: DOC-091
+    title: Delivery State Machine
+    path: docs/85-protocol/85.5-delivery-state-machine.md
+    category: Protocol
+    phase: Phase-4
+    priority: High
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-086, DOC-066]
+    blocks: [DOC-045]
+    blocked_by: [DOC-086, DOC-066]
+    related_documents: [DOC-045]
+    estimated_complexity: Medium
+
+  - id: DOC-092
+    title: Message Metadata
+    path: docs/85-protocol/85.6-message-metadata.md
+    category: Protocol
+    phase: Phase-4
+    priority: Critical
+    status: Pending
+    owner: Security
+    dependencies: [DOC-086, DOC-047]
+    blocks: []
+    blocked_by: [DOC-086, DOC-047]
+    related_documents: [DOC-051]
+    estimated_complexity: Medium
+
+  - id: DOC-093
+    title: Presence Protocol
+    path: docs/85-protocol/85.7-presence-protocol.md
+    category: Protocol
+    phase: Phase-4
+    priority: Medium
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-086, DOC-065]
+    blocks: []
+    blocked_by: [DOC-086, DOC-065]
+    related_documents: [DOC-065]
+    estimated_complexity: Low
+
+  - id: DOC-094
+    title: Typing Protocol
+    path: docs/85-protocol/85.8-typing-protocol.md
+    category: Protocol
+    phase: Phase-4
+    priority: Low
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-086, DOC-065]
+    blocks: []
+    blocked_by: [DOC-086, DOC-065]
+    related_documents: [DOC-065]
+    estimated_complexity: Low
+
+  - id: DOC-095
+    title: Synchronization Protocol
+    path: docs/85-protocol/85.9-synchronization-protocol.md
+    category: Protocol
+    phase: Phase-4
+    priority: High
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-086, DOC-060]
+    blocks: [DOC-037, DOC-044]
+    blocked_by: [DOC-086, DOC-060]
+    related_documents: [DOC-136]
+    estimated_complexity: High
+
+  # ---------------------------------------------------------------------------
+  # Infrastructure
+  # ---------------------------------------------------------------------------
+  - id: DOC-096
+    title: Deployment Architecture
+    path: docs/90-infrastructure/90-deployment-architecture.md
+    category: Infrastructure
+    phase: Phase-5
+    priority: Critical
+    status: Pending
+    owner: Platform
+    dependencies: [DOC-015, DOC-011]
+    blocks: [DOC-097, DOC-100, DOC-101]
+    blocked_by: [DOC-015, DOC-011]
+    related_documents: [DOC-103]
+    estimated_complexity: High
+
+  - id: DOC-097
+    title: Docker and Local Development
+    path: docs/90-infrastructure/91-docker-and-local-dev.md
+    category: Infrastructure
+    phase: Phase-5
+    priority: High
+    status: Pending
+    owner: Platform
+    dependencies: [DOC-096]
+    blocks: [DOC-101]
+    blocked_by: [DOC-096]
+    related_documents: [DOC-101]
+    estimated_complexity: Medium
+
+  - id: DOC-098
+    title: Background Workers
+    path: docs/90-infrastructure/92-background-workers.md
+    category: Infrastructure
+    phase: Phase-5
+    priority: Critical
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-019, DOC-027]
+    blocks: [DOC-067, DOC-068]
+    blocked_by: [DOC-019, DOC-027]
+    related_documents: [DOC-144, DOC-145]
+    estimated_complexity: High
+
+  - id: DOC-099
+    title: Observability
+    path: docs/90-infrastructure/93-observability.md
+    category: Infrastructure
+    phase: Phase-5
+    priority: Critical
+    status: Pending
+    owner: SRE
+    dependencies: [DOC-020, DOC-096]
+    blocks: [DOC-110]
+    blocked_by: [DOC-020, DOC-096]
+    related_documents: [DOC-023, DOC-106]
+    estimated_complexity: High
+
+  - id: DOC-100
+    title: Scalability and Capacity
+    path: docs/90-infrastructure/94-scalability-and-capacity.md
+    category: Infrastructure
+    phase: Phase-5
+    priority: Critical
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-021, DOC-056, DOC-064]
+    blocks: [DOC-062, DOC-068, DOC-112]
+    blocked_by: [DOC-021, DOC-056, DOC-064]
+    related_documents: [DOC-112]
+    estimated_complexity: High
+
+  - id: DOC-101
+    title: CI/CD
+    path: docs/90-infrastructure/95-ci-cd.md
+    category: Infrastructure
+    phase: Phase-5
+    priority: High
+    status: Pending
+    owner: Platform
+    dependencies: [DOC-097, DOC-104, DOC-107]
+    blocks: []
+    blocked_by: [DOC-097, DOC-104, DOC-107]
+    related_documents: [DOC-149]
+    estimated_complexity: Medium
+
+  - id: DOC-102
+    title: Config and Feature Flags
+    path: docs/90-infrastructure/96-config-and-feature-flags.md
+    category: Infrastructure
+    phase: Phase-5
+    priority: Medium
+    status: Pending
+    owner: Platform
+    dependencies: [DOC-096]
+    blocks: [DOC-149]
+    blocked_by: [DOC-096]
+    related_documents: [DOC-149]
+    estimated_complexity: Medium
+
+  - id: DOC-103
+    title: Multi-Region and Residency
+    path: docs/90-infrastructure/97-multi-region-and-residency.md
+    category: Infrastructure
+    phase: Phase-6
+    priority: Medium
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-096, DOC-051, DOC-062]
+    blocks: []
+    blocked_by: [DOC-096, DOC-051, DOC-062]
+    related_documents: [DOC-151]
+    estimated_complexity: High
+
+  # ---------------------------------------------------------------------------
+  # Quality
+  # ---------------------------------------------------------------------------
+  - id: DOC-104
+    title: Testing Strategy
+    path: docs/95-quality/95-testing-strategy.md
+    category: Quality
+    phase: Phase-5
+    priority: Critical
+    status: Pending
+    owner: QA
+    dependencies: [DOC-018, DOC-082]
+    blocks: [DOC-105, DOC-107, DOC-101]
+    blocked_by: [DOC-018, DOC-082]
+    related_documents: [DOC-108]
+    estimated_complexity: High
+
+  - id: DOC-105
+    title: Performance and Load Testing
+    path: docs/95-quality/96-performance-and-load-testing.md
+    category: Quality
+    phase: Phase-5
+    priority: High
+    status: Pending
+    owner: QA
+    dependencies: [DOC-021, DOC-100, DOC-106]
+    blocks: [DOC-114]
+    blocked_by: [DOC-021, DOC-100, DOC-106]
+    related_documents: [DOC-114]
+    estimated_complexity: Medium
+
+  - id: DOC-106
+    title: Performance Budget
+    path: docs/95-quality/96-performance-budget.md
+    category: Quality
+    phase: Phase-5
+    priority: High
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-011, DOC-021]
+    blocks: [DOC-105, DOC-110]
+    blocked_by: [DOC-011, DOC-021]
+    related_documents: [DOC-099, DOC-110]
+    estimated_complexity: Medium
+
+  - id: DOC-107
+    title: Definition of Done
+    path: docs/95-quality/97-definition-of-done.md
+    category: Quality
+    phase: Phase-5
+    priority: High
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-104, DOC-050, DOC-022, DOC-023]
+    blocks: [DOC-101]
+    blocked_by: [DOC-104, DOC-050, DOC-022, DOC-023]
+    related_documents: [DOC-012]
+    estimated_complexity: Low
+
+  - id: DOC-108
+    title: Crypto Test Vectors and Conformance
+    path: docs/95-quality/98-crypto-test-vectors-and-conformance.md
+    category: Quality
+    phase: Phase-5
+    priority: High
+    status: Pending
+    owner: Security
+    dependencies: [DOC-085, DOC-090]
+    blocks: []
+    blocked_by: [DOC-085, DOC-090]
+    related_documents: [DOC-047]
+    estimated_complexity: High
+
+  # ---------------------------------------------------------------------------
+  # Operations
+  # ---------------------------------------------------------------------------
+  - id: DOC-109
+    title: Runbooks
+    path: docs/98-operations/98-runbooks.md
+    category: Operations
+    phase: Phase-6
+    priority: High
+    status: Pending
+    owner: SRE
+    dependencies: [DOC-096, DOC-098, DOC-099]
+    blocks: [DOC-119]
+    blocked_by: [DOC-096, DOC-098, DOC-099]
+    related_documents: [DOC-119]
+    estimated_complexity: Medium
+
+  - id: DOC-110
+    title: SRE SLO and SLI
+    path: docs/98-operations/99-sre-slo-sli.md
+    category: Operations
+    phase: Phase-6
+    priority: High
+    status: Pending
+    owner: SRE
+    dependencies: [DOC-011, DOC-099, DOC-106, DOC-021]
+    blocks: []
+    blocked_by: [DOC-011, DOC-099, DOC-106, DOC-021]
+    related_documents: [DOC-106]
+    estimated_complexity: Medium
+
+  - id: DOC-111
+    title: Incident and Disaster Recovery
+    path: docs/98-operations/99-incident-and-dr.md
+    category: Operations
+    phase: Phase-6
+    priority: High
+    status: Pending
+    owner: SRE
+    dependencies: [DOC-050, DOC-056, DOC-049]
+    blocks: [DOC-115]
+    blocked_by: [DOC-050, DOC-056, DOC-049]
+    related_documents: [DOC-055, DOC-115]
+    estimated_complexity: High
+
+  - id: DOC-112
+    title: OPS-01 Capacity Planning
+    path: docs/98-operations/OPS-01-capacity-planning.md
+    category: Operations
+    phase: Phase-6
+    priority: High
+    status: Pending
+    owner: SRE
+    dependencies: [DOC-100]
+    blocks: []
+    blocked_by: [DOC-100]
+    related_documents: [DOC-062]
+    estimated_complexity: Medium
+
+  - id: DOC-113
+    title: OPS-02 Chaos Engineering
+    path: docs/98-operations/OPS-02-chaos-engineering.md
+    category: Operations
+    phase: Phase-6
+    priority: Medium
+    status: Pending
+    owner: SRE
+    dependencies: [DOC-100, DOC-099]
+    blocks: []
+    blocked_by: [DOC-100, DOC-099]
+    related_documents: [DOC-146]
+    estimated_complexity: Medium
+
+  - id: DOC-114
+    title: OPS-03 Load Testing Strategy
+    path: docs/98-operations/OPS-03-load-testing-strategy.md
+    category: Operations
+    phase: Phase-6
+    priority: Medium
+    status: Pending
+    owner: QA
+    dependencies: [DOC-105]
+    blocks: []
+    blocked_by: [DOC-105]
+    related_documents: [DOC-106]
+    estimated_complexity: Medium
+
+  - id: DOC-115
+    title: OPS-04 Disaster Recovery Validation
+    path: docs/98-operations/OPS-04-dr-validation.md
+    category: Operations
+    phase: Phase-6
+    priority: Medium
+    status: Pending
+    owner: SRE
+    dependencies: [DOC-111, DOC-063]
+    blocks: []
+    blocked_by: [DOC-111, DOC-063]
+    related_documents: [DOC-063]
+    estimated_complexity: Medium
+
+  - id: DOC-116
+    title: OPS-05 Secret Rotation
+    path: docs/98-operations/OPS-05-secret-rotation.md
+    category: Operations
+    phase: Phase-6
+    priority: High
+    status: Pending
+    owner: Security
+    dependencies: [DOC-052]
+    blocks: []
+    blocked_by: [DOC-052]
+    related_documents: [DOC-117]
+    estimated_complexity: Low
+
+  - id: DOC-117
+    title: OPS-06 Certificate Rotation
+    path: docs/98-operations/OPS-06-certificate-rotation.md
+    category: Operations
+    phase: Phase-6
+    priority: High
+    status: Pending
+    owner: Security
+    dependencies: [DOC-052]
+    blocks: []
+    blocked_by: [DOC-052]
+    related_documents: [DOC-116]
+    estimated_complexity: Low
+
+  - id: DOC-118
+    title: OPS-07 Key Rotation
+    path: docs/98-operations/OPS-07-key-rotation.md
+    category: Operations
+    phase: Phase-6
+    priority: High
+    status: Pending
+    owner: Security
+    dependencies: [DOC-049, DOC-055]
+    blocks: []
+    blocked_by: [DOC-049, DOC-055]
+    related_documents: [DOC-055]
+    estimated_complexity: Medium
+
+  - id: DOC-119
+    title: OPS-08 Operational Checklists
+    path: docs/98-operations/OPS-08-operational-checklists.md
+    category: Operations
+    phase: Phase-6
+    priority: Medium
+    status: Pending
+    owner: SRE
+    dependencies: [DOC-109]
+    blocks: []
+    blocked_by: [DOC-109]
+    related_documents: [DOC-109]
+    estimated_complexity: Low
+
+  # ---------------------------------------------------------------------------
+  # ADRs
+  # ---------------------------------------------------------------------------
+  - id: DOC-120
+    title: ADR Template
+    path: docs/ADR/adr-template.md
+    category: ADR
+    phase: Phase-1
+    priority: High
+    status: Pending
+    owner: Architecture
+    dependencies: []
+    blocks: [DOC-121, DOC-122, DOC-123, DOC-124, DOC-125, DOC-126, DOC-127, DOC-128, DOC-129, DOC-130, DOC-131, DOC-132, DOC-133, DOC-134, DOC-135, DOC-136, DOC-137, DOC-138, DOC-139, DOC-140, DOC-141, DOC-142, DOC-143, DOC-144, DOC-145, DOC-146, DOC-147, DOC-148, DOC-149, DOC-150]
+    blocked_by: []
+    related_documents: []
+    estimated_complexity: Low
+
+  - id: DOC-121
+    title: ADR-0001 Modular Monolith over Microservices
+    path: docs/ADR/ADR-0001-modular-monolith-over-microservices.md
+    category: ADR
+    phase: Phase-2
+    priority: Critical
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-120, DOC-013]
+    blocks: [DOC-017]
+    blocked_by: [DOC-120, DOC-013]
+    related_documents: [DOC-017, DOC-151]
+    estimated_complexity: Low
+
+  - id: DOC-122
+    title: ADR-0002 Vertical Slice Architecture
+    path: docs/ADR/ADR-0002-vertical-slice-architecture.md
+    category: ADR
+    phase: Phase-2
+    priority: Critical
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-120, DOC-013]
+    blocks: [DOC-018]
+    blocked_by: [DOC-120, DOC-013]
+    related_documents: [DOC-018]
+    estimated_complexity: Low
+
+  - id: DOC-123
+    title: ADR-0003 CQRS with EF and Dapper
+    path: docs/ADR/ADR-0003-cqrs-with-ef-and-dapper.md
+    category: ADR
+    phase: Phase-2
+    priority: High
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-120, DOC-018]
+    blocks: [DOC-058]
+    blocked_by: [DOC-120, DOC-018]
+    related_documents: [DOC-058]
+    estimated_complexity: Low
+
+  - id: DOC-124
+    title: ADR-0004 E2EE Client-Only Encryption
+    path: docs/ADR/ADR-0004-e2ee-client-only-encryption.md
+    category: ADR
+    phase: Phase-3
+    priority: Critical
+    status: Pending
+    owner: Security
+    dependencies: [DOC-120, DOC-046]
+    blocks: [DOC-047]
+    blocked_by: [DOC-120, DOC-046]
+    related_documents: [DOC-047]
+    estimated_complexity: Medium
+
+  - id: DOC-125
+    title: ADR-0005 SignalR for Realtime
+    path: docs/ADR/ADR-0005-signalr-for-realtime.md
+    category: ADR
+    phase: Phase-4
+    priority: High
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-120, DOC-064]
+    blocks: []
+    blocked_by: [DOC-120, DOC-064]
+    related_documents: [DOC-064, DOC-086]
+    estimated_complexity: Low
+
+  - id: DOC-126
+    title: ADR-0006 PostgreSQL as Primary Store
+    path: docs/ADR/ADR-0006-postgres-as-primary-store.md
+    category: ADR
+    phase: Phase-3
+    priority: High
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-120, DOC-056]
+    blocks: [DOC-057]
+    blocked_by: [DOC-120, DOC-056]
+    related_documents: [DOC-057]
+    estimated_complexity: Low
+
+  - id: DOC-127
+    title: ADR-0007 Redis Roles
+    path: docs/ADR/ADR-0007-redis-roles.md
+    category: ADR
+    phase: Phase-3
+    priority: High
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-120, DOC-059]
+    blocks: []
+    blocked_by: [DOC-120, DOC-059]
+    related_documents: [DOC-059]
+    estimated_complexity: Low
+
+  - id: DOC-128
+    title: ADR-0008 Message ID and Ordering Strategy
+    path: docs/ADR/ADR-0008-message-id-and-ordering-strategy.md
+    category: ADR
+    phase: Phase-3
+    priority: Critical
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-120, DOC-060]
+    blocks: [DOC-129]
+    blocked_by: [DOC-120, DOC-060]
+    related_documents: [DOC-045, DOC-129]
+    estimated_complexity: Medium
+
+  - id: DOC-129
+    title: ADR-0009 Search Engine Choice
+    path: docs/ADR/ADR-0009-search-engine-choice.md
+    category: ADR
+    phase: Phase-3
+    priority: Medium
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-120, DOC-061]
+    blocks: []
+    blocked_by: [DOC-120, DOC-061]
+    related_documents: [DOC-061, DOC-148]
+    estimated_complexity: Low
+
+  - id: DOC-130
+    title: ADR-0010 Message Ordering
+    path: docs/ADR/ADR-0010-message-ordering.md
+    category: ADR
+    phase: Phase-3
+    priority: Critical
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-120, DOC-128]
+    blocks: [DOC-045]
+    blocked_by: [DOC-120, DOC-128]
+    related_documents: [DOC-060, DOC-091]
+    estimated_complexity: Medium
+
+  - id: DOC-131
+    title: ADR-0011 Cursor Pagination
+    path: docs/ADR/ADR-0011-cursor-pagination.md
+    category: ADR
+    phase: Phase-3
+    priority: Medium
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-120, DOC-058]
+    blocks: []
+    blocked_by: [DOC-120, DOC-058]
+    related_documents: [DOC-095]
+    estimated_complexity: Low
+
+  - id: DOC-132
+    title: ADR-0012 Soft Delete
+    path: docs/ADR/ADR-0012-soft-delete.md
+    category: ADR
+    phase: Phase-4
+    priority: Medium
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-120, DOC-045]
+    blocks: []
+    blocked_by: [DOC-120, DOC-045]
+    related_documents: [DOC-078]
+    estimated_complexity: Low
+
+  - id: DOC-133
+    title: ADR-0013 Message Versioning
+    path: docs/ADR/ADR-0013-message-versioning.md
+    category: ADR
+    phase: Phase-4
+    priority: Medium
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-120, DOC-045]
+    blocks: []
+    blocked_by: [DOC-120, DOC-045]
+    related_documents: [DOC-078]
+    estimated_complexity: Low
+
+  - id: DOC-134
+    title: ADR-0014 Presence Architecture
+    path: docs/ADR/ADR-0014-presence-architecture.md
+    category: ADR
+    phase: Phase-4
+    priority: Medium
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-120, DOC-065]
+    blocks: []
+    blocked_by: [DOC-120, DOC-065]
+    related_documents: [DOC-093]
+    estimated_complexity: Low
+
+  - id: DOC-135
+    title: ADR-0015 Attachment Storage
+    path: docs/ADR/ADR-0015-attachment-storage.md
+    category: ADR
+    phase: Phase-4
+    priority: High
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-120, DOC-073]
+    blocks: []
+    blocked_by: [DOC-120, DOC-073]
+    related_documents: [DOC-039, DOC-040]
+    estimated_complexity: Low
+
+  - id: DOC-136
+    title: ADR-0016 Offline Synchronization
+    path: docs/ADR/ADR-0016-offline-synchronization.md
+    category: ADR
+    phase: Phase-4
+    priority: High
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-120, DOC-095]
+    blocks: []
+    blocked_by: [DOC-120, DOC-095]
+    related_documents: [DOC-044]
+    estimated_complexity: Medium
+
+  - id: DOC-137
+    title: ADR-0017 Event Versioning
+    path: docs/ADR/ADR-0017-event-versioning.md
+    category: ADR
+    phase: Phase-3
+    priority: High
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-120, DOC-027]
+    blocks: []
+    blocked_by: [DOC-120, DOC-027]
+    related_documents: [DOC-027]
+    estimated_complexity: Low
+
+  - id: DOC-138
+    title: ADR-0018 Idempotency
+    path: docs/ADR/ADR-0018-idempotency.md
+    category: ADR
+    phase: Phase-2
+    priority: Critical
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-120, DOC-020, DOC-023]
+    blocks: []
+    blocked_by: [DOC-120, DOC-020, DOC-023]
+    related_documents: [DOC-145]
+    estimated_complexity: Medium
+
+  - id: DOC-139
+    title: ADR-0019 Multi-Device
+    path: docs/ADR/ADR-0019-multi-device.md
+    category: ADR
+    phase: Phase-3
+    priority: High
+    status: Pending
+    owner: Security
+    dependencies: [DOC-120, DOC-049]
+    blocks: []
+    blocked_by: [DOC-120, DOC-049]
+    related_documents: [DOC-060]
+    estimated_complexity: Medium
+
+  - id: DOC-140
+    title: ADR-0020 Group Encryption
+    path: docs/ADR/ADR-0020-group-encryption.md
+    category: ADR
+    phase: Phase-4
+    priority: Critical
+    status: Pending
+    owner: Security
+    dependencies: [DOC-120, DOC-047]
+    blocks: [DOC-071]
+    blocked_by: [DOC-120, DOC-047]
+    related_documents: [DOC-071]
+    estimated_complexity: High
+
+  - id: DOC-141
+    title: ADR-0021 Rate Limiting
+    path: docs/ADR/ADR-0021-rate-limiting.md
+    category: ADR
+    phase: Phase-3
+    priority: High
+    status: Pending
+    owner: Security
+    dependencies: [DOC-120, DOC-053]
+    blocks: []
+    blocked_by: [DOC-120, DOC-053]
+    related_documents: [DOC-053]
+    estimated_complexity: Low
+
+  - id: DOC-142
+    title: ADR-0022 Distributed Locking
+    path: docs/ADR/ADR-0022-distributed-locking.md
+    category: ADR
+    phase: Phase-3
+    priority: Medium
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-120, DOC-059]
+    blocks: []
+    blocked_by: [DOC-120, DOC-059]
+    related_documents: [DOC-098]
+    estimated_complexity: Medium
+
+  - id: DOC-143
+    title: ADR-0023 Retry Policy
+    path: docs/ADR/ADR-0023-retry-policy.md
+    category: ADR
+    phase: Phase-3
+    priority: High
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-120, DOC-019]
+    blocks: []
+    blocked_by: [DOC-120, DOC-019]
+    related_documents: [DOC-098]
+    estimated_complexity: Low
+
+  - id: DOC-144
+    title: ADR-0024 Outbox Pattern
+    path: docs/ADR/ADR-0024-outbox-pattern.md
+    category: ADR
+    phase: Phase-3
+    priority: Critical
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-120, DOC-019]
+    blocks: [DOC-098]
+    blocked_by: [DOC-120, DOC-019]
+    related_documents: [DOC-098]
+    estimated_complexity: Medium
+
+  - id: DOC-145
+    title: ADR-0025 Inbox Pattern
+    path: docs/ADR/ADR-0025-inbox-pattern.md
+    category: ADR
+    phase: Phase-3
+    priority: High
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-120, DOC-019]
+    blocks: []
+    blocked_by: [DOC-120, DOC-019]
+    related_documents: [DOC-138, DOC-098]
+    estimated_complexity: Medium
+
+  - id: DOC-146
+    title: ADR-0026 Circuit Breakers
+    path: docs/ADR/ADR-0026-circuit-breakers.md
+    category: ADR
+    phase: Phase-5
+    priority: Medium
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-120, DOC-020]
+    blocks: []
+    blocked_by: [DOC-120, DOC-020]
+    related_documents: [DOC-096]
+    estimated_complexity: Low
+
+  - id: DOC-147
+    title: ADR-0027 Caching Strategy
+    path: docs/ADR/ADR-0027-caching-strategy.md
+    category: ADR
+    phase: Phase-3
+    priority: Medium
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-120, DOC-059]
+    blocks: []
+    blocked_by: [DOC-120, DOC-059]
+    related_documents: [DOC-058]
+    estimated_complexity: Low
+
+  - id: DOC-148
+    title: ADR-0028 Search Architecture
+    path: docs/ADR/ADR-0028-search-architecture.md
+    category: ADR
+    phase: Phase-3
+    priority: Medium
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-120, DOC-061]
+    blocks: []
+    blocked_by: [DOC-120, DOC-061]
+    related_documents: [DOC-061]
+    estimated_complexity: Medium
+
+  - id: DOC-149
+    title: ADR-0029 Feature Flags
+    path: docs/ADR/ADR-0029-feature-flags.md
+    category: ADR
+    phase: Phase-5
+    priority: Medium
+    status: Pending
+    owner: Platform
+    dependencies: [DOC-120, DOC-102]
+    blocks: []
+    blocked_by: [DOC-120, DOC-102]
+    related_documents: [DOC-102]
+    estimated_complexity: Low
+
+  - id: DOC-150
+    title: ADR-0030 API Versioning
+    path: docs/ADR/ADR-0030-api-versioning.md
+    category: ADR
+    phase: Phase-5
+    priority: Medium
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-120, DOC-081]
+    blocks: []
+    blocked_by: [DOC-120, DOC-081]
+    related_documents: [DOC-084]
+    estimated_complexity: Low
+
+  # ---------------------------------------------------------------------------
+  # Migration
+  # ---------------------------------------------------------------------------
+  - id: DOC-151
+    title: Monolith to Microservices Migration
+    path: docs/ZZ-migration/ZZ-monolith-to-microservices.md
+    category: Migration
+    phase: Phase-6
+    priority: Medium
+    status: Pending
+    owner: Architecture
+    dependencies: [DOC-017, DOC-025, DOC-028, DOC-019]
+    blocks: []
+    blocked_by: [DOC-017, DOC-025, DOC-028, DOC-019]
+    related_documents: [DOC-103]
+    estimated_complexity: High
