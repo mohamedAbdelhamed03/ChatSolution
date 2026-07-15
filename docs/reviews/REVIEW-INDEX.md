@@ -2,18 +2,26 @@
 
 > Entry point for reviewers. Start here, then follow the recommended review sequence. For the machine-readable dashboard, open `review-manifest.yaml`. The Git repository is the source of truth.
 
-**Current Build:** #2 — 2026-07-15 | **Branch:** feature/architecture-decisions-wave-1 | **Base:** main (5305ba6)
-**Prior Build:** #1 — 2026-07-14 (documentation foundations, on main)
+**Current Build:** #3 — 2026-07-15 (Architecture Decision Review Sprint) | **Branch:** feature/architecture-decisions-wave-1 | **Base:** main
+**Prior Builds:** #2 (ADRP Wave 1), #1 (documentation foundations)
 
 ---
 
 ## Current Project Status
 
-- **Phase:** Architecture Decision Sprint — ADRP Wave 1. Documentation generation paused.
-- **Decision coverage:** 10 of 50 decisions recommended (Under Review); 40 Proposed.
+- **Phase:** Architecture Decision Review Sprint complete for AD-001..AD-006. Documentation generation paused.
+- **Decision coverage:** 6 of 50 Approved; 4 Under Review (AD-007..AD-010); 40 Proposed.
 - **Documentation completion:** 9 of 151 documents (6.0%) — unchanged this build.
-- **Health:** All ADRP artifacts pass validation and quality gates; average decision quality 9.37/10.
+- **Health:** All six in-scope decisions reviewed, improved, and Approved; average review score 9.35/10.
 - **Defining constraint upheld:** Backend never decrypts message content (INV-01).
+
+## Sprint Outcome (Build #3)
+
+| Decision | Verdict | Status |
+|---|---|---|
+| AD-001..AD-006 | Approve with Changes | Approved |
+
+Approved: 6 · Rejected: 0 · Needs Revision: 0. Next sprint reviews AD-007..AD-010.
 
 ## Current Build
 

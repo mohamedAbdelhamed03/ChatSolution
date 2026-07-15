@@ -4,6 +4,34 @@
 
 ---
 
+## Build #3 — 2026-07-15 (Architecture Decision Review Sprint)
+
+**Branch:** feature/architecture-decisions-wave-1
+
+| File Path | Change | Reason | Related Documents |
+|---|---|---|---|
+| docs/architecture-decisions/AD-001-user-identity.md | Updated | Add Review Outcome; recovery model, launch posture, username lifecycle; status → Approved. | AD-005 |
+| docs/architecture-decisions/AD-002-authentication.md | Updated | Add Review Outcome; replay protection, token binding, revocation bound; status → Approved. | AD-006, OPS-05 |
+| docs/architecture-decisions/AD-003-authorization.md | Updated | Add Review Outcome; uniform enforcement, event-driven cache invalidation; status → Approved. | INV-07 |
+| docs/architecture-decisions/AD-004-e2ee-protocol.md | Updated | Add Review Outcome; MLS trigger criteria, library spike, metadata caveat; status → Approved (direction). | ADR-0004, AD-021 |
+| docs/architecture-decisions/AD-005-key-management.md | Updated | Add Review Outcome; prekey exhaustion fallback, key-injection defense, encrypted backup; status → Approved. | AD-006 |
+| docs/architecture-decisions/AD-006-device-model.md | Updated | Add Review Outcome; all-devices-lost recovery, fan-out bound, mandatory notifications; status → Approved. | AD-002, AD-005 |
+| docs/architecture-decisions/decision-manifest.yaml | Updated | Set AD-001..AD-006 status Approved with review/decision dates. | — |
+| docs/reviews/BUILD-REPORT.md | Updated | Append Build #3 review sprint section. | — |
+| docs/reviews/CHANGES.md | Updated | Append Build #3 section. | — |
+| docs/reviews/QUALITY-REPORT.md | Updated | Add Build #3 review verdicts and scores. | — |
+| docs/reviews/CROSS-REFERENCE-REPORT.md | Updated | Add Build #3 post-approval validation. | — |
+| docs/reviews/REVIEW-CHECKLIST.md | Updated | Check off approved AD-001..AD-006. | — |
+| docs/reviews/REVIEW-INDEX.md | Updated | Refresh entry point to review sprint outcome. | — |
+| docs/reviews/review-manifest.yaml | Updated | Regenerate dashboard for Build #3. | — |
+
+### Notes
+
+- No files removed; no new decisions, ADRs, documentation, or code generated.
+- All six decisions reached Approved via reviewed, justified changes; INV-01 upheld throughout.
+
+---
+
 ## Build #2 — 2026-07-15
 
 **Branch:** feature/architecture-decisions-wave-1 | **Base:** main (5305ba6)

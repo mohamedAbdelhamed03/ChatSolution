@@ -94,9 +94,23 @@ How should a user be identified within the platform, and what is the canonical i
 - What is the account-recovery model, and how does it interact with E2EE key loss?
 - What are username policy and squatting-prevention rules?
 
+## Review Outcome (2026-07-15)
+
+**Reviewer:** Chief Software Architect · **Verdict:** Approve with Changes
+
+**Required changes applied:**
+- **Account recovery model added:** recovery relies on client-side end-to-end encrypted backup with a user-held recovery secret (see AD-005). Loss of the secret loses message history; the server cannot recover content (INV-01). This must be communicated clearly in onboarding.
+- **Launch posture clarified:** username is the primary user-facing identity; phone/email are optional verified attributes used solely for discovery and anti-abuse, never as the cryptographic anchor.
+- **Username lifecycle rule added:** a released username enters a cool-down period before it can be reused, to reduce impersonation and takeover of prior conversations.
+
+**Residual open questions (owner follow-up, non-blocking):** whether phone verification is mandatory at launch (Product); detailed squatting/anti-abuse policy (Trust & Safety).
+
+**Quality scores** — Architecture 9 · Security 9 · Scalability 9 · Maintainability 9 · Documentation 9 · **Overall 9.2**
+
 ## Approval
 
-- **Status:** Under Review
+- **Status:** Approved
 - **Owner:** Architecture
-- **Review Date:** (pending)
-- **Decision Date:** (pending)
+- **Reviewed by:** Chief Software Architect (Architecture Decision Review Sprint)
+- **Review Date:** 2026-07-15
+- **Decision Date:** 2026-07-15

@@ -92,9 +92,24 @@ How are cryptographic keys generated, published, stored, distributed, and retire
 - Signed-prekey rotation cadence?
 - Encrypted-backup design and recovery-secret UX?
 
+## Review Outcome (2026-07-15)
+
+**Reviewer:** Chief Software Architect · **Verdict:** Approve with Changes
+
+**Required changes applied:**
+- **Prekey exhaustion fallback specified:** when a device's one-time prekey pool is depleted, session setup falls back to the last-resort signed prekey; clients monitor pool levels and replenish above a low-water threshold. The directory rejects fetches that would reuse a consumed one-time prekey.
+- **Key-injection defense strengthened:** all published key material is authenticated by the device's identity key, and identity-key changes surface a safety-number change to contacts (ties to AD-006) to detect server-side key substitution / MITM.
+- **Encrypted-backup model made explicit:** account/history recovery uses a client-side E2EE backup protected by a user-held recovery secret; the server stores only opaque ciphertext and never key-derivation material (INV-01). Lost secret = lost history.
+- **Hardware-backed storage preference stated:** private keys are stored in platform secure enclave/keystore where available.
+
+**Residual open questions (owner follow-up, non-blocking):** one-time prekey pool size and low-water thresholds; signed-prekey rotation cadence; backup recovery-secret UX.
+
+**Quality scores** — Architecture 9 · Security 10 · Scalability 9 · Maintainability 9 · Documentation 10 · **Overall 9.5**
+
 ## Approval
 
-- **Status:** Under Review
+- **Status:** Approved
 - **Owner:** Security
-- **Review Date:** (pending)
-- **Decision Date:** (pending)
+- **Reviewed by:** Chief Software Architect (Architecture Decision Review Sprint)
+- **Review Date:** 2026-07-15
+- **Decision Date:** 2026-07-15

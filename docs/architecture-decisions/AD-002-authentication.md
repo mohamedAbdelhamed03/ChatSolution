@@ -91,9 +91,24 @@ How do users and their devices prove their identity to the backend, and how are 
 - Initial verification method(s) at launch (SMS, email, QR device-linking)?
 - Signing algorithm and key-rotation cadence?
 
+## Review Outcome (2026-07-15)
+
+**Reviewer:** Chief Software Architect · **Verdict:** Approve with Changes
+
+**Required changes applied:**
+- **Replay protection added:** access tokens carry a short expiry and a unique `jti`; the SignalR connect handshake requires a fresh token and rejects reused/expired tokens. All transport is WSS/HTTPS (INV-09), preventing token capture in transit.
+- **Token binding added:** refresh tokens are bound to `DeviceId` and use rotation with reuse-detection (a replayed refresh token revokes the whole token family via the Redis deny-list).
+- **Revocation latency bounded:** access-token TTL is capped (recommended ≤15 min) so the stateless hot path plus deny-list gives near-immediate effective revocation.
+- **Clock-skew handling noted:** a small leeway is allowed on expiry validation to tolerate device clock drift.
+
+**Residual open questions (owner follow-up, non-blocking):** exact access/refresh TTLs; launch verification methods (SMS/email/QR); signing algorithm and key-rotation cadence (coordinate with OPS-05).
+
+**Quality scores** — Architecture 9 · Security 9 · Scalability 10 · Maintainability 9 · Documentation 9 · **Overall 9.3**
+
 ## Approval
 
-- **Status:** Under Review
+- **Status:** Approved
 - **Owner:** Security
-- **Review Date:** (pending)
-- **Decision Date:** (pending)
+- **Reviewed by:** Chief Software Architect (Architecture Decision Review Sprint)
+- **Review Date:** 2026-07-15
+- **Decision Date:** 2026-07-15

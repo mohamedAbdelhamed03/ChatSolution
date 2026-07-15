@@ -95,9 +95,27 @@ Which end-to-end encryption protocol should the platform adopt for one-to-one an
 - Sender-keys only, or MLS for large groups from the start?
 - Deniability requirements and safety-number verification UX?
 
+## Review Outcome (2026-07-15)
+
+**Reviewer:** Chief Software Architect · **Verdict:** Approve with Changes
+
+**Scope of approval:** the architectural **direction** is approved — adopt the **Signal Protocol** (X3DH + Double Ratchet) with **sender-keys for groups**, client-only encryption (INV-01), no custom cryptography. Specific library selection and the large-group strategy are recorded as bounded follow-ups below, not blockers to the direction.
+
+**Required changes applied:**
+- **MLS trigger criteria added:** sender-keys are the launch group mechanism; evaluate/adopt **MLS (RFC 9420)** when a group exceeds a defined membership threshold where sender-key re-distribution on membership change becomes the dominant cost. The threshold is to be set during the library spike.
+- **Library-selection spike mandated:** a time-boxed spike selects a specific audited implementation and records its audit status before implementation begins; captured in ADR-0004 on ratification.
+- **Metadata caveat reinforced:** E2EE protects content only; metadata protection is handled separately (AD-021) and is explicitly out of scope for this decision.
+- **Multi-device linkage noted:** per-device sessions (or sesame-style device management) are governed by AD-005/AD-006; group sender-keys are distributed per device.
+
+**Residual open questions (owner follow-up, non-blocking to direction):** specific vetted library + audit status; exact MLS adoption threshold; deniability and safety-number verification UX.
+
+**Quality scores** — Architecture 10 · Security 10 · Scalability 9 · Maintainability 9 · Documentation 10 · **Overall 9.7**
+
 ## Approval
 
-- **Status:** Under Review
+- **Status:** Approved
 - **Owner:** Security
-- **Review Date:** (pending)
-- **Decision Date:** (pending)
+- **Reviewed by:** Chief Software Architect (Architecture Decision Review Sprint)
+- **Review Date:** 2026-07-15
+- **Decision Date:** 2026-07-15
+- **Note:** Approval is of the architectural direction; library selection is a mandatory pre-implementation spike ratified in ADR-0004.

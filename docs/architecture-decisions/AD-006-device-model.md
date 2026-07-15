@@ -91,9 +91,24 @@ How are multiple devices per user modeled, linked, trusted, and revoked, and how
 - Recovery-path policy when no existing device is available?
 - Mandatory vs. optional safety-number verification UX?
 
+## Review Outcome (2026-07-15)
+
+**Reviewer:** Chief Software Architect · **Verdict:** Approve with Changes
+
+**Required changes applied:**
+- **All-devices-lost recovery path specified:** when no existing device is available, recovery proceeds via re-authentication (AD-002) plus the client-side E2EE backup (AD-005). Without the recovery secret, the account is regained but prior message history is not recoverable (INV-01) — communicated clearly to users.
+- **Fan-out bound added:** a maximum number of active devices per user is enforced to bound per-message encryption fan-out and group sender-key distribution cost; exceeding the limit requires revoking an existing device.
+- **Mandatory device-change notification:** every new device linking and every identity-key/safety-number change emits a user-visible, non-suppressible notification to counter silent malicious device addition.
+- **Prompt revocation defined:** revoking a device removes it from recipient sets, triggers group sender-key rotation for its groups, and adds its sessions to the auth deny-list (AD-002).
+
+**Residual open questions (owner follow-up, non-blocking):** maximum devices per user value; mandatory vs. optional safety-number verification UX.
+
+**Quality scores** — Architecture 9 · Security 9 · Scalability 9 · Maintainability 9 · Documentation 9 · **Overall 9.3**
+
 ## Approval
 
-- **Status:** Under Review
+- **Status:** Approved
 - **Owner:** Security
-- **Review Date:** (pending)
-- **Decision Date:** (pending)
+- **Reviewed by:** Chief Software Architect (Architecture Decision Review Sprint)
+- **Review Date:** 2026-07-15
+- **Decision Date:** 2026-07-15

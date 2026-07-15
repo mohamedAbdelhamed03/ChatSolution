@@ -2,8 +2,27 @@
 
 > Automated validation against the manifests. Regenerated every build.
 
-**Current Build:** #2 — 2026-07-15 (ADRP Wave 1)
-**Prior Build:** #1 — 2026-07-14
+**Current Build:** #3 — 2026-07-15 (Review Sprint)
+**Prior Builds:** #2 (ADRP Wave 1), #1
+
+---
+
+## Build #3 — Post-Approval Validation
+
+**Scope validated:** AD-001..AD-006 (now Approved) + `decision-manifest.yaml`.
+
+| Check | Result |
+|---|---|
+| Manifest status consistency (AD-001..006 = Approved, dates set) | PASS |
+| AD docs contain Review Outcome + Approval = Approved | PASS |
+| Dependency graph still acyclic; approved set has no unapproved dependencies | PASS |
+| INV-01 consistency across updated docs | PASS |
+| No broken references introduced by edits | PASS |
+| Naming conventions | PASS |
+
+Note: AD-001..006 depend only on each other or nothing; all dependencies of the approved set are themselves Approved (AD-001→002→003; 001→004→005→006). No dangling approvals.
+
+**Build #3 result: PASS.**
 
 ---
 

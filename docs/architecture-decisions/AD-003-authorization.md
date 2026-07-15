@@ -91,9 +91,23 @@ How does the platform decide what an authenticated user/device is permitted to d
 - Are message-level admin actions limited to metadata (pin, remove-for-group) given content is opaque?
 - Membership-cache TTL and invalidation strategy?
 
+## Review Outcome (2026-07-15)
+
+**Reviewer:** Chief Software Architect · **Verdict:** Approve with Changes
+
+**Required changes applied:**
+- **Uniform enforcement mechanism specified:** authorization is enforced by a shared cross-cutting pipeline behavior invoked by every command/query slice, so no slice can silently skip a check (defends INV-07). Architecture tests assert every conversation/message handler declares an authorization policy.
+- **Membership-cache invalidation made event-driven:** membership/role caches are invalidated by domain events (member added/removed, role changed) with a bounded TTL as a safety net, so revoked members lose access promptly.
+- **Content-agnostic admin actions clarified:** admin/moderation actions operate on metadata only (remove-for-group, pin by id, membership) — never on content — preserving INV-01.
+
+**Residual open questions (owner follow-up, non-blocking):** launch group role/permission matrix (Product); membership-cache TTL value (Architecture); whether channels require ReBAC at introduction.
+
+**Quality scores** — Architecture 9 · Security 9 · Scalability 9 · Maintainability 9 · Documentation 9 · **Overall 9.1**
+
 ## Approval
 
-- **Status:** Under Review
+- **Status:** Approved
 - **Owner:** Security
-- **Review Date:** (pending)
-- **Decision Date:** (pending)
+- **Reviewed by:** Chief Software Architect (Architecture Decision Review Sprint)
+- **Review Date:** 2026-07-15
+- **Decision Date:** 2026-07-15

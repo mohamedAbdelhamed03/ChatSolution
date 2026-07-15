@@ -4,19 +4,18 @@
 
 ## Architecture Decisions (ADRP — Build #2, current review scope)
 
-- [ ] ADRP README complete (purpose, workflow, lifecycle)
-- [ ] decision-manifest.yaml consistent (50 decisions, valid dependency graph)
-- [ ] AD-001 User Identity — alternatives, industry research, recommendation justified
-- [ ] AD-002 Authentication — trade-offs and risks documented
-- [ ] AD-003 Authorization — security impact analyzed
-- [ ] AD-004 E2EE Protocol — backend-never-decrypts upheld; alternatives compared
-- [ ] AD-005 Key Management — private keys device-only; scalability analyzed
-- [ ] AD-006 Device Model and Device Trust — revocation and trust surfaced
-- [ ] AD-007 Conversation Model — 1:1/group/channel coverage
-- [ ] AD-008 Message Model — metadata minimization respected
-- [ ] AD-009 Message Ordering — deterministic ordering (INV-05) satisfied
-- [ ] AD-010 Synchronization — idempotency/dedup (INV-04) satisfied
-- [ ] Each recommendation is Under Review (not self-approved)
+- [x] ADRP README complete (purpose, workflow, lifecycle)
+- [x] decision-manifest.yaml consistent (50 decisions, valid dependency graph)
+- [x] AD-001 User Identity — reviewed, improved, **Approved**
+- [x] AD-002 Authentication — reviewed, improved, **Approved**
+- [x] AD-003 Authorization — reviewed, improved, **Approved**
+- [x] AD-004 E2EE Protocol — reviewed, improved, **Approved** (direction; library spike pending)
+- [x] AD-005 Key Management — reviewed, improved, **Approved**
+- [x] AD-006 Device Model and Device Trust — reviewed, improved, **Approved**
+- [ ] AD-007 Conversation Model — Under Review (next sprint)
+- [ ] AD-008 Message Model — Under Review (next sprint)
+- [ ] AD-009 Message Ordering — Under Review (next sprint)
+- [ ] AD-010 Synchronization — Under Review (next sprint)
 - [ ] Pending decisions (AD-011..AD-050) catalogued with valid dependencies
 
 ## Product

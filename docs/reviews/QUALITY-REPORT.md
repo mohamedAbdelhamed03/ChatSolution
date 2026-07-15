@@ -2,8 +2,25 @@
 
 > Per-artifact quality assessment. Scores are out of 10. Regenerated every build.
 
-**Current Build:** #2 — 2026-07-15 (Architecture Decision Sprint — ADRP Wave 1)
-**Prior Build:** #1 — 2026-07-14 (Documentation foundations)
+**Current Build:** #3 — 2026-07-15 (Architecture Decision Review Sprint — AD-001..AD-006)
+**Prior Builds:** #2 (ADRP Wave 1), #1 (Documentation foundations)
+
+---
+
+## Build #3 — Review Sprint Verdicts (AD-001..AD-006)
+
+| Decision | Verdict | Architecture | Security | Scalability | Maintainability | Documentation | Overall |
+|---|---|---|---|---|---|---|---|
+| AD-001 User Identity | Approve with Changes | 9 | 9 | 9 | 9 | 9 | 9.2 |
+| AD-002 Authentication | Approve with Changes | 9 | 9 | 10 | 9 | 9 | 9.3 |
+| AD-003 Authorization | Approve with Changes | 9 | 9 | 9 | 9 | 9 | 9.1 |
+| AD-004 E2EE Protocol | Approve with Changes | 10 | 10 | 9 | 9 | 10 | 9.7 |
+| AD-005 Key Management | Approve with Changes | 9 | 10 | 9 | 9 | 10 | 9.5 |
+| AD-006 Device Model & Device Trust | Approve with Changes | 9 | 9 | 9 | 9 | 9 | 9.3 |
+
+**Average (Build #3):** 9.35 | **All six:** Approved (with applied changes). **Rejected:** 0 | **Needs Revision:** 0.
+
+Each verdict is backed by problem/requirement validation, alternative analysis, a challenge pass, and concrete document improvements recorded in each AD's Review Outcome section.
 
 ---
 

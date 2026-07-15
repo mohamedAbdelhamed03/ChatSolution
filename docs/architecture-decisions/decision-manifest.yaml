@@ -15,7 +15,7 @@ decisions:
   # ---------------------------------------------------------------- Core spine
   - id: AD-001
     title: User Identity
-    status: Under Review
+    status: Approved
     priority: Critical
     category: Product
     owner: Architecture
@@ -24,12 +24,12 @@ decisions:
     related_documents: [docs/40-security/42-authn-authz.md, docs/30-domain/30-domain-model-overview.md]
     related_adrs: [ADR-0019]
     affected_modules: [Identity]
-    decision_date: null
-    review_date: null
+    decision_date: 2026-07-15
+    review_date: 2026-07-15
 
   - id: AD-002
     title: Authentication
-    status: Under Review
+    status: Approved
     priority: Critical
     category: Product
     owner: Security
@@ -38,12 +38,12 @@ decisions:
     related_documents: [docs/40-security/42-authn-authz.md]
     related_adrs: [ADR-0019]
     affected_modules: [Identity]
-    decision_date: null
-    review_date: null
+    decision_date: 2026-07-15
+    review_date: 2026-07-15
 
   - id: AD-003
     title: Authorization
-    status: Under Review
+    status: Approved
     priority: Critical
     category: Product
     owner: Security
@@ -52,12 +52,12 @@ decisions:
     related_documents: [docs/40-security/42-authn-authz.md]
     related_adrs: [ADR-0019]
     affected_modules: [Identity, Conversations, Messaging]
-    decision_date: null
-    review_date: null
+    decision_date: 2026-07-15
+    review_date: 2026-07-15
 
   - id: AD-004
     title: E2EE Protocol
-    status: Under Review
+    status: Approved
     priority: Critical
     category: Security
     owner: Security
@@ -66,12 +66,12 @@ decisions:
     related_documents: [docs/40-security/41-e2ee-design.md, docs/85-protocol/85.4-encryption-envelope.md]
     related_adrs: [ADR-0004, ADR-0020]
     affected_modules: [Messaging, Identity, Media]
-    decision_date: null
-    review_date: null
+    decision_date: 2026-07-15
+    review_date: 2026-07-15
 
   - id: AD-005
     title: Key Management
-    status: Under Review
+    status: Approved
     priority: Critical
     category: Security
     owner: Security
@@ -80,12 +80,12 @@ decisions:
     related_documents: [docs/40-security/43-key-management-and-devices.md]
     related_adrs: [ADR-0004, ADR-0019]
     affected_modules: [Identity, Messaging]
-    decision_date: null
-    review_date: null
+    decision_date: 2026-07-15
+    review_date: 2026-07-15
 
   - id: AD-006
     title: Device Model and Device Trust
-    status: Under Review
+    status: Approved
     priority: Critical
     category: Security
     owner: Security
@@ -94,8 +94,8 @@ decisions:
     related_documents: [docs/40-security/43-key-management-and-devices.md]
     related_adrs: [ADR-0019]
     affected_modules: [Identity]
-    decision_date: null
-    review_date: null
+    decision_date: 2026-07-15
+    review_date: 2026-07-15
 
   - id: AD-007
     title: Conversation Model

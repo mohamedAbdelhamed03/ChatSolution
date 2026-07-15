@@ -5,9 +5,9 @@ version: 2
 # out-of-band on push). base_commit records the branch point.
 
 build:
-  id: BUILD-0002
-  timestamp: 2026-07-15T09:41:00+03:00
-  phase: Architecture Decision Sprint - ADRP Wave 1
+  id: BUILD-0003
+  timestamp: 2026-07-15T09:49:00+03:00
+  phase: Architecture Decision Review Sprint - AD-001..AD-006
   branch: feature/architecture-decisions-wave-1
   commit: HEAD of feature/architecture-decisions-wave-1
   base_branch: main
@@ -15,9 +15,9 @@ build:
 
 review_scope:
   description: >-
-    Establishment of the Architecture Decision Repository (ADRP) and the first
-    dependency-ordered wave of decision recommendations (AD-001..AD-010).
-    No documentation, ADRs, or implementation changed.
+    Engineering review of AD-001..AD-006. Each decision was problem-validated,
+    requirement-validated, challenged, and improved; all six reached Approved
+    (Approve with Changes). No new decisions, ADRs, documentation, or code.
   included_paths:
     - docs/architecture-decisions/
     - docs/reviews/
@@ -48,15 +48,20 @@ summary:
   completed_documents: 9
   documentation_completion_percentage: 6.0
   total_decisions: 50
-  decisions_under_review: 10
+  decisions_approved: 6
+  decisions_under_review: 4
   decisions_proposed: 40
-  decisions_approved: 0
   decision_recommendation_percentage: 20.0
+  decision_approval_percentage: 12.0
 
 review_status:
-  status: Ready for Review
-  reviewed_by: null
-  review_date: null
+  status: Sprint Complete - AD-001..AD-006 Approved
+  reviewed_by: Chief Software Architect (Architecture Decision Review Sprint)
+  review_date: 2026-07-15
+  sprint_result:
+    approved: [AD-001, AD-002, AD-003, AD-004, AD-005, AD-006]
+    rejected: []
+    needs_revision: []
 
 review_order:
   - path: docs/architecture-decisions/README.md
@@ -128,13 +133,15 @@ files_changed:
     - docs/reviews/review-manifest.yaml
   removed: []
 
-decisions_under_review:
+decisions_approved:
   - AD-001
   - AD-002
   - AD-003
   - AD-004
   - AD-005
   - AD-006
+
+decisions_under_review:
   - AD-007
   - AD-008
   - AD-009
@@ -163,14 +170,14 @@ pending_adrs:
     impacts: [AD-007]
 
 architecture_decisions:
-  completed: []
-  under_review:
+  approved:
     - AD-001
     - AD-002
     - AD-003
     - AD-004
     - AD-005
     - AD-006
+  under_review:
     - AD-007
     - AD-008
     - AD-009
@@ -203,9 +210,9 @@ validation:
   broken_references: PASS
   circular_dependencies: PASS
 
-architecture_status: On Track - decisions under review, documentation paused
-security_status: E2EE and backend-never-decrypt upheld across all recommendations
-completion_percentage: 20.0
+architecture_status: On Track - AD-001..AD-006 approved; AD-007..AD-010 next sprint; documentation paused
+security_status: E2EE and backend-never-decrypt upheld and validated across all approved decisions
+completion_percentage: 12.0
 
 known_risks:
   - id: RISK-01
@@ -237,15 +244,14 @@ open_questions:
 
 next_review:
   recommended_documents:
-    - path: docs/architecture-decisions/AD-011-presence.md
-    - path: docs/architecture-decisions/AD-012-notifications.md
-    - path: docs/architecture-decisions/AD-013-storage-strategy.md
-    - path: docs/architecture-decisions/AD-015-realtime-protocol.md
+    - path: docs/architecture-decisions/AD-007-conversation-model.md
+    - path: docs/architecture-decisions/AD-008-message-model.md
+    - path: docs/architecture-decisions/AD-009-message-ordering.md
+    - path: docs/architecture-decisions/AD-010-synchronization.md
 
 next_build_phase:
-  phase: Architecture Decision Sprint - ADRP Wave 2
+  phase: Architecture Decision Review Sprint 2 - AD-007..AD-010
   description: >-
-    On approval of AD-001..AD-010, generate the next dependency-satisfied wave
-    (AD-011 Presence, AD-012 Notifications, AD-013 Storage, AD-014 Search,
-    AD-015 Realtime Protocol, AD-016 Scaling, AD-017 Deployment, plus AD-018..
-    AD-050 as dependencies are satisfied).
+    Review the next batch of Under-Review decisions (AD-007 Conversation Model,
+    AD-008 Message Model, AD-009 Message Ordering, AD-010 Synchronization).
+    Do not begin new decision authoring or documentation until approved.

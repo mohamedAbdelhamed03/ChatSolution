@@ -4,6 +4,51 @@
 
 ---
 
+## Build #3 — 2026-07-15 (Architecture Decision Review Sprint)
+
+| Field | Value |
+|---|---|
+| **Build ID** | BUILD-0003 |
+| **Build Timestamp** | 2026-07-15T09:49:00+03:00 |
+| **Branch** | feature/architecture-decisions-wave-1 |
+| **Base Branch** | main |
+| **Current Phase** | Architecture Decision Review Sprint (AD-001..AD-006) |
+| **Build Duration** | ~15 minutes |
+
+### Scope
+
+Engineering review of the six in-scope decisions (AD-001 User Identity, AD-002 Authentication, AD-003 Authorization, AD-004 E2EE Protocol, AD-005 Key Management, AD-006 Device Model & Device Trust). Each was problem-validated, requirement-validated, challenged, and improved. No new decisions generated; AD-007..AD-050 untouched.
+
+### Outcome
+
+| Decision | Verdict | Status |
+|---|---|---|
+| AD-001 User Identity | Approve with Changes | Approved |
+| AD-002 Authentication | Approve with Changes | Approved |
+| AD-003 Authorization | Approve with Changes | Approved |
+| AD-004 E2EE Protocol | Approve with Changes | Approved |
+| AD-005 Key Management | Approve with Changes | Approved |
+| AD-006 Device Model & Device Trust | Approve with Changes | Approved |
+
+- **Approved:** 6 · **Rejected:** 0 · **Needs Revision:** 0
+- Each approval is backed by written engineering justification and applied document changes (Review Outcome section in each AD).
+
+### Decision Statistics (updated)
+
+| Metric | Value |
+|---|---|
+| Total decisions | 50 |
+| Approved | 6 |
+| Under Review | 4 (AD-007..AD-010) |
+| Proposed | 40 |
+| Approval coverage | 12.0% |
+
+### Blocking Architectural Decisions
+
+- None for this sprint. Sprint complete: all six in-scope decisions Approved. AD-004 carries a mandatory pre-implementation library-selection spike (ratified in ADR-0004).
+
+---
+
 ## Build #2 — 2026-07-15
 
 | Field | Value |
