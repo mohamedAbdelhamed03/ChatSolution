@@ -1,8 +1,43 @@
 # Quality Report
 
-> Per-document quality assessment for all Completed documents. Scores are out of 10. Regenerated every build.
+> Per-artifact quality assessment. Scores are out of 10. Regenerated every build.
 
-**Build:** #1 — 2026-07-14
+**Current Build:** #2 — 2026-07-15 (Architecture Decision Sprint — ADRP Wave 1)
+**Prior Build:** #1 — 2026-07-14 (Documentation foundations)
+
+---
+
+## Build #2 — Architecture Decision Recommendations (AD-001..AD-010)
+
+| Decision | Score | Alternatives | Trade-offs | Risks | Industry Research | Security | Scalability |
+|---|---|---|---|---|---|---|---|
+| AD-001 User Identity | 9.3 | 3 | Yes | Yes | Yes | Strong | Strong |
+| AD-002 Authentication | 9.3 | 3 | Yes | Yes | Yes | Strong | Strong |
+| AD-003 Authorization | 9.1 | 3 | Yes | Yes | Yes | Strong | Good |
+| AD-004 E2EE Protocol | 9.7 | 3 | Yes | Yes | Yes | Critical/Strong | Strong |
+| AD-005 Key Management | 9.5 | 3 | Yes | Yes | Yes | Critical/Strong | Strong |
+| AD-006 Device Model | 9.3 | 3 | Yes | Yes | Yes | Strong | Good |
+| AD-007 Conversation Model | 9.2 | 3 | Yes | Yes | Yes | Good | Good |
+| AD-008 Message Model | 9.4 | 3 | Yes | Yes | Yes | Strong | Strong |
+| AD-009 Message Ordering | 9.5 | 3 | Yes | Yes | Yes | Good | Strong |
+| AD-010 Synchronization | 9.4 | 3 | Yes | Yes | Yes | Strong | Strong |
+
+**Average (Build #2):** 9.37 | **Lowest:** 9.1 (AD-003) | **Highest:** 9.7 (AD-004)
+
+### Validation gate (Build #2)
+
+Every recommendation compares ≥3 alternatives, explains trade-offs and risks, summarizes industry practice (distinguishing documented fact from informed pattern), analyzes security and scalability, lists affected documents/ADRs/modules, and justifies a single recommendation without self-approval. **Gate: PASS.**
+
+### Notable observations
+
+- AD-004 and AD-009 resolve the previously flagged open decisions (ADR-0004, ADR-0008/0010) once approved.
+- All recommendations explicitly uphold INV-01 (backend never decrypts).
+- Recommended improvement: AD-003 will need extension toward ReBAC when channels are introduced.
+
+---
+
+## Build #1 — Documentation Foundations
+
 **Documents assessed:** 9
 
 ---

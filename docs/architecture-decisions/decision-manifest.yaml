@@ -1,0 +1,720 @@
+version: 1
+
+# =============================================================================
+# Architecture Decision Repository (ADRP) — Decision Manifest
+# Single source of truth for every architectural decision.
+#
+# status: Proposed | Under Review | Approved | Rejected | Superseded
+#   Proposed     = catalogued; recommendation not yet written
+#   Under Review = recommendation written; awaiting human approval
+# The architect never sets Approved. Approval is a human act.
+# =============================================================================
+
+decisions:
+
+  # ---------------------------------------------------------------- Core spine
+  - id: AD-001
+    title: User Identity
+    status: Under Review
+    priority: Critical
+    category: Product
+    owner: Architecture
+    depends_on: []
+    blocks: [AD-002, AD-004, AD-007, AD-018]
+    related_documents: [docs/40-security/42-authn-authz.md, docs/30-domain/30-domain-model-overview.md]
+    related_adrs: [ADR-0019]
+    affected_modules: [Identity]
+    decision_date: null
+    review_date: null
+
+  - id: AD-002
+    title: Authentication
+    status: Under Review
+    priority: Critical
+    category: Product
+    owner: Security
+    depends_on: [AD-001]
+    blocks: [AD-003, AD-006, AD-019]
+    related_documents: [docs/40-security/42-authn-authz.md]
+    related_adrs: [ADR-0019]
+    affected_modules: [Identity]
+    decision_date: null
+    review_date: null
+
+  - id: AD-003
+    title: Authorization
+    status: Under Review
+    priority: Critical
+    category: Product
+    owner: Security
+    depends_on: [AD-002]
+    blocks: [AD-007]
+    related_documents: [docs/40-security/42-authn-authz.md]
+    related_adrs: [ADR-0019]
+    affected_modules: [Identity, Conversations, Messaging]
+    decision_date: null
+    review_date: null
+
+  - id: AD-004
+    title: E2EE Protocol
+    status: Under Review
+    priority: Critical
+    category: Security
+    owner: Security
+    depends_on: [AD-001]
+    blocks: [AD-005, AD-008, AD-012, AD-014, AD-020, AD-021, AD-022]
+    related_documents: [docs/40-security/41-e2ee-design.md, docs/85-protocol/85.4-encryption-envelope.md]
+    related_adrs: [ADR-0004, ADR-0020]
+    affected_modules: [Messaging, Identity, Media]
+    decision_date: null
+    review_date: null
+
+  - id: AD-005
+    title: Key Management
+    status: Under Review
+    priority: Critical
+    category: Security
+    owner: Security
+    depends_on: [AD-004]
+    blocks: [AD-006, AD-024]
+    related_documents: [docs/40-security/43-key-management-and-devices.md]
+    related_adrs: [ADR-0004, ADR-0019]
+    affected_modules: [Identity, Messaging]
+    decision_date: null
+    review_date: null
+
+  - id: AD-006
+    title: Device Model and Device Trust
+    status: Under Review
+    priority: Critical
+    category: Security
+    owner: Security
+    depends_on: [AD-002, AD-005]
+    blocks: [AD-010, AD-011]
+    related_documents: [docs/40-security/43-key-management-and-devices.md]
+    related_adrs: [ADR-0019]
+    affected_modules: [Identity]
+    decision_date: null
+    review_date: null
+
+  - id: AD-007
+    title: Conversation Model
+    status: Under Review
+    priority: Critical
+    category: Product
+    owner: Architecture
+    depends_on: [AD-001, AD-003]
+    blocks: [AD-008, AD-025]
+    related_documents: [docs/70-features/FS-01-one-to-one-chat.md, docs/70-features/FS-02-group-chat.md]
+    related_adrs: [ADR-0020]
+    affected_modules: [Conversations]
+    decision_date: null
+    review_date: null
+
+  - id: AD-008
+    title: Message Model
+    status: Under Review
+    priority: Critical
+    category: Product
+    owner: Architecture
+    depends_on: [AD-007, AD-004]
+    blocks: [AD-009, AD-013, AD-014, AD-021, AD-027, AD-030, AD-032, AD-042]
+    related_documents: [docs/30-domain/36-message-lifecycle.md, docs/85-protocol/85.6-message-metadata.md]
+    related_adrs: [ADR-0008, ADR-0013]
+    affected_modules: [Messaging]
+    decision_date: null
+    review_date: null
+
+  - id: AD-009
+    title: Message Ordering
+    status: Under Review
+    priority: Critical
+    category: Domain
+    owner: Architecture
+    depends_on: [AD-008]
+    blocks: [AD-010, AD-027, AD-042]
+    related_documents: [docs/50-data/54-message-sync-and-storage.md, docs/85-protocol/85.5-delivery-state-machine.md]
+    related_adrs: [ADR-0008, ADR-0010]
+    affected_modules: [Messaging]
+    decision_date: null
+    review_date: null
+
+  - id: AD-010
+    title: Synchronization
+    status: Under Review
+    priority: Critical
+    category: Realtime
+    owner: Architecture
+    depends_on: [AD-009, AD-006]
+    blocks: [AD-015, AD-041]
+    related_documents: [docs/85-protocol/85.9-synchronization-protocol.md, docs/50-data/54-message-sync-and-storage.md]
+    related_adrs: [ADR-0016, ADR-0011]
+    affected_modules: [Messaging, Sync]
+    decision_date: null
+    review_date: null
+
+  # ---------------------------------------------------------------- Product (remaining)
+  - id: AD-011
+    title: Presence
+    status: Proposed
+    priority: High
+    category: Product
+    owner: Architecture
+    depends_on: [AD-006]
+    blocks: [AD-043]
+    related_documents: [docs/60-realtime/61-presence-and-typing.md]
+    related_adrs: [ADR-0014]
+    affected_modules: [Presence]
+    decision_date: null
+    review_date: null
+
+  - id: AD-012
+    title: Notifications
+    status: Proposed
+    priority: High
+    category: Product
+    owner: Architecture
+    depends_on: [AD-008, AD-004]
+    blocks: []
+    related_documents: [docs/60-realtime/63-push-notifications.md]
+    related_adrs: []
+    affected_modules: [Notifications]
+    decision_date: null
+    review_date: null
+
+  - id: AD-013
+    title: Storage Strategy
+    status: Proposed
+    priority: Critical
+    category: Data
+    owner: Architecture
+    depends_on: [AD-008]
+    blocks: [AD-016, AD-038, AD-048]
+    related_documents: [docs/50-data/50-data-architecture.md]
+    related_adrs: [ADR-0006, ADR-0015]
+    affected_modules: [Messaging, Media]
+    decision_date: null
+    review_date: null
+
+  - id: AD-014
+    title: Search
+    status: Proposed
+    priority: High
+    category: Product
+    owner: Architecture
+    depends_on: [AD-004, AD-008]
+    blocks: []
+    related_documents: [docs/50-data/55-search-architecture.md]
+    related_adrs: [ADR-0009, ADR-0028]
+    affected_modules: [Search]
+    decision_date: null
+    review_date: null
+
+  - id: AD-015
+    title: Realtime Protocol
+    status: Proposed
+    priority: Critical
+    category: Realtime
+    owner: Architecture
+    depends_on: [AD-008, AD-010]
+    blocks: [AD-016, AD-039, AD-040]
+    related_documents: [docs/85-protocol/85-protocol-overview.md]
+    related_adrs: [ADR-0005]
+    affected_modules: [Messaging, Presence]
+    decision_date: null
+    review_date: null
+
+  - id: AD-016
+    title: Scaling
+    status: Proposed
+    priority: Critical
+    category: Infrastructure
+    owner: Architecture
+    depends_on: [AD-013, AD-015]
+    blocks: [AD-017, AD-047]
+    related_documents: [docs/90-infrastructure/94-scalability-and-capacity.md]
+    related_adrs: [ADR-0007]
+    affected_modules: [All]
+    decision_date: null
+    review_date: null
+
+  - id: AD-017
+    title: Deployment
+    status: Proposed
+    priority: High
+    category: Infrastructure
+    owner: Platform
+    depends_on: [AD-016]
+    blocks: [AD-045, AD-046, AD-049, AD-050]
+    related_documents: [docs/90-infrastructure/90-deployment-architecture.md]
+    related_adrs: []
+    affected_modules: [All]
+    decision_date: null
+    review_date: null
+
+  - id: AD-018
+    title: User Model
+    status: Proposed
+    priority: High
+    category: Product
+    owner: Product
+    depends_on: [AD-001]
+    blocks: [AD-007]
+    related_documents: [docs/30-domain/30-domain-model-overview.md]
+    related_adrs: []
+    affected_modules: [Identity]
+    decision_date: null
+    review_date: null
+
+  # ---------------------------------------------------------------- Security (remaining)
+  - id: AD-019
+    title: Session Management
+    status: Proposed
+    priority: High
+    category: Security
+    owner: Security
+    depends_on: [AD-002]
+    blocks: []
+    related_documents: [docs/40-security/42-authn-authz.md]
+    related_adrs: [ADR-0019]
+    affected_modules: [Identity]
+    decision_date: null
+    review_date: null
+
+  - id: AD-020
+    title: Privacy Model
+    status: Proposed
+    priority: High
+    category: Security
+    owner: Security
+    depends_on: [AD-004]
+    blocks: [AD-038]
+    related_documents: [docs/40-security/45-data-privacy-and-compliance.md]
+    related_adrs: []
+    affected_modules: [All]
+    decision_date: null
+    review_date: null
+
+  - id: AD-021
+    title: Metadata Protection
+    status: Proposed
+    priority: High
+    category: Security
+    owner: Security
+    depends_on: [AD-004, AD-008]
+    blocks: []
+    related_documents: [docs/85-protocol/85.6-message-metadata.md]
+    related_adrs: []
+    affected_modules: [Messaging]
+    decision_date: null
+    review_date: null
+
+  - id: AD-022
+    title: Attachment Encryption
+    status: Proposed
+    priority: High
+    category: Security
+    owner: Security
+    depends_on: [AD-004]
+    blocks: [AD-023]
+    related_documents: [docs/70-features/FS-04-media-and-files.md]
+    related_adrs: [ADR-0015]
+    affected_modules: [Media]
+    decision_date: null
+    review_date: null
+
+  - id: AD-023
+    title: Media Encryption
+    status: Proposed
+    priority: Medium
+    category: Security
+    owner: Security
+    depends_on: [AD-022]
+    blocks: []
+    related_documents: [docs/70-features/FS-05-voice-notes.md]
+    related_adrs: [ADR-0015]
+    affected_modules: [Media]
+    decision_date: null
+    review_date: null
+
+  - id: AD-024
+    title: Key Rotation
+    status: Proposed
+    priority: High
+    category: Security
+    owner: Security
+    depends_on: [AD-005]
+    blocks: [AD-048]
+    related_documents: [docs/98-operations/OPS-07-key-rotation.md]
+    related_adrs: []
+    affected_modules: [Identity, Messaging]
+    decision_date: null
+    review_date: null
+
+  # ---------------------------------------------------------------- Domain (remaining)
+  - id: AD-025
+    title: Bounded Contexts
+    status: Proposed
+    priority: Critical
+    category: Domain
+    owner: Architecture
+    depends_on: [AD-007, AD-008]
+    blocks: [AD-026, AD-028]
+    related_documents: [docs/30-domain/31-bounded-contexts-and-modules.md]
+    related_adrs: [ADR-0001]
+    affected_modules: [All]
+    decision_date: null
+    review_date: null
+
+  - id: AD-026
+    title: Aggregate Design
+    status: Proposed
+    priority: High
+    category: Domain
+    owner: Architecture
+    depends_on: [AD-025]
+    blocks: []
+    related_documents: [docs/30-domain/32-aggregates-and-invariants.md]
+    related_adrs: []
+    affected_modules: [All]
+    decision_date: null
+    review_date: null
+
+  - id: AD-027
+    title: Message Lifecycle
+    status: Proposed
+    priority: Critical
+    category: Domain
+    owner: Architecture
+    depends_on: [AD-008, AD-009]
+    blocks: [AD-031]
+    related_documents: [docs/30-domain/36-message-lifecycle.md]
+    related_adrs: [ADR-0012, ADR-0013]
+    affected_modules: [Messaging]
+    decision_date: null
+    review_date: null
+
+  - id: AD-028
+    title: Event Model
+    status: Proposed
+    priority: Critical
+    category: Domain
+    owner: Architecture
+    depends_on: [AD-025]
+    blocks: [AD-029]
+    related_documents: [docs/30-domain/33-domain-events-catalog.md, docs/20-architecture/26-event-driven-architecture.md]
+    related_adrs: [ADR-0017, ADR-0024, ADR-0025]
+    affected_modules: [All]
+    decision_date: null
+    review_date: null
+
+  - id: AD-029
+    title: Consistency Model
+    status: Proposed
+    priority: Critical
+    category: Domain
+    owner: Architecture
+    depends_on: [AD-028]
+    blocks: []
+    related_documents: [docs/20-architecture/26-event-driven-architecture.md]
+    related_adrs: [ADR-0018]
+    affected_modules: [All]
+    decision_date: null
+    review_date: null
+
+  - id: AD-030
+    title: Versioning
+    status: Proposed
+    priority: High
+    category: Domain
+    owner: Architecture
+    depends_on: [AD-008]
+    blocks: []
+    related_documents: [docs/70-features/FS-09-edit-and-delete.md]
+    related_adrs: [ADR-0013]
+    affected_modules: [Messaging]
+    decision_date: null
+    review_date: null
+
+  - id: AD-031
+    title: Deletion Model
+    status: Proposed
+    priority: High
+    category: Domain
+    owner: Architecture
+    depends_on: [AD-027]
+    blocks: []
+    related_documents: [docs/70-features/FS-09-edit-and-delete.md]
+    related_adrs: [ADR-0012]
+    affected_modules: [Messaging]
+    decision_date: null
+    review_date: null
+
+  # ---------------------------------------------------------------- Data (remaining)
+  - id: AD-032
+    title: Database
+    status: Proposed
+    priority: Critical
+    category: Data
+    owner: Architecture
+    depends_on: [AD-008]
+    blocks: [AD-033, AD-035, AD-037]
+    related_documents: [docs/50-data/51-postgres-schema-and-migrations.md]
+    related_adrs: [ADR-0006]
+    affected_modules: [All]
+    decision_date: null
+    review_date: null
+
+  - id: AD-033
+    title: Partitioning
+    status: Proposed
+    priority: High
+    category: Data
+    owner: Architecture
+    depends_on: [AD-032]
+    blocks: [AD-034]
+    related_documents: [docs/50-data/56-partitioning-and-sharding.md]
+    related_adrs: []
+    affected_modules: [Messaging]
+    decision_date: null
+    review_date: null
+
+  - id: AD-034
+    title: Sharding
+    status: Proposed
+    priority: Medium
+    category: Data
+    owner: Architecture
+    depends_on: [AD-033]
+    blocks: []
+    related_documents: [docs/50-data/56-partitioning-and-sharding.md]
+    related_adrs: []
+    affected_modules: [Messaging]
+    decision_date: null
+    review_date: null
+
+  - id: AD-035
+    title: Read Models
+    status: Proposed
+    priority: High
+    category: Data
+    owner: Architecture
+    depends_on: [AD-032]
+    blocks: [AD-036]
+    related_documents: [docs/50-data/52-read-model-and-dapper.md]
+    related_adrs: [ADR-0003, ADR-0011]
+    affected_modules: [All]
+    decision_date: null
+    review_date: null
+
+  - id: AD-036
+    title: Caching
+    status: Proposed
+    priority: Medium
+    category: Data
+    owner: Architecture
+    depends_on: [AD-035]
+    blocks: []
+    related_documents: [docs/50-data/53-redis-usage.md]
+    related_adrs: [ADR-0027]
+    affected_modules: [All]
+    decision_date: null
+    review_date: null
+
+  - id: AD-037
+    title: Redis Strategy
+    status: Proposed
+    priority: High
+    category: Data
+    owner: Architecture
+    depends_on: [AD-032]
+    blocks: []
+    related_documents: [docs/50-data/53-redis-usage.md]
+    related_adrs: [ADR-0007, ADR-0022]
+    affected_modules: [Presence, Messaging]
+    decision_date: null
+    review_date: null
+
+  - id: AD-038
+    title: Retention
+    status: Proposed
+    priority: Medium
+    category: Data
+    owner: Architecture
+    depends_on: [AD-013, AD-020]
+    blocks: []
+    related_documents: [docs/50-data/57-retention-ttl-and-backup.md]
+    related_adrs: []
+    affected_modules: [Messaging, Media]
+    decision_date: null
+    review_date: null
+
+  # ---------------------------------------------------------------- Realtime (remaining)
+  - id: AD-039
+    title: SignalR
+    status: Proposed
+    priority: Critical
+    category: Realtime
+    owner: Architecture
+    depends_on: [AD-015]
+    blocks: []
+    related_documents: [docs/60-realtime/60-realtime-architecture.md, docs/80-api/82-signalr-hub-contract.md]
+    related_adrs: [ADR-0005]
+    affected_modules: [Messaging, Presence]
+    decision_date: null
+    review_date: null
+
+  - id: AD-040
+    title: Packet Format
+    status: Proposed
+    priority: High
+    category: Realtime
+    owner: Architecture
+    depends_on: [AD-015]
+    blocks: []
+    related_documents: [docs/85-protocol/85.1-packet-format.md]
+    related_adrs: []
+    affected_modules: [Messaging]
+    decision_date: null
+    review_date: null
+
+  - id: AD-041
+    title: Offline Recovery
+    status: Proposed
+    priority: High
+    category: Realtime
+    owner: Architecture
+    depends_on: [AD-010]
+    blocks: []
+    related_documents: [docs/30-domain/35-sequences/SQ-15-offline-recovery.md]
+    related_adrs: [ADR-0016]
+    affected_modules: [Sync, Messaging]
+    decision_date: null
+    review_date: null
+
+  - id: AD-042
+    title: Delivery Semantics
+    status: Proposed
+    priority: Critical
+    category: Realtime
+    owner: Architecture
+    depends_on: [AD-008, AD-009]
+    blocks: [AD-044]
+    related_documents: [docs/60-realtime/62-delivery-and-read-receipts.md, docs/85-protocol/85.5-delivery-state-machine.md]
+    related_adrs: [ADR-0018]
+    affected_modules: [Messaging]
+    decision_date: null
+    review_date: null
+
+  - id: AD-043
+    title: Typing
+    status: Proposed
+    priority: Low
+    category: Realtime
+    owner: Architecture
+    depends_on: [AD-011]
+    blocks: []
+    related_documents: [docs/85-protocol/85.8-typing-protocol.md]
+    related_adrs: []
+    affected_modules: [Presence]
+    decision_date: null
+    review_date: null
+
+  - id: AD-044
+    title: Read Receipts
+    status: Proposed
+    priority: Medium
+    category: Realtime
+    owner: Architecture
+    depends_on: [AD-042]
+    blocks: []
+    related_documents: [docs/60-realtime/62-delivery-and-read-receipts.md]
+    related_adrs: []
+    affected_modules: [Messaging]
+    decision_date: null
+    review_date: null
+
+  # ---------------------------------------------------------------- Infrastructure (remaining)
+  - id: AD-045
+    title: Docker
+    status: Proposed
+    priority: High
+    category: Infrastructure
+    owner: Platform
+    depends_on: [AD-017]
+    blocks: []
+    related_documents: [docs/90-infrastructure/91-docker-and-local-dev.md]
+    related_adrs: []
+    affected_modules: [All]
+    decision_date: null
+    review_date: null
+
+  - id: AD-046
+    title: CI/CD
+    status: Proposed
+    priority: High
+    category: Infrastructure
+    owner: Platform
+    depends_on: [AD-017]
+    blocks: []
+    related_documents: [docs/90-infrastructure/95-ci-cd.md]
+    related_adrs: []
+    affected_modules: [All]
+    decision_date: null
+    review_date: null
+
+  - id: AD-047
+    title: Observability
+    status: Proposed
+    priority: High
+    category: Infrastructure
+    owner: SRE
+    depends_on: [AD-016]
+    blocks: []
+    related_documents: [docs/90-infrastructure/93-observability.md]
+    related_adrs: [ADR-0026]
+    affected_modules: [All]
+    decision_date: null
+    review_date: null
+
+  - id: AD-048
+    title: Disaster Recovery
+    status: Proposed
+    priority: High
+    category: Infrastructure
+    owner: SRE
+    depends_on: [AD-013, AD-024]
+    blocks: []
+    related_documents: [docs/98-operations/99-incident-and-dr.md]
+    related_adrs: []
+    affected_modules: [All]
+    decision_date: null
+    review_date: null
+
+  - id: AD-049
+    title: Feature Flags
+    status: Proposed
+    priority: Medium
+    category: Infrastructure
+    owner: Platform
+    depends_on: [AD-017]
+    blocks: []
+    related_documents: [docs/90-infrastructure/96-config-and-feature-flags.md]
+    related_adrs: [ADR-0029]
+    affected_modules: [All]
+    decision_date: null
+    review_date: null
+
+  - id: AD-050
+    title: Configuration
+    status: Proposed
+    priority: Medium
+    category: Infrastructure
+    owner: Platform
+    depends_on: [AD-017]
+    blocks: []
+    related_documents: [docs/90-infrastructure/96-config-and-feature-flags.md]
+    related_adrs: []
+    affected_modules: [All]
+    decision_date: null
+    review_date: null

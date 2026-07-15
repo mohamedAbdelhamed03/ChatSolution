@@ -4,6 +4,74 @@
 
 ---
 
+## Build #2 — 2026-07-15
+
+| Field | Value |
+|---|---|
+| **Build ID** | BUILD-0002 |
+| **Build Timestamp** | 2026-07-15T09:41:00+03:00 |
+| **Branch** | feature/architecture-decisions-wave-1 |
+| **Base Branch** | main |
+| **Base Commit** | 5305ba6 |
+| **Current Phase** | Architecture Decision Sprint — ADRP Wave 1 |
+| **Build Duration** | ~10 minutes (single build pass) |
+
+### Scope
+
+Establishment of the Architecture Decision Repository (ADRP) and generation of the first dependency-ordered wave of decision recommendations (AD-001 through AD-010). Documentation generation remains paused; no ADRs or implementation were produced.
+
+### Artifacts Generated (this build)
+
+| Artifact | Path |
+|---|---|
+| ADRP README | docs/architecture-decisions/README.md |
+| Decision Manifest (50 decisions) | docs/architecture-decisions/decision-manifest.yaml |
+| AD-001 User Identity | docs/architecture-decisions/AD-001-user-identity.md |
+| AD-002 Authentication | docs/architecture-decisions/AD-002-authentication.md |
+| AD-003 Authorization | docs/architecture-decisions/AD-003-authorization.md |
+| AD-004 E2EE Protocol | docs/architecture-decisions/AD-004-e2ee-protocol.md |
+| AD-005 Key Management | docs/architecture-decisions/AD-005-key-management.md |
+| AD-006 Device Model and Device Trust | docs/architecture-decisions/AD-006-device-model.md |
+| AD-007 Conversation Model | docs/architecture-decisions/AD-007-conversation-model.md |
+| AD-008 Message Model | docs/architecture-decisions/AD-008-message-model.md |
+| AD-009 Message Ordering | docs/architecture-decisions/AD-009-message-ordering.md |
+| AD-010 Synchronization | docs/architecture-decisions/AD-010-synchronization.md |
+
+### Decision Statistics
+
+| Metric | Value |
+|---|---|
+| Total decisions catalogued | 50 |
+| Under Review (recommendations written) | 10 |
+| Proposed (not yet written) | 40 |
+| Approved | 0 |
+| Recommendation coverage | 20.0% |
+
+### Documentation Statistics (unchanged this build)
+
+| Metric | Value |
+|---|---|
+| Total documents | 151 |
+| Completed | 9 |
+| Pending | 142 |
+| Completion | 6.0% |
+
+### Dependency Graph Summary
+
+- Decision spine (satisfied in order): AD-001 → AD-002 → AD-003; AD-001 → AD-004 → AD-005 → AD-006; AD-007 → AD-008 → AD-009 → AD-010.
+- No circular dependencies among decisions.
+- All 40 remaining decisions have valid `depends_on` references within the catalogue.
+
+### Blocking Documents
+
+- None. Documentation generation is intentionally paused pending decision approvals.
+
+### Blocking Architectural Decisions
+
+- 10 recommendations are awaiting human approval. Highest-impact: AD-004 (E2EE Protocol), AD-009 (Message Ordering) — these resolve the previously flagged ADR-0004 and ADR-0008/0010 open decisions once approved.
+
+---
+
 ## Build #1 — 2026-07-14
 
 | Field | Value |

@@ -1,6 +1,23 @@
 # Architecture Review Checklist
 
-> Reviewer checklist for Build #1. Items for not-yet-generated documents are listed as pending and remain unchecked until their build.
+> Reviewer checklist. Build #2 adds the Architecture Decision Repository (ADRP) section below. Items for not-yet-generated documents remain unchecked until their build.
+
+## Architecture Decisions (ADRP — Build #2, current review scope)
+
+- [ ] ADRP README complete (purpose, workflow, lifecycle)
+- [ ] decision-manifest.yaml consistent (50 decisions, valid dependency graph)
+- [ ] AD-001 User Identity — alternatives, industry research, recommendation justified
+- [ ] AD-002 Authentication — trade-offs and risks documented
+- [ ] AD-003 Authorization — security impact analyzed
+- [ ] AD-004 E2EE Protocol — backend-never-decrypts upheld; alternatives compared
+- [ ] AD-005 Key Management — private keys device-only; scalability analyzed
+- [ ] AD-006 Device Model and Device Trust — revocation and trust surfaced
+- [ ] AD-007 Conversation Model — 1:1/group/channel coverage
+- [ ] AD-008 Message Model — metadata minimization respected
+- [ ] AD-009 Message Ordering — deterministic ordering (INV-05) satisfied
+- [ ] AD-010 Synchronization — idempotency/dedup (INV-04) satisfied
+- [ ] Each recommendation is Under Review (not self-approved)
+- [ ] Pending decisions (AD-011..AD-050) catalogued with valid dependencies
 
 ## Product
 

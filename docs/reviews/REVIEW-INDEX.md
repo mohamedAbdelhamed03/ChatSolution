@@ -1,48 +1,58 @@
 # Review Index
 
-> Entry point for reviewers. Start here, then follow the recommended review sequence. For the machine-readable dashboard, open `review-manifest.yaml`.
+> Entry point for reviewers. Start here, then follow the recommended review sequence. For the machine-readable dashboard, open `review-manifest.yaml`. The Git repository is the source of truth.
 
-**Build:** #1 — 2026-07-14 | **Branch:** main | **Documented commit:** cb5c3a4
+**Current Build:** #2 — 2026-07-15 | **Branch:** feature/architecture-decisions-wave-1 | **Base:** main (5305ba6)
+**Prior Build:** #1 — 2026-07-14 (documentation foundations, on main)
 
 ---
 
 ## Current Project Status
 
-- **Phase:** Phase-1 (Foundations) complete; entering Phase-2 (Core Architecture & Domain).
-- **Completion:** 9 of 151 documents (6.0%).
-- **Health:** All completed documents pass validation and quality gates; average quality 9.32/10.
+- **Phase:** Architecture Decision Sprint — ADRP Wave 1. Documentation generation paused.
+- **Decision coverage:** 10 of 50 decisions recommended (Under Review); 40 Proposed.
+- **Documentation completion:** 9 of 151 documents (6.0%) — unchanged this build.
+- **Health:** All ADRP artifacts pass validation and quality gates; average decision quality 9.37/10.
 - **Defining constraint upheld:** Backend never decrypts message content (INV-01).
 
 ## Current Build
 
-- Manifest source of truth: `docs/document-manifest.yaml`.
-- Build report: `BUILD-REPORT.md`.
-- Changes: `CHANGES.md`.
+- Decision source of truth: `docs/architecture-decisions/decision-manifest.yaml`.
+- Documentation source of truth: `docs/document-manifest.yaml`.
+- Build report: `BUILD-REPORT.md` (Build #2). Changes: `CHANGES.md` (Build #2).
 
-## Documents Created (this build)
+## Review Scope (this build)
 
-1. DOC-002 README & Reading Order
-2. DOC-003 Glossary Overview
-3. DOC-009 Personas and Use Cases
-4. DOC-010 Functional Requirements
-5. DOC-011 Non-Functional Requirements
-6. DOC-013 Architecture Overview
-7. DOC-022 Architecture Principles
-8. DOC-023 System Invariants
-9. DOC-001 Vision and Scope (registered)
+Architecture Decision Repository (ADRP) Wave 1: README, decision manifest, and 10 recommendation documents (AD-001..AD-010). No documentation, ADRs, or code changed.
+
+## Artifacts Created (this build)
+
+1. ADRP README
+2. decision-manifest.yaml (50 decisions)
+3. AD-001 User Identity
+4. AD-002 Authentication
+5. AD-003 Authorization
+6. AD-004 E2EE Protocol
+7. AD-005 Key Management
+8. AD-006 Device Model and Device Trust
+9. AD-007 Conversation Model
+10. AD-008 Message Model
+11. AD-009 Message Ordering
+12. AD-010 Synchronization
 
 ## Review Order
 
 ```mermaid
 flowchart LR
-    A[DOC-001 Vision] --> B[DOC-010 Functional Req]
-    A --> C[DOC-011 NFR]
-    B --> D[DOC-013 Arch Overview]
-    C --> D
-    D --> E[DOC-022 Principles]
-    E --> F[DOC-023 Invariants]
-    F --> G[DOC-009 Personas]
-    G --> H[DOC-002 README + DOC-003 Glossary]
+    A[AD-001 Identity] --> B[AD-002 Auth]
+    B --> C[AD-003 Authz]
+    A --> D[AD-004 E2EE]
+    D --> E[AD-005 Keys]
+    E --> F[AD-006 Devices]
+    A --> G[AD-007 Conversation]
+    G --> H[AD-008 Message]
+    H --> I[AD-009 Ordering]
+    I --> J[AD-010 Sync]
 ```
 
 ## Critical Documents
@@ -81,9 +91,10 @@ See `ARCHITECTURE-DECISIONS-PENDING.md`. Highest priority: ADR-0004 (E2EE protoc
 
 1. `REVIEW-INDEX.md` (this file)
 2. `review-manifest.yaml` (dashboard)
-3. `BUILD-REPORT.md`
-4. `QUALITY-REPORT.md`
-5. `CROSS-REFERENCE-REPORT.md`
+3. `BUILD-REPORT.md` (Build #2)
+4. `QUALITY-REPORT.md` (Build #2 decision scores)
+5. `CROSS-REFERENCE-REPORT.md` (Build #2 ADRP validation)
 6. `ARCHITECTURE-DECISIONS-PENDING.md`
-7. `REVIEW-CHECKLIST.md`
-8. The 9 completed documents in the review order above.
+7. `REVIEW-CHECKLIST.md` (ADRP section)
+8. `docs/architecture-decisions/README.md` then `decision-manifest.yaml`
+9. The 10 recommendation documents (AD-001..AD-010) in the review order above.
