@@ -5,19 +5,32 @@ version: 2
 # out-of-band on push). base_commit records the branch point.
 
 build:
-  id: BUILD-0003
-  timestamp: 2026-07-15T09:49:00+03:00
-  phase: Architecture Decision Review Sprint - AD-001..AD-006
-  branch: feature/architecture-decisions-wave-1
-  commit: HEAD of feature/architecture-decisions-wave-1
+  id: BUILD-0004
+  timestamp: 2026-07-15T10:01:00+03:00
+  phase: Architecture Research Sprint - RS-001..RS-004 (evidence for AD-007..AD-010)
+  branch: feature/research-sprint-2
+  commit: HEAD of feature/research-sprint-2
   base_branch: main
   base_commit: 5305ba6
+  builds_on_branch: feature/architecture-decisions-wave-1
 
 review_scope:
   description: >-
-    Engineering review of AD-001..AD-006. Each decision was problem-validated,
-    requirement-validated, challenged, and improved; all six reached Approved
-    (Approve with Changes). No new decisions, ADRs, documentation, or code.
+    Engineering research (evidence, not decisions) for the next Architecture
+    Decision Sprint. RS-001..RS-004 compare industry practices and patterns and
+    recommend directions for AD-007..AD-010. No decisions approved, no ADRs, no
+    documentation, no code.
+  research_documents:
+    - path: docs/research/README.md
+      feeds: null
+    - path: docs/research/RS-001-conversation-models.md
+      feeds: AD-007
+    - path: docs/research/RS-002-message-models.md
+      feeds: AD-008
+    - path: docs/research/RS-003-message-ordering.md
+      feeds: AD-009
+    - path: docs/research/RS-004-synchronization.md
+      feeds: AD-010
   included_paths:
     - docs/architecture-decisions/
     - docs/reviews/
@@ -244,14 +257,16 @@ open_questions:
 
 next_review:
   recommended_documents:
-    - path: docs/architecture-decisions/AD-007-conversation-model.md
-    - path: docs/architecture-decisions/AD-008-message-model.md
-    - path: docs/architecture-decisions/AD-009-message-ordering.md
-    - path: docs/architecture-decisions/AD-010-synchronization.md
+    - path: docs/research/README.md
+    - path: docs/research/RS-001-conversation-models.md
+    - path: docs/research/RS-002-message-models.md
+    - path: docs/research/RS-003-message-ordering.md
+    - path: docs/research/RS-004-synchronization.md
 
 next_build_phase:
-  phase: Architecture Decision Review Sprint 2 - AD-007..AD-010
+  phase: Architecture Decision Sprint 2 - AD-007..AD-010 (evidence-based)
   description: >-
-    Review the next batch of Under-Review decisions (AD-007 Conversation Model,
-    AD-008 Message Model, AD-009 Message Ordering, AD-010 Synchronization).
-    Do not begin new decision authoring or documentation until approved.
+    Using RS-001..RS-004 as evidence, draft and review AD-007 Conversation Model,
+    AD-008 Message Model, AD-009 Message Ordering, and AD-010 Synchronization.
+    Each decision must cite its corresponding research document. Do not begin
+    documentation generation until decisions are approved.

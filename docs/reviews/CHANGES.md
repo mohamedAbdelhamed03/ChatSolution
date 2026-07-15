@@ -4,6 +4,30 @@
 
 ---
 
+## Build #4 — 2026-07-15 (Architecture Research Sprint)
+
+**Branch:** feature/research-sprint-2
+
+| File Path | Change | Reason | Related Documents |
+|---|---|---|---|
+| docs/research/README.md | Created | Establish the Research Repository and its relationship to decisions/ADRs/docs. | RS-001..RS-004 |
+| docs/research/RS-001-conversation-models.md | Created | Evidence for conversation model decision. | AD-007 |
+| docs/research/RS-002-message-models.md | Created | Evidence for message model decision. | AD-008 |
+| docs/research/RS-003-message-ordering.md | Created | Evidence for ordering/ID decision. | AD-009 |
+| docs/research/RS-004-synchronization.md | Created | Evidence for synchronization decision. | AD-010 |
+| docs/architecture-decisions/decision-manifest.yaml | Updated | Add related_research links (AD-007..010 → RS-001..004). | RS-001..RS-004 |
+| docs/reviews/review-manifest.yaml | Updated | Add research documents to next review scope; Build #4. | — |
+| docs/reviews/BUILD-REPORT.md | Updated | Append Build #4 section. | — |
+| docs/reviews/CHANGES.md | Updated | Append Build #4 section. | — |
+| docs/reviews/REVIEW-INDEX.md | Updated | Refresh entry point to research sprint. | — |
+
+### Notes
+
+- No files removed; no Architecture Decisions authored or approved; no ADRs, documentation, or code generated.
+- Research clearly distinguishes documented facts, industry patterns, and project recommendations, and respects constraints AD-001..AD-006.
+
+---
+
 ## Build #3 — 2026-07-15 (Architecture Decision Review Sprint)
 
 **Branch:** feature/architecture-decisions-wave-1

@@ -107,6 +107,7 @@ decisions:
     blocks: [AD-008, AD-025]
     related_documents: [docs/70-features/FS-01-one-to-one-chat.md, docs/70-features/FS-02-group-chat.md]
     related_adrs: [ADR-0020]
+    related_research: [RS-001]
     affected_modules: [Conversations]
     decision_date: null
     review_date: null
@@ -121,6 +122,7 @@ decisions:
     blocks: [AD-009, AD-013, AD-014, AD-021, AD-027, AD-030, AD-032, AD-042]
     related_documents: [docs/30-domain/36-message-lifecycle.md, docs/85-protocol/85.6-message-metadata.md]
     related_adrs: [ADR-0008, ADR-0013]
+    related_research: [RS-002]
     affected_modules: [Messaging]
     decision_date: null
     review_date: null
@@ -135,6 +137,7 @@ decisions:
     blocks: [AD-010, AD-027, AD-042]
     related_documents: [docs/50-data/54-message-sync-and-storage.md, docs/85-protocol/85.5-delivery-state-machine.md]
     related_adrs: [ADR-0008, ADR-0010]
+    related_research: [RS-003]
     affected_modules: [Messaging]
     decision_date: null
     review_date: null
@@ -149,6 +152,7 @@ decisions:
     blocks: [AD-015, AD-041]
     related_documents: [docs/85-protocol/85.9-synchronization-protocol.md, docs/50-data/54-message-sync-and-storage.md]
     related_adrs: [ADR-0016, ADR-0011]
+    related_research: [RS-004]
     affected_modules: [Messaging, Sync]
     decision_date: null
     review_date: null

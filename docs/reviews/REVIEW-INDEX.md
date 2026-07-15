@@ -2,8 +2,10 @@
 
 > Entry point for reviewers. Start here, then follow the recommended review sequence. For the machine-readable dashboard, open `review-manifest.yaml`. The Git repository is the source of truth.
 
-**Current Build:** #3 — 2026-07-15 (Architecture Decision Review Sprint) | **Branch:** feature/architecture-decisions-wave-1 | **Base:** main
-**Prior Builds:** #2 (ADRP Wave 1), #1 (documentation foundations)
+**Current Build:** #4 — 2026-07-15 (Architecture Research Sprint) | **Branch:** feature/research-sprint-2 | **Base:** main
+**Prior Builds:** #3 (Decision Review Sprint, AD-001..006 Approved), #2 (ADRP Wave 1), #1 (documentation foundations)
+
+> Build #4 adds research evidence (RS-001..RS-004) for the next decision sprint (AD-007..AD-010). Research is evidence, not decisions or approvals.
 
 ---
 

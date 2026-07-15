@@ -4,6 +4,42 @@
 
 ---
 
+## Build #4 — 2026-07-15 (Architecture Research Sprint)
+
+| Field | Value |
+|---|---|
+| **Build ID** | BUILD-0004 |
+| **Build Timestamp** | 2026-07-15T10:01:00+03:00 |
+| **Branch** | feature/research-sprint-2 (builds on feature/architecture-decisions-wave-1) |
+| **Base Branch** | main |
+| **Current Phase** | Architecture Research Sprint — evidence for AD-007..AD-010 |
+| **Build Duration** | ~12 minutes |
+
+### Scope
+
+Engineering research (evidence, not decisions) to inform the next Architecture Decision Sprint. Created the Research Repository and four research documents. No decisions authored/approved, no ADRs, no documentation, no code.
+
+### Artifacts Generated
+
+| Artifact | Path | Feeds |
+|---|---|---|
+| Research README | docs/research/README.md | — |
+| RS-001 Conversation Models | docs/research/RS-001-conversation-models.md | AD-007 |
+| RS-002 Message Models | docs/research/RS-002-message-models.md | AD-008 |
+| RS-003 Message Ordering | docs/research/RS-003-message-ordering.md | AD-009 |
+| RS-004 Synchronization | docs/research/RS-004-synchronization.md | AD-010 |
+
+### Manifest Updates
+
+- decision-manifest.yaml: added `related_research` linking AD-007→RS-001, AD-008→RS-002, AD-009→RS-003, AD-010→RS-004.
+- review-manifest.yaml: research documents added to next review scope.
+
+### Blocking Architectural Decisions
+
+- None. Research is evidence only. AD-007..AD-010 remain Under Review and must cite their research when drafted in the next sprint.
+
+---
+
 ## Build #3 — 2026-07-15 (Architecture Decision Review Sprint)
 
 | Field | Value |
