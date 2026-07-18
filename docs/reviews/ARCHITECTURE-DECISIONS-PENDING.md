@@ -73,7 +73,7 @@
 | Decision | ADR(s) | Blocks generation? | Must resolve before |
 |---|---|---|---|
 | DEC-01 E2EE Protocol | ADR-0004 | No | DOC-047 Approved |
-| DEC-02 Message ID/Ordering | ADR-0008/0010 | No | DOC-045, DOC-060 Approved |
+| DEC-02 Message ID/Ordering | ADR-0008/0010 | **Resolved** | Accepted 2026-07-18 |
 | DEC-03 Group Encryption | ADR-0020 | No | DOC-071 Approved |
 | DEC-04 Search Engine | ADR-0009/0028 | No | DOC-061 Approved |
 | DEC-05 Multi-Region | DOC-103 | No | DOC-103 Approved |
