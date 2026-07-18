@@ -4,7 +4,7 @@
 |---|---|
 | **Workshop ID** | WS-044 |
 | **Topic** | Read Receipts |
-| **Status** | Completed — Awaiting Decision |
+| **Status** | Completed — Decision Under Review |
 | **Owner** | Principal Software Architect |
 | **Version** | 1.0.0 |
 | **Date** | 2026-07-18 |

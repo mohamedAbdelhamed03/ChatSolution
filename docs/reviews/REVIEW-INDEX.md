@@ -11,9 +11,9 @@
 ## Current Project Status
 
 - **Phase 3:** Closed. AD-007..AD-010 Approved. Baseline established.
-- **Phase 4:** In progress. Sprint 1 complete (AD-042). Sprint 2: RS-006 + WS-044 complete.
-- **Decision gate:** Approve WS-044 lean → proceed to AR-044 / AD-044.
-- **Decision coverage:** 11 of 54 Approved (AD-001..AD-010, AD-042).
+- **Phase 4:** In progress. Sprint 1 complete (AD-042). Sprint 2: AR-044 approved; AD-044 Under Review.
+- **Decision gate:** Approve AD-044 → ratify ADR + realtime docs; close Sprint 2.
+- **Decision coverage:** 11 of 54 Approved (AD-001..AD-010, AD-042); AD-044 Under Review.
 
 ## Messaging Core (baseline)
 
@@ -43,11 +43,12 @@ Do **not** use retired placeholder labels that conflict with catalog AD-011..AD-
 | Artifact | Path | Status |
 |---|---|---|
 | RS-006 | [research/RS-006-read-receipts.md](../research/RS-006-read-receipts.md) | Complete |
-| WS-044 | [workshops/WS-044-read-receipts.md](../architecture-decisions/workshops/WS-044-read-receipts.md) | Awaiting Decision |
-| AR-044 / AD-044 | — | Not started |
+| WS-044 | [workshops/WS-044-read-receipts.md](../architecture-decisions/workshops/WS-044-read-receipts.md) | Complete |
+| AR-044 | [reviews/AR-044-read-receipts.md](../architecture-decisions/reviews/AR-044-read-receipts.md) | Approved |
+| AD-044 | [AD-044-read-receipts.md](../architecture-decisions/AD-044-read-receipts.md) | Under Review |
 
 ## Recommended Reading
 
 1. AD-042 + ADR-0018 (Sprint 1 baseline)
-2. RS-006 → WS-044
-3. Approve workshop lean to authorize AR-044 / AD-044
+2. RS-006 → WS-044 → AR-044 → AD-044
+3. Approve AD-044 to close Sprint 2

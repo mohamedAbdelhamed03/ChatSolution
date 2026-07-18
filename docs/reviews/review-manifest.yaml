@@ -1,9 +1,9 @@
 version: 2
 
 build:
-  id: BUILD-0014
-  timestamp: 2026-07-18T15:00:00+03:00
-  phase: Phase 4 Sprint 2 - RS-006 / WS-044 Read Receipts (pre-decision)
+  id: BUILD-0015
+  timestamp: 2026-07-18T15:15:00+03:00
+  phase: Phase 4 Sprint 2 - AR-044 / AD-044 Read Receipts (decision gate)
   branch: feature/messaging-services-ad-044
   commit: HEAD of feature/messaging-services-ad-044
   base_branch: main
@@ -11,8 +11,8 @@ build:
 
 review_scope:
   description: >-
-    Close Sprint 1 (AD-042 Approved, ADR-0018 Accepted). Author RS-006 and
-    WS-044 for AD-044 Read Receipts. Await human approval for AR-044.
+    Record AR-044 approval and AD-044 decision recommendation (Under Review).
+    Await human approval of AD-044 to close Sprint 2.
 
 summary:
   total_documents: 156
@@ -20,19 +20,19 @@ summary:
   documentation_completion_percentage: 13.5
   total_decisions: 54
   decisions_approved: 11
-  decisions_under_review: 0
-  decisions_proposed: 43
+  decisions_under_review: 1
+  decisions_proposed: 42
   decision_approval_percentage: 20.4
 
 review_status:
-  status: Phase 4 IN PROGRESS — Sprint 1 COMPLETE; Sprint 2 WS-044 awaiting gate
+  status: Phase 4 IN PROGRESS — Sprint 2 AD-044 Under Review (AR-044 approved)
   reviewed_by: Chief Software Architect
   review_date: 2026-07-18
   sprint_result:
     approved: [AD-001, AD-002, AD-003, AD-004, AD-005, AD-006, AD-007, AD-008, AD-009, AD-010, AD-042]
     rejected: []
     needs_revision: []
-    under_review: []
+    under_review: [AD-044]
 
 decisions_approved:
   - AD-001
@@ -47,7 +47,8 @@ decisions_approved:
   - AD-010
   - AD-042
 
-decisions_under_review: []
+decisions_under_review:
+  - AD-044
 
 accepted_adrs:
   - ADR-0031
@@ -67,12 +68,12 @@ validation:
   broken_links: PASS
   circular_dependencies: PASS
 
-architecture_status: Phase 4 IN PROGRESS — Sprint 1 COMPLETE; Sprint 2 WS-044 awaiting gate
-security_status: E2EE and INV-01/04/05 upheld; read metadata-only on server
+architecture_status: Phase 4 IN PROGRESS — AR-044 approved; AD-044 Under Review
+security_status: E2EE and INV-01/04/05 upheld; read metadata-only; privacy gate at emission
 completion_percentage: 20.4
 
 next_build_phase:
-  phase: Phase 4 Sprint 2 - AR-044 / AD-044 Read Receipts
+  phase: Phase 4 Sprint 2 - AD-044 Approval + ADR ratification
   description: >-
-    After workshop approval, write AR-044 and AD-044 recommendation. Preserve
-    independence from AD-042 delivery semantics.
+    After human approval of AD-044, ratify supporting ADR, update domain and
+    realtime docs, close Sprint 2, then Sprint 3 (AD-011/AD-043) on authorization.

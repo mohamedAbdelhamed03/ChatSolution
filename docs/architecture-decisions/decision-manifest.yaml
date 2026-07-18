@@ -654,7 +654,7 @@ decisions:
 
   - id: AD-044
     title: Read Receipts
-    status: Proposed
+    status: Under Review
     priority: Critical
     category: Realtime
     owner: Architecture
@@ -662,13 +662,15 @@ decisions:
     blocks: []
     related_research: [RS-006]
     related_documents:
+      - docs/architecture-decisions/AD-044-read-receipts.md
+      - docs/architecture-decisions/reviews/AR-044-read-receipts.md
       - docs/60-realtime/62-delivery-and-read-receipts.md
       - docs/20-architecture/20.3-phase-4-messaging-services-plan.md
       - docs/architecture-decisions/workshops/WS-044-read-receipts.md
-    related_adrs: []
+    related_adrs: [ADR-0018]
     affected_modules: [Messaging]
     decision_date: null
-    review_date: null
+    review_date: 2026-07-18
 
   # ---------------------------------------------------------------- Infrastructure (remaining)
   - id: AD-045
