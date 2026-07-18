@@ -3,7 +3,7 @@
 > Entry point for reviewers. Start here, then follow the recommended review sequence. For the machine-readable dashboard, open `review-manifest.yaml`. The Git repository is the source of truth.
 
 **Phase 3 Status:** **COMPLETE** — [DOC-155](../20-architecture/20.2-phase-3-messaging-core-completion.md)  
-**Phase 4 Status:** **IN PROGRESS** — Sprint 1 (AD-042) — [DOC-156](../20-architecture/20.3-phase-4-messaging-services-plan.md)  
+**Phase 4 Status:** **IN PROGRESS** — Sprint 2 (AD-044) — [DOC-156](../20-architecture/20.3-phase-4-messaging-services-plan.md)  
 **Messaging Core entry point:** [DOC-154](../20-architecture/20.1-messaging-core-architecture.md)
 
 ---
