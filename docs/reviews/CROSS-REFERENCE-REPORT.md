@@ -2,8 +2,46 @@
 
 > Automated validation against the manifests. Regenerated every build.
 
-**Current Build:** #6 — 2026-07-18 (AD-007 Finalization Amendments)
-**Prior Builds:** #5 (AD-007 Approved), #4 (Research), #3 (AD-001..006), #2, #1
+**Current Build:** #8 — 2026-07-18 (Message Ordering AD-009)
+**Prior Builds:** #7 (AD-008), #6, #5, #4, #3, #2, #1
+
+---
+
+## Build #8 — Message Ordering Validation
+
+| Check | Result |
+|---|---|
+| AD-009 Approved; cites RS-003 Alternative C | PASS |
+| Depends only on Approved AD-008 | PASS |
+| MessageId ≠ Sequence; aligns AD-008 | PASS |
+| Txn allocate+insert; idempotent MessageId | PASS |
+| O-INV-* with enforcement layers | PASS |
+| Edits do not allocate Sequence | PASS |
+| HLC-ready; no dual-primary Sequence | PASS |
+| ADR-0008 + ADR-0010 Accepted; DOC-128/130 Completed | PASS |
+| No contradiction with AD-001..008 / INV-05 | PASS |
+| AD-010 still Under Review | PASS |
+
+**Build #8 result: PASS.**
+
+---
+
+## Build #7 — Message Model Validation
+
+| Check | Result |
+|---|---|
+| AD-008 Approved; cites RS-002 | PASS |
+| Depends only on Approved AD-007, AD-004 | PASS |
+| No contradiction with AD-001..007 / INV-01/02/12 | PASS |
+| Message outside Conversation aggregate | PASS |
+| MessageId ≠ Sequence ownership clear | PASS |
+| Receipts not on Message state | PASS |
+| Reactions encrypted; forward flag-only default | PASS |
+| ADR-0032 Accepted; DOC-153 Completed | PASS |
+| WS-008 → AR-008 → AD-008 → ADR-0032 → DOC-024 chain | PASS |
+| AD-009/AD-010 still Under Review (untouched) | PASS |
+
+**Build #7 result: PASS.**
 
 ---
 

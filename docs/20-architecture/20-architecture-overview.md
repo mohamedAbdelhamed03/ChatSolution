@@ -5,13 +5,13 @@
 | **Title** | Architecture Overview |
 | **Status** | Completed |
 | **Owner** | Architecture |
-| **Version** | 1.2.0 |
+| **Version** | 1.4.0 |
 | **Last Updated** | 2026-07-18 |
 | **Document ID** | DOC-013 |
 
 **Dependencies:** `10-vision-and-scope` (DOC-001), `12-functional-requirements` (DOC-010), `13-non-functional-requirements` (DOC-011).
 
-**Related Documents:** `29-architecture-principles` (DOC-022), `29.5-system-invariants` (DOC-023), `21-c4-context` (DOC-014), `22-c4-container` (DOC-015), `24-modular-monolith-blueprint` (DOC-017), `30-domain-model-overview` (DOC-024), AD-007, ADR-0031.
+**Related Documents:** `29-architecture-principles` (DOC-022), `29.5-system-invariants` (DOC-023), `21-c4-context` (DOC-014), `22-c4-container` (DOC-015), `24-modular-monolith-blueprint` (DOC-017), `30-domain-model-overview` (DOC-024), AD-007, AD-008, AD-009, ADR-0031, ADR-0032, ADR-0008, ADR-0010.
 
 ---
 
@@ -138,6 +138,41 @@ flowchart TB
 
 Normative detail: AD-007, ADR-0031, `30-domain-model-overview` (DOC-024).
 
+### 4.2 Message Model (AD-008 / ADR-0032)
+
+The Messaging module owns a **Message aggregate root**: client-generated ULID `MessageId`, ciphertext + bounded metadata envelope, `editVersion` for edits, tombstones for delete/recall, attachment refs to encrypted object storage, and relations for replies/reactions/pins. Forwards are new messages with `isForwarded`. **Delivered/Read** are separate receipt projections. Per-conversation `Sequence` is reserved for AD-009; sync dedup uses MessageId (AD-010).
+
+```mermaid
+flowchart LR
+    Conv[ConversationId]
+    Msg[Message aggregate\n ciphertext + envelope]
+    Rel[Relations\n reply / reaction / pin]
+    Blob[(Encrypted object storage)]
+    Rcpt[Receipt projections]
+    Conv --> Msg
+    Msg --> Rel
+    Msg --> Blob
+    Msg -.-> Rcpt
+```
+
+Normative detail: AD-008, ADR-0032, DOC-024 §10.
+
+### 4.3 Message Ordering (AD-009 / ADR-0008 / ADR-0010)
+
+Authoritative order is a per-conversation server **`Sequence`** (`int64`), allocated atomically with message insert. **`MessageId`** (ULID) is identity and idempotency only — never the sort authority. Clients may use temporary `localOrder` while Pending, then re-sort on Ack. Edits/tombstones do not allocate new Sequences. Single-region Sequence authority at launch; **HLC-ready** for future multi-region without changing MessageId. Sync cursors (AD-010) consume Sequence.
+
+```mermaid
+flowchart LR
+    Id[MessageId ULID\n identity + dedup]
+    Seq[Sequence\n total order]
+    Id --> Accept[Server Accept Txn]
+    Accept --> Seq
+    Seq --> Devices[All devices sort]
+    Seq --> Cursor[AD-010 sync cursor]
+```
+
+Normative detail: AD-009, ADR-0008, ADR-0010, DOC-024 §11.
+
 ## 5. Technology Mapping
 
 | Concern | Technology | Rationale |
@@ -187,7 +222,7 @@ The modular monolith is designed so each module can be extracted into an indepen
 
 | ID | Question | Owner |
 |---|---|---|
-| OQ-ARCH-01 | Confirmed global message ID/ordering scheme? | Architecture (ADR-0008) |
+| OQ-ARCH-01 | Confirmed global message ID/ordering scheme? | **Resolved** — AD-009 / ADR-0008 / ADR-0010 (ULID + Sequence; HLC later) |
 | OQ-ARCH-02 | Selected E2EE protocol/library and audit status? | Security (ADR-0004) |
 | OQ-ARCH-03 | Single-region launch or multi-region from day one? | Architecture + Product |
 

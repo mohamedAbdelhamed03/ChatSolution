@@ -120,33 +120,43 @@ decisions:
 
   - id: AD-008
     title: Message Model
-    status: Under Review
+    status: Approved
     priority: Critical
     category: Product
     owner: Architecture
     depends_on: [AD-007, AD-004]
     blocks: [AD-009, AD-013, AD-014, AD-021, AD-027, AD-030, AD-032, AD-042]
-    related_documents: [docs/30-domain/36-message-lifecycle.md, docs/85-protocol/85.6-message-metadata.md]
-    related_adrs: [ADR-0008, ADR-0013]
+    related_documents:
+      - docs/30-domain/30-domain-model-overview.md
+      - docs/30-domain/36-message-lifecycle.md
+      - docs/85-protocol/85.6-message-metadata.md
+      - docs/architecture-decisions/workshops/WS-008-message-model.md
+      - docs/architecture-decisions/reviews/AR-008-message-model.md
+    related_adrs: [ADR-0032, ADR-0008, ADR-0013]
     related_research: [RS-002]
     affected_modules: [Messaging]
-    decision_date: null
-    review_date: null
+    decision_date: 2026-07-18
+    review_date: 2026-07-18
 
   - id: AD-009
     title: Message Ordering
-    status: Under Review
+    status: Approved
     priority: Critical
     category: Domain
     owner: Architecture
     depends_on: [AD-008]
     blocks: [AD-010, AD-027, AD-042]
-    related_documents: [docs/50-data/54-message-sync-and-storage.md, docs/85-protocol/85.5-delivery-state-machine.md]
+    related_documents:
+      - docs/30-domain/30-domain-model-overview.md
+      - docs/50-data/54-message-sync-and-storage.md
+      - docs/85-protocol/85.5-delivery-state-machine.md
+      - docs/architecture-decisions/workshops/WS-009-message-ordering.md
+      - docs/architecture-decisions/reviews/AR-009-message-ordering.md
     related_adrs: [ADR-0008, ADR-0010]
     related_research: [RS-003]
     affected_modules: [Messaging]
-    decision_date: null
-    review_date: null
+    decision_date: 2026-07-18
+    review_date: 2026-07-18
 
   - id: AD-010
     title: Synchronization

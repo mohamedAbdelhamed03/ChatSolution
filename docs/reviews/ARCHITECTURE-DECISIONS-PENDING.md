@@ -7,6 +7,9 @@
 | ADR | Title | Date | Ratifies |
 |---|---|---|---|
 | ADR-0031 | Unified Conversation Model | 2026-07-18 | AD-007 |
+| ADR-0032 | Immutable Message Model | 2026-07-18 | AD-008 |
+| ADR-0008 | Message ID and Ordering Strategy | 2026-07-18 | AD-009 (+ AD-008 identity) |
+| ADR-0010 | Per-Conversation Message Ordering | 2026-07-18 | AD-009 |
 
 ---
 
@@ -21,16 +24,14 @@
 | **Possible alternatives** | (a) Signal Protocol library; (b) MLS (Messaging Layer Security) for groups; (c) custom protocol (not recommended). |
 | **Recommendation** | Adopt an audited implementation of the Signal Protocol for 1:1 and evaluate MLS for large-group scaling; avoid custom cryptography. |
 
-## DEC-02 — Global Message ID & Ordering (ADR-0008, ADR-0010)
+## DEC-02 — Global Message ID & Ordering (ADR-0008, ADR-0010) — **RESOLVED 2026-07-18**
 
 | Field | Value |
 |---|---|
 | **Decision ID** | ADR-0008 / ADR-0010 |
-| **Why it matters** | Guarantees immutable identity (INV-02, INV-12) and deterministic total ordering per conversation (INV-05) — foundational to sync, receipts, and lifecycle. |
-| **Dependent documents** | DOC-045 (Message Lifecycle), DOC-060 (Message Sync & Storage), DOC-091 (Delivery State Machine), DOC-095 (Synchronization Protocol). |
-| **Current assumptions** | Time-sortable, globally unique IDs with a per-conversation monotonic sequence for ordering. |
-| **Possible alternatives** | (a) ULID; (b) Snowflake-style IDs; (c) Hybrid Logical Clocks (HLC) for multi-region. |
-| **Recommendation** | ULID for identity plus a per-conversation server sequence for total order at launch; adopt HLC if/when multi-region active-active is introduced. |
+| **Status** | **Accepted** via AD-009 |
+| **Decision** | ULID `MessageId` + per-conversation server `Sequence`; HLC-ready for multi-region; no client-timestamp order. |
+| **Residual** | OQ-ORD-01 counter implementation; OQ-ORD-03 HLC adoption triggers. |
 
 ## DEC-03 — Group Encryption Model (ADR-0020)
 
@@ -72,7 +73,7 @@
 | Decision | ADR(s) | Blocks generation? | Must resolve before |
 |---|---|---|---|
 | DEC-01 E2EE Protocol | ADR-0004 | No | DOC-047 Approved |
-| DEC-02 Message ID/Ordering | ADR-0008/0010 | No | DOC-045, DOC-060 Approved |
+| DEC-02 Message ID/Ordering | ADR-0008/0010 | **Resolved** | Accepted 2026-07-18 |
 | DEC-03 Group Encryption | ADR-0020 | No | DOC-071 Approved |
 | DEC-04 Search Engine | ADR-0009/0028 | No | DOC-061 Approved |
 | DEC-05 Multi-Region | DOC-103 | No | DOC-103 Approved |

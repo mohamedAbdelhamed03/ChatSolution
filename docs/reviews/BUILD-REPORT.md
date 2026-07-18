@@ -4,6 +4,62 @@
 
 ---
 
+## Build #8 — 2026-07-18 (Messaging Core — Message Ordering)
+
+| Field | Value |
+|---|---|
+| **Build ID** | BUILD-0008 |
+| **Build Timestamp** | 2026-07-18T13:15:00+03:00 |
+| **Branch** | feature/messaging-core-ad-009 |
+| **Current Phase** | Messaging Core Architecture Sprint — Topic 3 Message Ordering |
+| **Design** | RS-003 Alternative C — per-conversation server Sequence + ULID MessageId |
+
+### Lifecycle Completed
+
+WS-009 → AR-009 → AD-009 **Approved** → ADR-0008 + ADR-0010 **Accepted** → domain/architecture/glossary → review package.
+
+### Decision Summary
+
+Server-authoritative `Sequence` allocated in same txn as insert; MessageId for identity/dedup; optimistic localOrder; HLC-ready multi-region; edits/tombstones keep Sequence.
+
+### Next
+
+Await human approval before Topic 4 (Synchronization / AD-010).
+
+---
+
+## Build #7 — 2026-07-18 (Messaging Core — Message Model)
+
+| Field | Value |
+|---|---|
+| **Build ID** | BUILD-0007 |
+| **Build Timestamp** | 2026-07-18T13:00:00+03:00 |
+| **Branch** | feature/messaging-core-ad-008 |
+| **Current Phase** | Messaging Core Architecture Sprint — Topic 2 Message Model |
+| **Design** | RS-002 Alternative B — immutable Message + envelope + relations |
+
+### Lifecycle Completed
+
+| Step | Artifact |
+|---|---|
+| Research | RS-002 |
+| Workshop | WS-008 |
+| Architecture Review | AR-008 (Approve with Changes) |
+| Architecture Decision | AD-008 **Approved** |
+| ADR | ADR-0032 **Accepted** |
+| Domain / Architecture / Glossary | Updated |
+| Review Package | This build |
+
+### Decision Summary
+
+Message aggregate root; ULID MessageId; ciphertext + bounded envelope; editVersion; tombstones; attachment refs; encrypted reaction relations; forward = new message + flag; receipts as projections; Sequence reserved for AD-009.
+
+### Next
+
+Await human approval before Topic 3 (Message Ordering / AD-009).
+
+---
+
 ## Build #6 — 2026-07-18 (AD-007 Finalization Amendments)
 
 | Field | Value |

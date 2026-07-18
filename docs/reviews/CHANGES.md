@@ -4,6 +4,49 @@
 
 ---
 
+## Build #8 — 2026-07-18 (Messaging Core — Message Ordering)
+
+**Branch:** feature/messaging-core-ad-009
+
+| File Path | Change | Reason |
+|---|---|---|
+| docs/architecture-decisions/workshops/WS-009-message-ordering.md | Created | Workshop; 14 investigation topics |
+| docs/architecture-decisions/reviews/AR-009-message-ordering.md | Created | Critical review |
+| docs/architecture-decisions/AD-009-message-ordering.md | Updated | Approved; cites RS-003 Alt C |
+| docs/ADR/ADR-0008-message-id-and-ordering-strategy.md | Created | Ratify ID vs order separation |
+| docs/ADR/ADR-0010-message-ordering.md | Created | Ratify Sequence allocation rules |
+| docs/30-domain/30-domain-model-overview.md | Updated | §11 Ordering |
+| docs/20-architecture/20-architecture-overview.md | Updated | §4.3 Ordering |
+| docs/00-glossary/00-glossary-overview.md | Updated | Sequence / localOrder |
+| docs/architecture-decisions/decision-manifest.yaml | Updated | AD-009 Approved |
+| docs/document-manifest.yaml | Updated | DOC-128/130 Completed |
+| docs/reviews/* | Updated | Build #8 |
+
+---
+
+## Build #7 — 2026-07-18 (Messaging Core — Message Model)
+
+**Branch:** feature/messaging-core-ad-008
+
+| File Path | Change | Reason |
+|---|---|---|
+| docs/architecture-decisions/workshops/WS-008-message-model.md | Created | Workshop; 17 investigation topics |
+| docs/architecture-decisions/reviews/AR-008-message-model.md | Created | Critical review; Approve with Changes |
+| docs/architecture-decisions/AD-008-message-model.md | Updated | Approved; cites RS-002; full model |
+| docs/ADR/ADR-0032-immutable-message-model.md | Created | Ratify Message Model |
+| docs/30-domain/30-domain-model-overview.md | Updated | §10 Message aggregate |
+| docs/20-architecture/20-architecture-overview.md | Updated | §4.2 Message Model |
+| docs/00-glossary/00-glossary-overview.md | Updated | Message/Sequence/Tombstone terms |
+| docs/architecture-decisions/decision-manifest.yaml | Updated | AD-008 Approved |
+| docs/document-manifest.yaml | Updated | DOC-153 Added/Completed |
+| docs/reviews/* | Updated | Build #7 |
+
+### Notes
+
+- AD-009/AD-010 untouched. Pause for human approval.
+
+---
+
 ## Build #6 — 2026-07-18 (AD-007 Finalization Amendments)
 
 **Branch:** feature/messaging-core-ad-007
