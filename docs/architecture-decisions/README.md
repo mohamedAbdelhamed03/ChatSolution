@@ -88,6 +88,8 @@ Documentation generation is **paused** while the ADRP is built. Downstream docum
 | Message Ordering | WS-009 | AR-009 | AD-009 **Approved** | ADR-0008 / ADR-0010 **Accepted** |
 | Synchronization | WS-010 | AR-010 | AD-010 **Approved** | ADR-0016 / ADR-0011 **Accepted** |
 
+**Entry-point overview:** [`docs/20-architecture/20.1-messaging-core-architecture.md`](../20-architecture/20.1-messaging-core-architecture.md) (DOC-154).
+
 ## Validation Gate (per decision)
 
 Before a recommendation is saved it must satisfy: alternatives compared; trade-offs explained; risks documented; industry practices summarized; security impact analyzed; scalability impact analyzed; related documents listed; related ADRs listed; dependencies valid; recommendation justified.
