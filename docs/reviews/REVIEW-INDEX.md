@@ -2,41 +2,44 @@
 
 > Entry point for reviewers. Start here, then follow the recommended review sequence. For the machine-readable dashboard, open `review-manifest.yaml`. The Git repository is the source of truth.
 
-**Phase 3 Status:** **COMPLETE** — Messaging Core Architecture baseline established  
-**Closure document:** [`docs/20-architecture/20.2-phase-3-messaging-core-completion.md`](../20-architecture/20.2-phase-3-messaging-core-completion.md) (DOC-155)  
-**Entry-point overview:** [`docs/20-architecture/20.1-messaging-core-architecture.md`](../20-architecture/20.1-messaging-core-architecture.md) (DOC-154)
-
-**Latest Messaging Core Build:** #9 — 2026-07-18 (AD-010 Synchronization) | Merged to `main`
+**Phase 3 Status:** **COMPLETE** — [DOC-155](../20-architecture/20.2-phase-3-messaging-core-completion.md)  
+**Phase 4 Status:** **PLANNED** — [DOC-156](../20-architecture/20.3-phase-4-messaging-services-plan.md)  
+**Messaging Core entry point:** [DOC-154](../20-architecture/20.1-messaging-core-architecture.md)
 
 ---
 
 ## Current Project Status
 
-- **Phase:** Phase 3 closed; Phase 4 (Messaging Services Architecture) authorized to begin when scheduled.
-- **Decision coverage:** 10 of 50 Approved (AD-001..AD-010); 40 Proposed.
-- **Messaging Core:** AD-007..AD-010 Approved; DOC-154/DOC-155 Completed.
-- **Defining constraints upheld:** INV-01, INV-04, INV-05.
+- **Phase 3:** Closed. AD-007..AD-010 Approved. Baseline established.
+- **Phase 4:** Planned. Ten messaging-service sprints mapped to catalog AD IDs (see DOC-156 reconciliation).
+- **Next sprint (when authorized):** AD-042 Delivery & Acknowledgements.
+- **Decision coverage:** 10 of 54 Approved (AD-001..AD-010); AD-051..AD-054 newly catalogued Proposed.
 
-## Messaging Core Outcome
+## Messaging Core (baseline)
 
 | Decision | Status |
 |---|---|
-| AD-007 Conversation Model | Approved |
-| AD-008 Message Model | Approved |
-| AD-009 Message Ordering | Approved |
-| AD-010 Synchronization | Approved |
+| AD-007..AD-010 | Approved |
 
-## Recommended Reading (Phase 3 closed)
+## Phase 4 Sprint Order (authoritative AD IDs)
 
-1. DOC-154 Messaging Core Architecture
-2. DOC-155 Phase 3 Completion Report
-3. AD-007..AD-010 and related ADRs as needed
-4. DOC-024 Domain Model Overview
+| Sprint | AD | Topic |
+|---|---|---|
+| 1 | AD-042 | Delivery & Acknowledgements |
+| 2 | AD-044 | Read Receipts |
+| 3 | AD-011 / AD-043 | Presence & Typing |
+| 4 | AD-051 | Reactions & Interactions |
+| 5 | AD-054 | Media & Attachments |
+| 6 | AD-012 | Push Notifications |
+| 7 | AD-014 | Search & Indexing |
+| 8 | AD-052 | Moderation & Safety |
+| 9 | AD-038 | Retention & Compliance |
+| 10 | AD-053 | Voice & Video Signaling |
 
-## Next Phase
+Do **not** use retired placeholder labels that conflict with catalog AD-011..AD-020 (see DOC-156).
 
-Phase 4 — Messaging Services Architecture (Delivery, Receipts, Presence, Reactions, Media, Push, Search, Moderation, Retention, Calling). Each topic follows Research → Workshop → Review → Decision → ADR → Docs → Validation → Approval.
+## Recommended Reading
 
-## Open Questions
-
-Non-blocking product/ops questions remain in AD-007..AD-010 (e.g., OQ-CONV-01, OQ-MSG-01, OQ-SYNC-01). None block Phase 3 closure.
+1. DOC-154 → DOC-155 → DOC-156
+2. `decision-manifest.yaml`
+3. Await human authorization to start Phase 4 Sprint 1 (AD-042)
