@@ -5,7 +5,7 @@
 | **Title** | Glossary Overview |
 | **Status** | Completed |
 | **Owner** | Architecture |
-| **Version** | 1.4.0 |
+| **Version** | 1.5.0 |
 | **Last Updated** | 2026-07-18 |
 | **Document ID** | DOC-003 |
 
@@ -65,6 +65,9 @@ A single, shared vocabulary prevents specification drift and contradictory desig
 | Message ID | Client-generated ULID; the single immutable global identifier of a message (INV-02). Never reused across logical messages (INV-12). |
 | Sequence | Server-assigned per-conversation monotonic `int64` position; sole authoritative sort key within a conversation (AD-009 / INV-05). Distinct from Message ID. Allocated in the same DB transaction as message insert. |
 | localOrder | Temporary client-only ordering among Pending (unacked) messages; discarded after Sequence Ack. |
+| Sync cursor | Per-device, per-conversation checkpoint: last contiguous applied ConversationSequence (AD-010). |
+| Delta sync | Authoritative catch-up fetching ciphertext envelopes with Sequence greater than the sync cursor. |
+| ConversationSequence | Synonym for per-conversation server `Sequence` when used as the sync cursor basis. |
 | Tombstone | Soft-deleted message placeholder that clears ciphertext but retains Message ID and sequence position. |
 | Attachment Ref | Metadata pointer from a Message to an encrypted blob in object storage. |
 

@@ -1,100 +1,296 @@
 # AD-010 — Synchronization (Decision Recommendation)
 
+| Field | Value |
+|---|---|
+| **Status** | Approved |
+| **Owner** | Architecture |
+| **Version** | 2.0.0 |
+| **Last Updated** | 2026-07-18 |
+| **Workshop** | [WS-010](workshops/WS-010-synchronization.md) |
+| **Architecture Review** | [AR-010](reviews/AR-010-synchronization.md) |
+| **Related Research** | [RS-004 Synchronization](../research/RS-004-synchronization.md) |
+
 ## Question
 
-How do a user's multiple devices synchronize conversation state — receiving missed messages in order, converging on a consistent view, and backfilling history for new devices — while the backend only handles ciphertext?
+How do a user's devices synchronize conversation state — catch-up after disconnect, multi-device convergence, and new-device backfill — while the backend handles only ciphertext and ConversationSequence is the canonical cursor?
 
 ---
 
-## Background
+## Context
 
-**Business context:** Multi-device continuity is a core product promise (PER-03). A device that was offline, or a newly added device, must reach a correct, gap-free view quickly.
+Multi-device continuity is a core promise. AD-009 provides per-conversation `Sequence` (ConversationSequence). AD-008 provides immutable `MessageId` for dedup. AD-006 gates new-device history. Sync must be deterministic, idempotent, and E2EE-safe.
 
-**Technical context:** Building on ordering (AD-009) and the device model (AD-006), synchronization uses per-device cursors over per-conversation sequences. All synced payloads are ciphertext; decryption happens on the device.
-
-**Constraints:** Deterministic ordering (INV-05); idempotency/dedup (INV-04); backend never decrypts (INV-01); reconnect+sync latency target (NFR-P-05).
+Evidence: **RS-004**. Workshop: **WS-010**. Review: **AR-010**.
 
 ---
 
-## Requirements
+## Problem Statement
 
-- **Functional:** Deliver missed messages after reconnect; backfill history to a new device; detect and fill gaps; converge across devices.
-- **Non-Functional:** Fast catch-up for typical backlog; bounded memory/bandwidth; resumable.
-- **Security:** All transferred content is ciphertext; new-device backfill never requires server decryption.
-- **Scalability:** Sync scales with active devices and message volume.
+Push-only delivery loses messages under disconnect. Full snapshot sync does not scale. Without a Sequence-based cursor protocol, devices diverge, duplicate, or reorder. Synchronization must make Ordering observable and convergent on every authorized device.
 
 ---
 
-## Alternatives
+## Constraints
 
-### Alternative A — Full state re-download on connect
-- **Pros:** Simple; guarantees completeness.
-- **Cons:** Prohibitively expensive at scale; slow; wasteful for small deltas.
-
-### Alternative B — Cursor/checkpoint-based incremental sync (per-device cursor over per-conversation sequence)
-- **Pros:** Transfers only deltas; deterministic via AD-009 sequences; trivial gap detection; resumable; efficient.
-- **Cons:** Requires per-device cursor state and careful multi-conversation cursor management.
-
-### Alternative C — Event-log / changefeed subscription (global per-device change stream)
-- **Pros:** Real-time convergence; unified stream; good for many conversations.
-- **Cons:** More infrastructure (per-device change stream); ordering across conversations must still map to per-conversation sequences; heavier to operate initially.
+| ID | Constraint |
+|---|---|
+| AD-009 | ConversationSequence is canonical order and cursor |
+| INV-05 / INV-04 / INV-01 | Deterministic order; idempotent; ciphertext only |
+| AD-006 / AD-007 / AD-003 | Device trust; membership; authz on sync |
+| AD-008 | MessageId dedup; edits without new Sequence |
+| NFR-P-05 | Reconnect catch-up latency |
 
 ---
 
-## Industry Research
+## Decision
 
-- **Documented/informed pattern:** Incremental sync via cursors/tokens is standard — e.g., Matrix uses a `since` sync token to fetch deltas; many mobile clients persist a "last seen" position per room and request newer events.
-- **Signal/WhatsApp (informed):** Offline messages are queued server-side (as ciphertext) and delivered on reconnect; multi-device companions receive their own encrypted copies and reconcile.
-- **Fact vs. pattern:** Token/cursor-based delta sync is documented (Matrix); exact consumer-app sync internals are generally not public but follow the same delta/queue pattern.
+**Adopt RS-004 Alternative B** (refined by AR-010):
+
+1. **Hybrid delivery:** SignalR (WSS) for **best-effort live push**; **cursor delta sync** as the **authoritative** catch-up and gap-fill mechanism.
+2. **Canonical cursor:** Per `(DeviceId, ConversationId)` store `cursorSequence` = last **contiguous** applied ConversationSequence.
+3. **Incremental sync:** Return messages/events with `Sequence > cursor` ordered by Sequence, paged (`LIMIT`).
+4. **Mandatory pull on reconnect** (and on resume from background); do not rely on push alone.
+5. **Idempotent apply** keyed by `MessageId`; safe under at-least-once push + sync overlap.
+6. **Multi-conversation sync:** Batch API to fetch deltas for many conversations in one request (launch requirement).
+7. **Backfill:** New/trusted device — paged, **recent-first**, then older on demand (window: OQ-SYNC-01).
+8. **Offline outbound:** Pending queue + MessageId retries (AD-009); inbound via server ciphertext retention + sync.
+9. **Authz:** Every sync request authenticated and authorized; revoked members receive no further content deltas.
+10. **CRDTs / global changefeed:** Not required for message path at launch (RS-004 D rejected; C deferred).
+
+```mermaid
+flowchart TB
+    subgraph Live
+      SR[SignalR push]
+    end
+    subgraph Authority
+      Sync[Delta Sync API\n Sequence cursor]
+    end
+    Persist[Accepted Message + Sequence]
+    Persist --> SR
+    Persist --> Store[(Message store)]
+    Store --> Sync
+    SR -->|may miss| Device
+    Sync -->|authoritative| Device[Device apply]
+    Device --> Cursor[Advance contiguous cursor]
+```
+
+### Cursor rules
+
+| Rule | Detail |
+|---|---|
+| Name | ConversationSequence cursor (`Sequence`) |
+| Advance | Only after applying all Sequences through N with no holes |
+| Never | Advance past a gap; never use timestamps as cursor |
+| Reset | Explicit recovery only (lost local state) → resync from policy base |
+| Server hint | Optional durable checkpoint; **client cursor is primary** |
+
+### Sync modes
+
+```mermaid
+stateDiagram-v2
+    [*] --> Idle
+    Idle --> Syncing: ReconnectOrResumeOrTimer
+    Syncing --> CatchingUp: GapsOrCursorBehind
+    CatchingUp --> Idle: ContiguousCaughtUp
+    Syncing --> Idle: AlreadyCaughtUp
+    CatchingUp --> Failed: Error
+    Failed --> Syncing: BackoffRetry
+    Idle --> Live: SignalRConnected
+    Live --> Syncing: DisconnectOrGap
+```
+
+### Reconnect sequence
+
+```mermaid
+sequenceDiagram
+    participant D as Device
+    participant H as SignalR Hub
+    participant S as Sync API
+    participant DB as Store
+    D->>H: Connect + auth
+    D->>S: SyncBatch(conversations[], cursors)
+    S->>DB: Range scan Sequence > cursor
+    S-->>D: Pages of ciphertext envelopes
+    D->>D: Apply by Sequence; dedup MessageId
+    D->>D: Advance contiguous cursors
+    H-->>D: Live pushes (best effort)
+    Note over D,S: On any gap suspicion, Sync again
+```
+
+### Conflict resolution
+
+| Case | Resolution |
+|---|---|
+| Duplicate MessageId | Ignore |
+| Higher editVersion | Apply edit |
+| Tombstone | Clear content; keep Sequence |
+| Out-of-order push | Buffer or ignore until sync fill |
+| Missing blob | Keep message; lazy fetch attachment |
+
+### Retry / backoff
+
+Exponential backoff + jitter; honor rate limits; cursor unchanged on failure; MessageId makes accept/sync retries safe.
+
+### Performance defaults (normative bounds, values tunable)
+
+- Page size capped (implementation default band 50–200).
+- Multi-conversation batch with server-side prioritization (active first).
+- Reconnect jitter to prevent stampedes.
+- Lazy media download.
 
 ---
 
-## Recommendation
+## Domain Events / Signals
 
-**Recommend Alternative B (with an eventing assist from C):** **cursor/checkpoint-based incremental synchronization**, where each device maintains a **per-conversation cursor** over the AD-009 sequence and requests deltas on reconnect; the server delivers queued ciphertext in order and the client de-duplicates via `MessageId` (INV-04). Use realtime events (SignalR, AD-039) as the **live push channel** and the cursor sync as the **authoritative catch-up/gap-fill mechanism**. New-device backfill streams historical ciphertext bounded by cursors, never decrypted server-side.
+| Name | Role |
+|---|---|
+| `MessageAccepted` (existing) | Drives push + store |
+| `SyncStarted` / `SyncCompleted` | Client telemetry |
+| `CursorAdvanced` | Client-local |
+| `CursorReset` | Recovery |
+| `DeviceCaughtUp` | UX |
+| `SyncFailed` / `RetryScheduled` | Client resilience |
 
-**Why:** Cursor sync gives efficient, deterministic, resumable convergence that directly leverages AD-009 ordering and satisfies INV-04/05, while realtime events provide low-latency delivery when online. This is the proven delta+queue pattern and meets the reconnect latency NFR.
+---
 
-**Trade-offs:** Per-device, per-conversation cursor bookkeeping; backfill volume for very large histories (bounded/paged, ties to AD-035 cursor pagination).
+## Domain Invariants
 
-**Risks:** Cursor drift or loss (recover by re-reading from a known checkpoint); large-history backfill cost (paged + prioritized recent-first); dedup correctness (keyed on immutable `MessageId`).
+| ID | Invariant | Enforcement |
+|---|---|---|
+| S-INV-01 | Cursor advances only forward except explicit reset | A + Client |
+| S-INV-02 | Re-applying a sync page is idempotent | A + Client |
+| S-INV-03 | Canonical cursor is ConversationSequence | A |
+| S-INV-04 | Sync requires authn/authz; no membership bypass | A |
+| S-INV-05 | New-device history requires trusted device (AD-006) | A |
+| S-INV-06 | Dedup by MessageId | A + DB |
+| S-INV-07 | Contiguous cursor semantics (no hole skip) | A + Client |
+| S-INV-08 | After successful catch-up, devices share the same Sequence-ordered message set (within retention/authz) | A + Client |
 
-*(Not approved — recommendation only.)*
+---
+
+## Decision Drivers
+
+1. Leverage AD-009 Sequence for gap detection (RS-004).
+2. Mobile-efficient deltas; not full snapshots.
+3. Push for UX latency; pull for correctness.
+4. E2EE and device trust preserved.
+5. Operational simplicity vs global changefeed at launch.
+6. Foundation for receipts/reactions as future delta types.
+
+---
+
+## Alternatives Considered
+
+### RS-004 Alternative A — Full snapshot on connect
+
+Rejected as primary: cost and latency.
+
+### RS-004 Alternative B — Cursor delta + realtime push *(chosen)*
+
+Accepted with AR-010 changes (contiguous cursor, batch sync, mandatory reconnect pull, stampede controls).
+
+### RS-004 Alternative C — Global per-device changefeed
+
+Deferred until many-conversation catch-up demands it.
+
+### RS-004 Alternative D — CRDT / version vectors
+
+Rejected for append-only messages given server Sequence.
 
 ---
 
 ## Consequences
 
-- **Positive:** Efficient, deterministic multi-device convergence; fast reconnect; E2EE-preserving backfill.
-- **Negative:** Cursor state management; backfill paging complexity.
-- **Future Impact:** Defines AD-015 (realtime protocol sync frames), AD-041 (offline recovery), and `85.9` synchronization protocol; interacts with AD-035 pagination.
+**Positive:** Deterministic multi-device convergence; efficient catch-up; E2EE-safe backfill; clear push vs pull roles.  
+**Negative:** Cursor bookkeeping; backfill paging; reconnect stampede controls required.  
+**Neutral:** Global changefeed and HLC multi-region sync remain future work.
 
 ---
 
-## Affected Documents
+## Risks
 
-- `docs/85-protocol/85.9-synchronization-protocol.md`
-- `docs/50-data/54-message-sync-and-storage.md`
-- `docs/30-domain/35-sequences/SQ-08-message-synchronization.md`
-- `docs/30-domain/35-sequences/SQ-15-offline-recovery.md`
+| ID | Risk | Severity |
+|---|---|---|
+| R-010-01 | Clients trust push only | High |
+| R-010-02 | Cursor advanced over gaps | High |
+| R-010-03 | Sync stampede after outage | High |
+| R-010-04 | Backfill bandwidth for new devices | Medium |
+| R-010-05 | Cursor table growth | Medium |
 
-## Affected ADRs
+---
 
-- ADR-0016 (Offline Synchronization), ADR-0011 (Cursor Pagination)
+## Mitigations
 
-## Affected Modules
+| Risk | Mitigation |
+|---|---|
+| R-010-01 | Mandatory sync on reconnect; SDK contract tests |
+| R-010-02 | Contiguous advancement rule; code review + tests |
+| R-010-03 | Jitter, rate limits, batched sync |
+| R-010-04 | Recent-first pages; on-demand history (OQ-SYNC-01) |
+| R-010-05 | Lazy cursor rows; delete on device revoke |
 
-- Messaging, Sync
+---
+
+## Future Evolution
+
+- Optional global changefeed (RS-004 C).
+- Align cursors with HLC if multi-region active-active (AD-009).
+- Extend delta types: receipts, typing (ephemeral may stay push-only), reactions, pins.
+- Selective sync for archived conversations.
+
+---
+
+## Related Research
+
+- **[RS-004 Synchronization](../research/RS-004-synchronization.md)** — Alternative B adopted.
+
+---
+
+## Related ADRs
+
+- **ADR-0016** — Offline Synchronization (ratification)
+- **ADR-0011** — Cursor Pagination (Sequence-range pages)
+- ADR-0008 / ADR-0010 — Ordering foundation
+- ADR-0019 — Multi-Device (related)
+
+---
+
+## Related Documents
+
+- WS-010, AR-010
+- AD-009, AD-008, AD-006, AD-007
+- `docs/30-domain/30-domain-model-overview.md`
+- `docs/85-protocol/85.9-synchronization-protocol.md` *(pending detail DOC)*
+- `docs/50-data/54-message-sync-and-storage.md` *(pending)*
+
+---
 
 ## Open Questions
 
-- Backfill policy for new devices: full history vs. recent window + on-demand older?
-- Where are per-device cursors stored, and what is their durability/replication?
-- Do we need a global per-device changefeed (C) at launch or later?
+| ID | Question | Owner | Blocking? |
+|---|---|---|---|
+| OQ-SYNC-01 | New-device recent backfill window | Product | No |
+| OQ-SYNC-02 | Cursor durability store details | Backend | No |
+| OQ-SYNC-03 | Global changefeed timing | Architecture | No (deferred) |
+| OQ-SYNC-04 | Offline ciphertext retention TTL | Product + SRE | No |
+
+---
+
+## Review Outcome (2026-07-18)
+
+**Reviewer:** Chief Software Architect · **Verdict:** Approve with Changes  
+**Artifact:** [AR-010](reviews/AR-010-synchronization.md)
+
+**Changes applied:** RS-004 B; ConversationSequence contiguous cursor; hybrid push/pull with mandatory reconnect sync; batch multi-conversation sync; conflict/idempotency rules; S-INV-*; stampede mitigations; device trust on backfill.
+
+**Quality scores** — Architecture 9 · Security 10 · Scalability 9 · Maintainability 9 · Documentation 9 · **Overall 9.4**
+
+---
 
 ## Approval
 
-- **Status:** Under Review
+- **Status:** Approved
 - **Owner:** Architecture
-- **Review Date:** (pending)
-- **Decision Date:** (pending)
+- **Reviewed by:** Chief Software Architect (Messaging Core — Synchronization)
+- **Review Date:** 2026-07-18
+- **Decision Date:** 2026-07-18

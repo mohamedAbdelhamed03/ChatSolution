@@ -160,18 +160,23 @@ decisions:
 
   - id: AD-010
     title: Synchronization
-    status: Under Review
+    status: Approved
     priority: Critical
     category: Realtime
     owner: Architecture
     depends_on: [AD-009, AD-006]
     blocks: [AD-015, AD-041]
-    related_documents: [docs/85-protocol/85.9-synchronization-protocol.md, docs/50-data/54-message-sync-and-storage.md]
+    related_documents:
+      - docs/30-domain/30-domain-model-overview.md
+      - docs/85-protocol/85.9-synchronization-protocol.md
+      - docs/50-data/54-message-sync-and-storage.md
+      - docs/architecture-decisions/workshops/WS-010-synchronization.md
+      - docs/architecture-decisions/reviews/AR-010-synchronization.md
     related_adrs: [ADR-0016, ADR-0011]
     related_research: [RS-004]
     affected_modules: [Messaging, Sync]
-    decision_date: null
-    review_date: null
+    decision_date: 2026-07-18
+    review_date: 2026-07-18
 
   # ---------------------------------------------------------------- Product (remaining)
   - id: AD-011

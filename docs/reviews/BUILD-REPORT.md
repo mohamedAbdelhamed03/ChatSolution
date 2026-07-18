@@ -4,6 +4,30 @@
 
 ---
 
+## Build #9 — 2026-07-18 (Messaging Core — Synchronization)
+
+| Field | Value |
+|---|---|
+| **Build ID** | BUILD-0009 |
+| **Build Timestamp** | 2026-07-18T13:30:00+03:00 |
+| **Branch** | feature/messaging-core-ad-010 |
+| **Current Phase** | Messaging Core Architecture Sprint — Topic 4 Synchronization |
+| **Design** | RS-004 Alternative B — cursor delta sync + SignalR; ConversationSequence cursor |
+
+### Lifecycle Completed
+
+WS-010 → AR-010 → AD-010 **Approved** → ADR-0016 + ADR-0011 **Accepted** → domain/architecture/glossary → review package.
+
+### Decision Summary
+
+Hybrid push/pull; contiguous ConversationSequence cursors; mandatory reconnect sync; MessageId idempotency; batch multi-conversation sync; trusted-device backfill.
+
+### Messaging Core Spine
+
+AD-007, AD-008, AD-009, AD-010 all **Approved**. Await human approval before next architecture phase.
+
+---
+
 ## Build #8 — 2026-07-18 (Messaging Core — Message Ordering)
 
 | Field | Value |

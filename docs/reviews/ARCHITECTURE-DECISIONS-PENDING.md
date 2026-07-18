@@ -10,6 +10,8 @@
 | ADR-0032 | Immutable Message Model | 2026-07-18 | AD-008 |
 | ADR-0008 | Message ID and Ordering Strategy | 2026-07-18 | AD-009 (+ AD-008 identity) |
 | ADR-0010 | Per-Conversation Message Ordering | 2026-07-18 | AD-009 |
+| ADR-0011 | Cursor Pagination | 2026-07-18 | AD-010 |
+| ADR-0016 | Offline Synchronization | 2026-07-18 | AD-010 |
 
 ---
 

@@ -5,13 +5,13 @@
 | **Title** | Architecture Overview |
 | **Status** | Completed |
 | **Owner** | Architecture |
-| **Version** | 1.4.0 |
+| **Version** | 1.5.0 |
 | **Last Updated** | 2026-07-18 |
 | **Document ID** | DOC-013 |
 
 **Dependencies:** `10-vision-and-scope` (DOC-001), `12-functional-requirements` (DOC-010), `13-non-functional-requirements` (DOC-011).
 
-**Related Documents:** `29-architecture-principles` (DOC-022), `29.5-system-invariants` (DOC-023), `21-c4-context` (DOC-014), `22-c4-container` (DOC-015), `24-modular-monolith-blueprint` (DOC-017), `30-domain-model-overview` (DOC-024), AD-007, AD-008, AD-009, ADR-0031, ADR-0032, ADR-0008, ADR-0010.
+**Related Documents:** `29-architecture-principles` (DOC-022), `29.5-system-invariants` (DOC-023), `21-c4-context` (DOC-014), `22-c4-container` (DOC-015), `24-modular-monolith-blueprint` (DOC-017), `30-domain-model-overview` (DOC-024), AD-007..AD-010, ADR-0031, ADR-0032, ADR-0008, ADR-0010, ADR-0016, ADR-0011.
 
 ---
 
@@ -172,6 +172,22 @@ flowchart LR
 ```
 
 Normative detail: AD-009, ADR-0008, ADR-0010, DOC-024 §11.
+
+### 4.4 Synchronization (AD-010 / ADR-0016 / ADR-0011)
+
+Devices synchronize via **hybrid SignalR push + authoritative delta sync**. The canonical cursor is **ConversationSequence** per device and conversation, advanced only contiguously. Reconnect/resume **must** pull deltas; MessageId makes overlapping push/sync idempotent. New-device backfill is paged (recent-first) and gated by device trust. Multi-conversation batch sync is required at launch.
+
+```mermaid
+flowchart LR
+    Push[SignalR live]
+    Pull[Delta sync API]
+    Cur[Contiguous Sequence cursor]
+    Push -.->|best effort| Dev[Device]
+    Pull -->|authority| Dev
+    Dev --> Cur
+```
+
+Normative detail: AD-010, ADR-0016, ADR-0011, DOC-024 §12.
 
 ## 5. Technology Mapping
 

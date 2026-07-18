@@ -2,8 +2,26 @@
 
 > Automated validation against the manifests. Regenerated every build.
 
-**Current Build:** #8 — 2026-07-18 (Message Ordering AD-009)
-**Prior Builds:** #7 (AD-008), #6, #5, #4, #3, #2, #1
+**Current Build:** #9 — 2026-07-18 (Synchronization AD-010)
+**Prior Builds:** #8 (AD-009), #7, #6, #5, #4, #3, #2, #1
+
+---
+
+## Build #9 — Synchronization Validation
+
+| Check | Result |
+|---|---|
+| AD-010 Approved; cites RS-004 Alternative B | PASS |
+| Depends only on Approved AD-009, AD-006 | PASS |
+| Canonical cursor = ConversationSequence | PASS |
+| Contiguous advancement; MessageId idempotency | PASS |
+| No contradiction with AD-001..009 / INV-01/04/05 | PASS |
+| Push vs authoritative pull distinguished | PASS |
+| Device trust / authz on sync stated | PASS |
+| ADR-0016 + ADR-0011 Accepted; DOC-131/136 Completed | PASS |
+| AD-007..AD-010 all Approved (Messaging Core spine) | PASS |
+
+**Build #9 result: PASS.**
 
 ---
 

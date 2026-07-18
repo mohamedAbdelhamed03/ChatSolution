@@ -5,29 +5,29 @@
 | **Title** | Domain Model Overview |
 | **Status** | Completed |
 | **Owner** | Architecture |
-| **Version** | 1.3.0 |
+| **Version** | 1.4.0 |
 | **Last Updated** | 2026-07-18 |
 | **Document ID** | DOC-024 |
 
 **Dependencies:** `00-glossary-overview` (DOC-003), `12-functional-requirements` (DOC-010), `20-architecture-overview` (DOC-013), ADR-0031 (DOC-152), ADR-0032 (DOC-153).
 
-**Related Documents:** `31-bounded-contexts-and-modules` (DOC-025), AD-007, AD-008, AD-009, ADR-0031, ADR-0032, ADR-0008, ADR-0010, RS-001, RS-002, RS-003.
+**Related Documents:** AD-007, AD-008, AD-009, AD-010, ADR-0031, ADR-0032, ADR-0008, ADR-0010, ADR-0016, ADR-0011, RS-001..RS-004.
 
 ---
 
 ## Purpose
 
-This document defines the ubiquitous domain model for the messaging platform: core aggregates, identities, lifecycles, invariants, and relationships that all feature specs and sequences must respect. **Conversation** (AD-007), **Message** (AD-008), and **Ordering** (AD-009) are ratified. Sync protocol remains AD-010.
+This document defines the ubiquitous domain model for the messaging platform: core aggregates, identities, lifecycles, invariants, and relationships that all feature specs and sequences must respect. **Conversation** (AD-007), **Message** (AD-008), **Ordering** (AD-009), and **Synchronization** (AD-010) are ratified.
 
 ## Scope
 
-**In scope:** Conversation aggregate; Message aggregate; per-conversation Sequence allocation rules; domain events; terminology.
+**In scope:** Conversation aggregate; Message aggregate; Sequence allocation; sync cursors and catch-up rules; domain events; terminology.
 
-**Out of scope (pending AD-010):** Sync cursor protocol details, full delivery state machine implementation.
+**Out of scope (later docs):** Wire-level protocol frames (`85.9`), full receipt state machine implementation detail.
 
 ## Architecture Impact
 
-Conversation + Message + server Sequence form the messaging engine core. Ordering is deterministic and gap-detectable (INV-05), enabling reliable multi-device sync.
+Conversation + Message + Sequence + cursor sync form the messaging engine core. Devices converge deterministically on authorized ciphertext streams without server decryption.
 
 ---
 
@@ -390,25 +390,58 @@ flowchart LR
 
 ### 11.4 Gap semantics
 
-Missing Sequence in a range ⇒ not yet synced (AD-010) or future purge policy. Tombstones **keep** Sequence. Successful commits do not skip numbers.
+Missing Sequence in a range ⇒ not yet synced (see §12) or future purge policy. Tombstones **keep** Sequence. Successful commits do not skip numbers.
 
 ---
 
-## 12. Terminology
+## 12. Synchronization (AD-010 / ADR-0016 / ADR-0011)
+
+### 12.1 Model
+
+Hybrid **SignalR push** (liveness) + **delta sync** (authority). Canonical cursor = **ConversationSequence** per `(DeviceId, ConversationId)`, advanced only when Sequences are **contiguous**.
+
+### 12.2 Rules
+
+| Rule | Detail |
+|---|---|
+| Reconnect | Mandatory delta sync |
+| Dedup | MessageId |
+| Batch | Multi-conversation sync API |
+| Backfill | Recent-first pages; device trust required |
+| Page | Sequence-range cursor pagination (ADR-0011) |
+
+### 12.3 Sync catch-up flow
+
+```mermaid
+sequenceDiagram
+    participant D as Device
+    participant S as Sync API
+    D->>S: SyncBatch(cursors)
+    S-->>D: Envelopes Sequence > cursor
+    D->>D: Apply ordered; dedup
+    D->>D: Advance contiguous cursors
+```
+
+### 12.4 Invariants (summary)
+
+S-INV-01..08 — forward-only contiguous cursor; idempotent pages; authz; MessageId dedup; ConversationSequence canonical. Full table: AD-010.
+
+---
+
+## 13. Terminology
 
 | Term | Meaning |
 |---|---|
 | Conversation | Aggregate root; typed Direct/Group/Channel; has lifecycle state |
 | Membership | Entity binding `UserId` to Conversation with state and role |
-| Role | owner / admin / moderator / member (Group); peers (Direct) |
 | Message | Messaging aggregate root; immutable id; ciphertext + envelope |
-| MessageId | Client-generated ULID; immutable global identity / dedup key |
-| Sequence | Server-assigned per-conversation monotonic order position |
+| MessageId | Client-generated ULID; identity / dedup key |
+| Sequence / ConversationSequence | Server-assigned per-conversation order; sync cursor basis |
+| Sync cursor | Last contiguous applied Sequence per device+conversation |
 | localOrder | Temporary client-only order among Pending messages |
 | Tombstone | Soft-deleted message placeholder retaining id/sequence |
-| AttachmentRef | Pointer to encrypted blob in object storage |
+| Delta sync | Fetch envelopes with Sequence greater than cursor |
 | Receipt projection | Delivered/Read state outside Message aggregate |
-| Canonical Pair Key | Sorted `(UserId, UserId)` uniqueness for Direct |
 
 Aligned with `00-glossary-overview`.
 
@@ -418,29 +451,28 @@ Aligned with `00-glossary-overview`.
 
 | Risk | Impact | Mitigation |
 |---|---|---|
-| Domain model drifts from AD-007/008/009 | Inconsistent implementation | ADRs normative |
-| Sequence treated as MessageId | Ordering bugs | Explicit field separation |
-| Hot conversation lock latency | p99 spikes | Efficient counter; monitor |
+| Domain model drifts from AD-007..010 | Inconsistent implementation | ADRs normative |
+| Push-only clients | Lost messages | Mandatory reconnect sync |
+| Cursor skip over gaps | Divergence | Contiguous advancement tests |
 
 ## Future Considerations
 
-- AD-010 sync cursors consume Sequence.
-- HLC when multi-region active-active is approved.
+- Optional global changefeed; HLC multi-region alignment.
+- Wire protocol DOC `85.9`.
 
 ## Open Questions
 
 | ID | Question | Owner |
 |---|---|---|
-| OQ-CONV-01 | Max group size (`maxMembers`) | Product + Security |
-| OQ-MSG-01 | Edit / delete-for-everyone windows | Product |
+| OQ-SYNC-01 | New-device backfill window | Product |
+| OQ-SYNC-04 | Offline ciphertext retention TTL | Product + SRE |
 | OQ-ORD-01 | Counter implementation pattern | Backend |
-| OQ-ORD-03 | HLC adoption triggers | Architecture + SRE |
 
 ## References
 
 - AD-007 / ADR-0031 / RS-001
 - AD-008 / ADR-0032 / RS-002
 - AD-009 / ADR-0008 / ADR-0010 / RS-003
-- AD-001, AD-003, AD-004, AD-006
+- AD-010 / ADR-0016 / ADR-0011 / RS-004
 - `20-architecture-overview` (DOC-013)
 - `29.5-system-invariants` (DOC-023)
