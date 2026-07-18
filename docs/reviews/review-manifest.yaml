@@ -1,32 +1,33 @@
 version: 2
 
 build:
-  id: BUILD-0010
-  timestamp: 2026-07-18T14:00:00+03:00
-  phase: Phase 3 Closure - Messaging Core Completion Report (DOC-155)
-  branch: docs/phase-3-completion-report
-  commit: HEAD of docs/phase-3-completion-report
+  id: BUILD-0011
+  timestamp: 2026-07-18T14:15:00+03:00
+  phase: Phase 4 Plan - Messaging Services Architecture (DOC-156)
+  branch: docs/phase-4-messaging-services-plan
+  commit: HEAD of docs/phase-4-messaging-services-plan
   base_branch: main
   base_commit: 5305ba6
 
 review_scope:
   description: >-
-    Formal Phase 3 completion report (DOC-155). Messaging Core AD-007..AD-010
-    and DOC-154 are the approved baseline. Phase 4 authorized when scheduled.
+    Publish Phase 4 plan (DOC-156), reconcile service sprint AD IDs with the
+    decision catalog, and catalogue AD-051..AD-054. Do not start Sprint 1
+    (AD-042) until human authorization.
 
 summary:
-  total_documents: 155
-  completed_documents: 19
-  documentation_completion_percentage: 12.3
-  total_decisions: 50
+  total_documents: 156
+  completed_documents: 20
+  documentation_completion_percentage: 12.8
+  total_decisions: 54
   decisions_approved: 10
   decisions_under_review: 0
-  decisions_proposed: 40
-  decision_approval_percentage: 20.0
+  decisions_proposed: 44
+  decision_approval_percentage: 18.5
 
 review_status:
-  status: Phase 3 COMPLETE - Messaging Core baseline established (DOC-155)
-  reviewed_by: Chief Software Architect (Messaging Core Architecture Sprint)
+  status: Phase 3 COMPLETE; Phase 4 PLANNED (DOC-156); await auth to start AD-042
+  reviewed_by: Chief Software Architect
   review_date: 2026-07-18
   sprint_result:
     approved: [AD-001, AD-002, AD-003, AD-004, AD-005, AD-006, AD-007, AD-008, AD-009, AD-010]
@@ -64,13 +65,12 @@ validation:
   broken_links: PASS
   circular_dependencies: PASS
 
-architecture_status: Phase 3 COMPLETE - Messaging Core baseline (DOC-154/DOC-155); AD-007..AD-010 Approved
-security_status: E2EE and INV-01/04/05 upheld across Messaging Core
-completion_percentage: 20.0
+architecture_status: Phase 3 COMPLETE; Phase 4 PLANNED (DOC-156); next sprint AD-042 when authorized
+security_status: E2EE and INV-01/04/05 upheld; Phase 4 must preserve INV-01
+completion_percentage: 18.5
 
 next_build_phase:
-  phase: Phase 4 - Messaging Services Architecture
+  phase: Phase 4 Sprint 1 - AD-042 Delivery and Acknowledgements
   description: >-
-    Delivery, receipts, presence, reactions, media, push, search, moderation,
-    retention, calling. Start only when explicitly scheduled/approved.
-    Extend Messaging Core; do not redesign AD-007..AD-010.
+    After human authorization, run RS/WS/AR/AD/ADR lifecycle for AD-042.
+    Do not redesign AD-007..AD-010. Follow DOC-156 sprint order.

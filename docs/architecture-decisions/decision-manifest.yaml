@@ -623,9 +623,12 @@ decisions:
     priority: Critical
     category: Realtime
     owner: Architecture
-    depends_on: [AD-008, AD-009]
-    blocks: [AD-044]
-    related_documents: [docs/60-realtime/62-delivery-and-read-receipts.md, docs/85-protocol/85.5-delivery-state-machine.md]
+    depends_on: [AD-008, AD-009, AD-010]
+    blocks: [AD-044, AD-012]
+    related_documents:
+      - docs/60-realtime/62-delivery-and-read-receipts.md
+      - docs/85-protocol/85.5-delivery-state-machine.md
+      - docs/20-architecture/20.3-phase-4-messaging-services-plan.md
     related_adrs: [ADR-0018]
     affected_modules: [Messaging]
     decision_date: null
@@ -648,12 +651,14 @@ decisions:
   - id: AD-044
     title: Read Receipts
     status: Proposed
-    priority: Medium
+    priority: Critical
     category: Realtime
     owner: Architecture
-    depends_on: [AD-042]
+    depends_on: [AD-042, AD-010]
     blocks: []
-    related_documents: [docs/60-realtime/62-delivery-and-read-receipts.md]
+    related_documents:
+      - docs/60-realtime/62-delivery-and-read-receipts.md
+      - docs/20-architecture/20.3-phase-4-messaging-services-plan.md
     related_adrs: []
     affected_modules: [Messaging]
     decision_date: null
@@ -741,5 +746,66 @@ decisions:
     related_documents: [docs/90-infrastructure/96-config-and-feature-flags.md]
     related_adrs: []
     affected_modules: [All]
+    decision_date: null
+    review_date: null
+
+  # ---------------------------------------------------------------- Phase 4 Messaging Services (gaps)
+  - id: AD-051
+    title: Reactions and Message Interactions
+    status: Proposed
+    priority: High
+    category: Product
+    owner: Architecture
+    depends_on: [AD-008, AD-010]
+    blocks: []
+    related_documents: [docs/70-features/FS-06-reactions.md, docs/20-architecture/20.3-phase-4-messaging-services-plan.md]
+    related_adrs: []
+    related_research: []
+    affected_modules: [Messaging]
+    decision_date: null
+    review_date: null
+
+  - id: AD-052
+    title: Moderation and Safety
+    status: Proposed
+    priority: Medium
+    category: Product
+    owner: Security
+    depends_on: [AD-003, AD-007, AD-008]
+    blocks: []
+    related_documents: [docs/20-architecture/20.3-phase-4-messaging-services-plan.md]
+    related_adrs: []
+    related_research: []
+    affected_modules: [Messaging, Identity]
+    decision_date: null
+    review_date: null
+
+  - id: AD-053
+    title: Voice and Video Signaling
+    status: Proposed
+    priority: Low
+    category: Realtime
+    owner: Architecture
+    depends_on: [AD-006, AD-011, AD-010]
+    blocks: []
+    related_documents: [docs/20-architecture/20.3-phase-4-messaging-services-plan.md]
+    related_adrs: []
+    related_research: []
+    affected_modules: [Presence, Messaging]
+    decision_date: null
+    review_date: null
+
+  - id: AD-054
+    title: Media and Attachment Services
+    status: Proposed
+    priority: Critical
+    category: Product
+    owner: Architecture
+    depends_on: [AD-008, AD-004, AD-013, AD-022]
+    blocks: []
+    related_documents: [docs/70-features/FS-04-media-and-files.md, docs/20-architecture/20.3-phase-4-messaging-services-plan.md]
+    related_adrs: [ADR-0015]
+    related_research: []
+    affected_modules: [Media, Messaging]
     decision_date: null
     review_date: null

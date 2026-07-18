@@ -228,10 +228,24 @@ documents:
     status: Completed
     owner: Architecture
     dependencies: [DOC-154]
-    blocks: []
+    blocks: [DOC-156]
     blocked_by: [DOC-154]
-    related_documents: [DOC-154, DOC-013, DOC-024]
+    related_documents: [DOC-154, DOC-013, DOC-024, DOC-156]
     estimated_complexity: Low
+
+  - id: DOC-156
+    title: Phase 4 — Messaging Services Architecture Plan
+    path: docs/20-architecture/20.3-phase-4-messaging-services-plan.md
+    category: Architecture
+    phase: Phase-4
+    priority: Critical
+    status: Completed
+    owner: Architecture
+    dependencies: [DOC-155, DOC-154]
+    blocks: []
+    blocked_by: [DOC-155, DOC-154]
+    related_documents: [DOC-154, DOC-155]
+    estimated_complexity: Medium
 
   - id: DOC-014
     title: C4 Context Diagram

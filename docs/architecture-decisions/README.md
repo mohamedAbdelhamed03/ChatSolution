@@ -92,6 +92,8 @@ Documentation generation is **paused** while the ADRP is built. Downstream docum
 
 **Phase 3 closure:** [`docs/20-architecture/20.2-phase-3-messaging-core-completion.md`](../20-architecture/20.2-phase-3-messaging-core-completion.md) (DOC-155) — Messaging Core **COMPLETE**.
 
+**Phase 4 plan:** [`docs/20-architecture/20.3-phase-4-messaging-services-plan.md`](../20-architecture/20.3-phase-4-messaging-services-plan.md) (DOC-156) — Messaging Services **PLANNED** (starts with AD-042).
+
 ## Validation Gate (per decision)
 
 Before a recommendation is saved it must satisfy: alternatives compared; trade-offs explained; risks documented; industry practices summarized; security impact analyzed; scalability impact analyzed; related documents listed; related ADRs listed; dependencies valid; recommendation justified.
