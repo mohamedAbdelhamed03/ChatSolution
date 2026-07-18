@@ -625,10 +625,12 @@ decisions:
     owner: Architecture
     depends_on: [AD-008, AD-009, AD-010]
     blocks: [AD-044, AD-012]
+    related_research: [RS-005]
     related_documents:
       - docs/60-realtime/62-delivery-and-read-receipts.md
       - docs/85-protocol/85.5-delivery-state-machine.md
       - docs/20-architecture/20.3-phase-4-messaging-services-plan.md
+      - docs/architecture-decisions/workshops/WS-042-delivery-and-acknowledgements.md
     related_adrs: [ADR-0018]
     affected_modules: [Messaging]
     decision_date: null
