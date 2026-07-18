@@ -5,13 +5,13 @@
 | **Title** | Architecture Overview |
 | **Status** | Completed |
 | **Owner** | Architecture |
-| **Version** | 1.0.0 |
-| **Last Updated** | 2026-07-14 |
+| **Version** | 1.2.0 |
+| **Last Updated** | 2026-07-18 |
 | **Document ID** | DOC-013 |
 
 **Dependencies:** `10-vision-and-scope` (DOC-001), `12-functional-requirements` (DOC-010), `13-non-functional-requirements` (DOC-011).
 
-**Related Documents:** `29-architecture-principles` (DOC-022), `29.5-system-invariants` (DOC-023), `21-c4-context` (DOC-014), `22-c4-container` (DOC-015), `24-modular-monolith-blueprint` (DOC-017).
+**Related Documents:** `29-architecture-principles` (DOC-022), `29.5-system-invariants` (DOC-023), `21-c4-context` (DOC-014), `22-c4-container` (DOC-015), `24-modular-monolith-blueprint` (DOC-017), `30-domain-model-overview` (DOC-024), AD-007, ADR-0031.
 
 ---
 
@@ -112,6 +112,31 @@ flowchart LR
 ```
 
 Modules communicate via contracts and domain events only; no cross-module database access (INV-06). Module-to-context mapping is detailed in `31-bounded-contexts-and-modules`.
+
+### 4.1 Conversation Model (AD-007 / ADR-0031)
+
+The Conversations module owns a **unified `Conversation` aggregate** (root) containing **Membership** entities and **Role**, **ConversationMetadata**, and **ConversationSettings** value objects. Types: `Direct` | `Group` | `Channel` (Channel not creatable until FS-03). Messages reference `ConversationId` but live in the Messaging module (outside the aggregate).
+
+- **Direct:** exactly two `Active` peers; canonical pair uniqueness; no owner hierarchy.
+- **Group:** roles `owner` | `admin` | `moderator` | `member`; ≥1 owner; last owner cannot leave without transfer.
+- **Lifecycles:** Conversation (`Created`/`Active`/`Archived`/`Frozen`/`Deleted`); Membership (`Invited`/`Pending`/`Active`/`Left`/`Removed`/`Blocked`).
+- **Events:** membership and lifecycle events drive authz invalidation, sync projections, notifications, and future sender-key rotation (ADR-0020).
+- **Extensibility:** additive types/settings/role packs or wrapper aggregates (e.g., Community); never a second message pipeline.
+
+```mermaid
+flowchart TB
+    subgraph Conversations Module - Aggregate
+      Conv[Conversation root\n type, lifecycle]
+      Mem[Membership\n state, role]
+      Meta[Metadata / Settings]
+      Conv --> Mem
+      Conv --> Meta
+    end
+    Msg[Messaging Module\n messages by ConversationId]
+    Conv -.->|ID only| Msg
+```
+
+Normative detail: AD-007, ADR-0031, `30-domain-model-overview` (DOC-024).
 
 ## 5. Technology Mapping
 

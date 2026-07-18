@@ -1,8 +1,106 @@
 # Cross-Reference Validation Report
 
-> Automated validation of the 9 completed documents against `document-manifest.yaml`. Regenerated every build.
+> Automated validation against the manifests. Regenerated every build.
 
-**Build:** #1 — 2026-07-14
+**Current Build:** #6 — 2026-07-18 (AD-007 Finalization Amendments)
+**Prior Builds:** #5 (AD-007 Approved), #4 (Research), #3 (AD-001..006), #2, #1
+
+---
+
+## Build #6 — Finalization Consistency Review
+
+**Scope:** AD-007 v2.1, ADR-0031, DOC-024, DOC-013 §4.1, glossary, WS-007, AR-007.
+
+| Check | Result |
+|---|---|
+| Design still Alternative B (unified Conversation + Membership) | PASS |
+| No new Architecture Decision introduced | PASS |
+| Conversation lifecycle complete + Mermaid state diagram | PASS |
+| Membership lifecycle complete + effects (authz/notify/keys/sync/RM) | PASS |
+| Domain invariants explicit with D/A/DB enforcement | PASS |
+| Ownership model unambiguous; Direct N/A stated | PASS |
+| Future extensibility strategy documented (not implemented) | PASS |
+| Aggregate diagrams include Metadata, Settings, Role, boundaries | PASS |
+| Messages outside Conversation aggregate (consistent) | PASS |
+| Glossary terms aligned with AD-007/DOC-024 | PASS |
+| ADR-0031 / DOC-024 / overview do not contradict AD-007 | PASS |
+| No duplicate competing state machines | PASS |
+| Channel still gated until FS-03 | PASS |
+| INV-01 upheld (metadata-only) | PASS |
+
+**Build #6 result: PASS.**
+
+---
+
+## Build #5 — Conversation Model Validation
+
+**Scope validated:** WS-007, AR-007, AD-007, ADR-0031, DOC-024, DOC-013 §4.1, glossary, manifests.
+
+| Check | Result |
+|---|---|
+| AD-007 status Approved with decision_date/review_date | PASS |
+| AD-007 cites RS-001 (Related Research) | PASS |
+| Alternatives lettering matches RS-001 (A/B/C) | PASS |
+| ADR-0031 Accepted and linked from AD-007 / decision-manifest | PASS |
+| DOC-024 / DOC-120 / DOC-152 Completed in document-manifest | PASS |
+| Dependency graph: AD-007 depends only on Approved AD-001, AD-003 | PASS |
+| INV-01 upheld (metadata-only conversation model) | PASS |
+| No Channel creatable at launch stated consistently | PASS |
+| Workshop → Review → Decision → ADR → Domain chain present | PASS |
+| AD-008..AD-010 untouched (still Under Review) | PASS |
+
+**Build #5 result: PASS.**
+
+---
+
+## Build #3 — Post-Approval Validation
+
+**Scope validated:** AD-001..AD-006 (now Approved) + `decision-manifest.yaml`.
+
+| Check | Result |
+|---|---|
+| Manifest status consistency (AD-001..006 = Approved, dates set) | PASS |
+| AD docs contain Review Outcome + Approval = Approved | PASS |
+| Dependency graph still acyclic; approved set has no unapproved dependencies | PASS |
+| INV-01 consistency across updated docs | PASS |
+| No broken references introduced by edits | PASS |
+| Naming conventions | PASS |
+
+Note: AD-001..006 depend only on each other or nothing; all dependencies of the approved set are themselves Approved (AD-001→002→003; 001→004→005→006). No dangling approvals.
+
+**Build #3 result: PASS.**
+
+---
+
+## Build #2 — ADRP Validation
+
+**Scope validated:** `decision-manifest.yaml` (50 decisions) + 10 recommendation documents + ADRP README.
+
+| Check | Result | Count |
+|---|---|---|
+| Broken references | PASS | 0 |
+| Missing references | PASS | 0 |
+| Circular dependencies (decision graph) | PASS | 0 |
+| Missing dependencies | PASS | 0 |
+| Invalid links | PASS | 0 |
+| Duplicate decision IDs | PASS | 0 |
+| Duplicate concepts | PASS | 0 |
+| Conflicting definitions | PASS | 0 |
+| Naming convention (AD-XXX-*.md) | PASS | 10/10 |
+
+Details:
+- All `depends_on`/`blocks` entries in `decision-manifest.yaml` reference existing decision IDs (AD-001..AD-050).
+- Decision spine is acyclic: AD-001→AD-002→AD-003; AD-001→AD-004→AD-005→AD-006; AD-007→AD-008→AD-009→AD-010.
+- Every recommendation lists Affected Documents that exist as entries in `document-manifest.yaml` (forward references to Pending docs are expected).
+- `related_adrs` reference valid ADR IDs catalogued in `document-manifest.yaml`.
+- INV-01 (backend never decrypts) stated consistently across AD-004, AD-005, AD-008; no contradictions detected.
+
+**Build #2 result: PASS** (no blocking issues).
+
+---
+
+## Build #1 — Documentation Validation
+
 **Scope validated:** 9 Completed documents + `document-manifest.yaml`.
 
 ---

@@ -1,269 +1,194 @@
-version: 1
+version: 2
+
+# Regenerated every build. The Git repository is the source of truth.
+# The exact reviewable commit SHA is HEAD of the branch below (also reported
+# out-of-band on push). base_commit records the branch point.
 
 build:
-  id: BUILD-0001
-  timestamp: 2026-07-14T16:59:00+03:00
-  phase: Phase-1 (Foundations)
-  commit: cb5c3a4
-  branch: main
+  id: BUILD-0006
+  timestamp: 2026-07-18T12:45:00+03:00
+  phase: Messaging Core - AD-007 finalization amendments (documentation only)
+  branch: feature/messaging-core-ad-007
+  commit: HEAD of feature/messaging-core-ad-007
+  base_branch: main
+  base_commit: 5305ba6
+  builds_on_branch: feature/research-sprint-2
+
+review_scope:
+  description: >-
+    Mandatory documentation amendments to AD-007 (lifecycles, invariants,
+    ownership, extensibility, aggregate diagrams) without redesign. Validate
+    consistency across ADR-0031, DOC-024, overview, glossary, WS-007, AR-007.
+    Do not proceed to AD-008 until human confirms AD-007 finalized.
+  research_documents:
+    - path: docs/research/RS-001-conversation-models.md
+      feeds: AD-007
+  workshop_documents:
+    - path: docs/architecture-decisions/workshops/WS-007-conversation-model.md
+      feeds: AD-007
+  review_documents:
+    - path: docs/architecture-decisions/reviews/AR-007-conversation-model.md
+      feeds: AD-007
+  included_paths:
+    - docs/architecture-decisions/
+    - docs/ADR/
+    - docs/30-domain/
+    - docs/20-architecture/
+    - docs/00-glossary/
+    - docs/reviews/
+  affected_documents:
+    - docs/30-domain/30-domain-model-overview.md
+    - docs/20-architecture/20-architecture-overview.md
+    - docs/00-glossary/00-glossary-overview.md
+    - docs/70-features/FS-01-one-to-one-chat.md
+    - docs/70-features/FS-02-group-chat.md
+  affected_adrs:
+    - ADR-0031
+    - ADR-0020
+  affected_modules:
+    - Conversations
+    - Messaging
+    - Identity
+  breaking_changes: []
 
 summary:
-  total_documents: 151
-  completed_documents: 9
-  pending_documents: 142
-  blocked_documents: 0
-  completion_percentage: 6.0
+  total_documents: 152
+  completed_documents: 12
+  documentation_completion_percentage: 7.9
+  total_decisions: 50
+  decisions_approved: 7
+  decisions_under_review: 3
+  decisions_proposed: 40
+  decision_recommendation_percentage: 20.0
+  decision_approval_percentage: 14.0
 
 review_status:
-  status: Ready for Review
-  reviewed_by: null
-  review_date: null
+  status: AD-007 amendments complete; awaiting human finalization confirmation before AD-008
+  reviewed_by: Chief Software Architect (Messaging Core Architecture Sprint)
+  review_date: 2026-07-18
+  sprint_result:
+    approved: [AD-001, AD-002, AD-003, AD-004, AD-005, AD-006, AD-007]
+    rejected: []
+    needs_revision: []
+    amendments_applied: [AD-007]
 
 review_order:
-  - path: docs/10-product/10-vision-and-scope.md
+  - path: docs/research/RS-001-conversation-models.md
     priority: Critical
-    reason: Root product intent; everything traces to it.
-  - path: docs/10-product/12-functional-requirements.md
+    reason: Evidence base for Conversation Model.
+  - path: docs/architecture-decisions/workshops/WS-007-conversation-model.md
     priority: Critical
-    reason: Scope baseline for all feature work.
-  - path: docs/10-product/13-non-functional-requirements.md
+    reason: Workshop preparing the decision.
+  - path: docs/architecture-decisions/reviews/AR-007-conversation-model.md
     priority: Critical
-    reason: Drives scalability, performance, and security targets.
-  - path: docs/20-architecture/20-architecture-overview.md
+    reason: Critical review and required changes.
+  - path: docs/architecture-decisions/AD-007-conversation-model.md
     priority: Critical
-    reason: Solution strategy the whole build follows.
-  - path: docs/20-architecture/29-architecture-principles.md
+    reason: Approved architecture decision.
+  - path: docs/ADR/ADR-0031-unified-conversation-model.md
     priority: Critical
-    reason: Non-negotiable design principles.
-  - path: docs/20-architecture/29.5-system-invariants.md
+    reason: Formal ratification.
+  - path: docs/30-domain/30-domain-model-overview.md
     priority: Critical
-    reason: Absolute runtime rules incl. backend-never-decrypts.
-  - path: docs/10-product/11-personas-and-use-cases.md
-    priority: High
-    reason: Personas and journeys requirements trace to.
-  - path: docs/00-README.md
-    priority: Medium
-    reason: Documentation standards and navigation.
-  - path: docs/00-glossary/00-glossary-overview.md
-    priority: Medium
-    reason: Ubiquitous language and core terms.
+    reason: Domain model for Conversation/Membership.
 
 critical_documents:
-  - path: docs/20-architecture/29.5-system-invariants.md
-    reason: Encodes absolute rules including backend-never-decrypts (INV-01).
-  - path: docs/20-architecture/20-architecture-overview.md
-    reason: The solution strategy for the entire platform.
-  - path: docs/10-product/13-non-functional-requirements.md
-    reason: Drives scalability, performance, and security.
-  - path: docs/10-product/12-functional-requirements.md
-    reason: Scope baseline for all features.
+  - path: docs/architecture-decisions/AD-007-conversation-model.md
+    reason: Normative conversation model for the messaging engine.
+  - path: docs/ADR/ADR-0031-unified-conversation-model.md
+    reason: Ratified ADR for Conversation aggregate.
+  - path: docs/research/RS-001-conversation-models.md
+    reason: Evidence cited by AD-007.
 
-new_documents:
-  - path: docs/document-manifest.yaml
-  - path: docs/00-README.md
-  - path: docs/00-glossary/00-glossary-overview.md
-  - path: docs/10-product/10-vision-and-scope.md
-  - path: docs/10-product/11-personas-and-use-cases.md
-  - path: docs/10-product/12-functional-requirements.md
-  - path: docs/10-product/13-non-functional-requirements.md
-  - path: docs/20-architecture/20-architecture-overview.md
-  - path: docs/20-architecture/29-architecture-principles.md
-  - path: docs/20-architecture/29.5-system-invariants.md
+files_changed:
+  created:
+    - docs/architecture-decisions/workshops/WS-007-conversation-model.md
+    - docs/architecture-decisions/reviews/AR-007-conversation-model.md
+    - docs/ADR/adr-template.md
+    - docs/ADR/ADR-0031-unified-conversation-model.md
+    - docs/30-domain/30-domain-model-overview.md
+  updated:
+    - docs/architecture-decisions/AD-007-conversation-model.md
+    - docs/architecture-decisions/decision-manifest.yaml
+    - docs/architecture-decisions/README.md
+    - docs/document-manifest.yaml
+    - docs/20-architecture/20-architecture-overview.md
+    - docs/00-glossary/00-glossary-overview.md
+    - docs/reviews/BUILD-REPORT.md
+    - docs/reviews/CHANGES.md
+    - docs/reviews/REVIEW-CHECKLIST.md
+    - docs/reviews/QUALITY-REPORT.md
+    - docs/reviews/CROSS-REFERENCE-REPORT.md
+    - docs/reviews/REVIEW-INDEX.md
+    - docs/reviews/review-manifest.yaml
+    - docs/reviews/ARCHITECTURE-DECISIONS-PENDING.md
+  removed: []
 
-updated_documents: []
+decisions_approved:
+  - AD-001
+  - AD-002
+  - AD-003
+  - AD-004
+  - AD-005
+  - AD-006
+  - AD-007
 
-removed_documents: []
-
-pending_documents:
-  - path: docs/00-glossary/01-business-terms.md
-  - path: docs/00-glossary/02-technical-terms.md
-  - path: docs/00-glossary/03-acronyms.md
-  - path: docs/00-glossary/04-protocol-terms.md
-  - path: docs/00-glossary/05-cryptography-terms.md
-  - path: docs/10-product/14-requirements-traceability-matrix.md
-  - path: docs/20-architecture/21-c4-context.md
-  - path: docs/20-architecture/22-c4-container.md
-  - path: docs/20-architecture/23-c4-component.md
-  - path: docs/20-architecture/24-modular-monolith-blueprint.md
-  - path: docs/20-architecture/25-vertical-slice-and-cqrs.md
-  - path: docs/20-architecture/26-event-driven-architecture.md
-  - path: docs/20-architecture/27-cross-cutting-concerns.md
-  - path: docs/20-architecture/28-quality-scenarios.md
-  - path: docs/30-domain/30-domain-model-overview.md
-  - path: docs/30-domain/31-bounded-contexts-and-modules.md
-  - path: docs/30-domain/32-aggregates-and-invariants.md
-  - path: docs/30-domain/33-domain-events-catalog.md
-  - path: docs/30-domain/34-context-map.md
-  - path: docs/30-domain/36-message-lifecycle.md
-  - path: docs/40-security/40-security-architecture.md
-  - path: docs/40-security/41-e2ee-design.md
-  - path: docs/40-security/42-authn-authz.md
-  - path: docs/40-security/43-key-management-and-devices.md
-  - path: docs/40-security/44-threat-model.md
-  - path: docs/40-security/45-data-privacy-and-compliance.md
-  - path: docs/40-security/46-zero-trust-and-tls-policy.md
-  - path: docs/40-security/47-abuse-spam-and-rate-limiting.md
-  - path: docs/40-security/48-attack-mitigations.md
-  - path: docs/40-security/49-key-compromise-recovery.md
-  - path: docs/50-data/50-data-architecture.md
-  - path: docs/50-data/51-postgres-schema-and-migrations.md
-  - path: docs/50-data/52-read-model-and-dapper.md
-  - path: docs/50-data/53-redis-usage.md
-  - path: docs/50-data/54-message-sync-and-storage.md
-  - path: docs/50-data/55-search-architecture.md
-  - path: docs/50-data/56-partitioning-and-sharding.md
-  - path: docs/50-data/57-retention-ttl-and-backup.md
-  - path: docs/60-realtime/60-realtime-architecture.md
-  - path: docs/60-realtime/61-presence-and-typing.md
-  - path: docs/60-realtime/62-delivery-and-read-receipts.md
-  - path: docs/60-realtime/63-push-notifications.md
-  - path: docs/60-realtime/64-backpressure-and-fanout.md
-  - path: docs/70-features/70-feature-spec-template.md
-  - path: docs/70-features/FS-01-one-to-one-chat.md
-  - path: docs/70-features/FS-02-group-chat.md
-  - path: docs/70-features/FS-03-channels.md
-  - path: docs/70-features/FS-04-media-and-files.md
-  - path: docs/70-features/FS-05-voice-notes.md
-  - path: docs/70-features/FS-06-reactions.md
-  - path: docs/70-features/FS-07-replies.md
-  - path: docs/70-features/FS-08-forwarding.md
-  - path: docs/70-features/FS-09-edit-and-delete.md
-  - path: docs/70-features/FS-10-search.md
-  - path: docs/70-features/FS-11-contact-discovery-and-blocking.md
-  - path: docs/80-api/80-api-design-guidelines.md
-  - path: docs/80-api/81-rest-contract.md
-  - path: docs/80-api/82-signalr-hub-contract.md
-  - path: docs/80-api/83-error-model-and-versioning.md
-  - path: docs/80-api/84-client-sdk-crypto-contract.md
-  - path: docs/85-protocol/85-protocol-overview.md
-  - path: docs/85-protocol/85.1-packet-format.md
-  - path: docs/85-protocol/85.2-client-server-protocol.md
-  - path: docs/85-protocol/85.3-signalr-event-catalog.md
-  - path: docs/85-protocol/85.4-encryption-envelope.md
-  - path: docs/85-protocol/85.5-delivery-state-machine.md
-  - path: docs/85-protocol/85.6-message-metadata.md
-  - path: docs/85-protocol/85.7-presence-protocol.md
-  - path: docs/85-protocol/85.8-typing-protocol.md
-  - path: docs/85-protocol/85.9-synchronization-protocol.md
-  - path: docs/90-infrastructure/90-deployment-architecture.md
-  - path: docs/90-infrastructure/91-docker-and-local-dev.md
-  - path: docs/90-infrastructure/92-background-workers.md
-  - path: docs/90-infrastructure/93-observability.md
-  - path: docs/90-infrastructure/94-scalability-and-capacity.md
-  - path: docs/90-infrastructure/95-ci-cd.md
-  - path: docs/90-infrastructure/96-config-and-feature-flags.md
-  - path: docs/90-infrastructure/97-multi-region-and-residency.md
-  - path: docs/95-quality/95-testing-strategy.md
-  - path: docs/95-quality/96-performance-and-load-testing.md
-  - path: docs/95-quality/96-performance-budget.md
-  - path: docs/95-quality/97-definition-of-done.md
-  - path: docs/95-quality/98-crypto-test-vectors-and-conformance.md
-  - path: docs/98-operations/98-runbooks.md
-  - path: docs/98-operations/99-sre-slo-sli.md
-  - path: docs/98-operations/99-incident-and-dr.md
-  - path: docs/98-operations/OPS-01-capacity-planning.md
-  - path: docs/98-operations/OPS-02-chaos-engineering.md
-  - path: docs/98-operations/OPS-03-load-testing-strategy.md
-  - path: docs/98-operations/OPS-04-dr-validation.md
-  - path: docs/98-operations/OPS-05-secret-rotation.md
-  - path: docs/98-operations/OPS-06-certificate-rotation.md
-  - path: docs/98-operations/OPS-07-key-rotation.md
-  - path: docs/98-operations/OPS-08-operational-checklists.md
-  - path: docs/ADR/adr-template.md
-  - path: docs/ADR/ADR-0001-modular-monolith-over-microservices.md
-  - path: docs/ADR/ADR-0002-vertical-slice-architecture.md
-  - path: docs/ADR/ADR-0003-cqrs-with-ef-and-dapper.md
-  - path: docs/ADR/ADR-0004-e2ee-client-only-encryption.md
-  - path: docs/ADR/ADR-0005-signalr-for-realtime.md
-  - path: docs/ADR/ADR-0006-postgres-as-primary-store.md
-  - path: docs/ADR/ADR-0007-redis-roles.md
-  - path: docs/ADR/ADR-0008-message-id-and-ordering-strategy.md
-  - path: docs/ADR/ADR-0009-search-engine-choice.md
-  - path: docs/ADR/ADR-0010-message-ordering.md
-  - path: docs/ADR/ADR-0011-cursor-pagination.md
-  - path: docs/ADR/ADR-0012-soft-delete.md
-  - path: docs/ADR/ADR-0013-message-versioning.md
-  - path: docs/ADR/ADR-0014-presence-architecture.md
-  - path: docs/ADR/ADR-0015-attachment-storage.md
-  - path: docs/ADR/ADR-0016-offline-synchronization.md
-  - path: docs/ADR/ADR-0017-event-versioning.md
-  - path: docs/ADR/ADR-0018-idempotency.md
-  - path: docs/ADR/ADR-0019-multi-device.md
-  - path: docs/ADR/ADR-0020-group-encryption.md
-  - path: docs/ADR/ADR-0021-rate-limiting.md
-  - path: docs/ADR/ADR-0022-distributed-locking.md
-  - path: docs/ADR/ADR-0023-retry-policy.md
-  - path: docs/ADR/ADR-0024-outbox-pattern.md
-  - path: docs/ADR/ADR-0025-inbox-pattern.md
-  - path: docs/ADR/ADR-0026-circuit-breakers.md
-  - path: docs/ADR/ADR-0027-caching-strategy.md
-  - path: docs/ADR/ADR-0028-search-architecture.md
-  - path: docs/ADR/ADR-0029-feature-flags.md
-  - path: docs/ADR/ADR-0030-api-versioning.md
-  - path: docs/ZZ-migration/ZZ-monolith-to-microservices.md
-
-blocked_documents: []
+decisions_under_review:
+  - AD-008
+  - AD-009
+  - AD-010
 
 pending_adrs:
   - id: ADR-0004
     title: E2EE Client-Only Encryption
-    reason: Cryptographic protocol/library not yet selected.
-    impacts: [DOC-047, DOC-049, DOC-090, DOC-085, DOC-108, DOC-140]
+    reason: Recommended in AD-004; library spike pending.
+    impacts: [AD-005, AD-008, AD-020]
   - id: ADR-0008
     title: Message ID and Ordering Strategy
-    reason: Global ID scheme and ordering not yet chosen.
-    impacts: [DOC-045, DOC-060, DOC-091, DOC-095]
+    reason: Recommended in AD-009; awaiting approval to ratify.
+    impacts: [AD-010, AD-027, AD-042]
   - id: ADR-0010
     title: Message Ordering
-    reason: Depends on ADR-0008; total-order guarantee to be finalized.
-    impacts: [DOC-045, DOC-060]
+    reason: Recommended in AD-009; awaiting approval.
+    impacts: [AD-027]
+  - id: ADR-0016
+    title: Offline Synchronization
+    reason: Recommended in AD-010; awaiting approval.
+    impacts: [AD-015]
+  - id: ADR-0019
+    title: Multi-Device
+    reason: Recommended across AD-002/AD-005/AD-006; awaiting approval.
+    impacts: [AD-010]
   - id: ADR-0020
     title: Group Encryption
-    reason: Sender-keys vs. MLS decision pending.
-    impacts: [DOC-071, DOC-035]
-  - id: ADR-0009
-    title: Search Engine Choice
-    reason: Metadata search engine not finalized.
-    impacts: [DOC-061, DOC-079]
+    reason: Depends on AD-007 membership events; awaiting AD-020 / later ratification.
+    impacts: [AD-007]
+
+accepted_adrs:
+  - id: ADR-0031
+    title: Unified Conversation Model
+    reason: Ratifies AD-007.
+    impacts: [AD-008, DOC-024]
 
 architecture_decisions:
-  completed: []
-  pending:
-    - ADR-0001
-    - ADR-0002
-    - ADR-0003
-    - ADR-0004
-    - ADR-0005
-    - ADR-0006
-    - ADR-0007
-    - ADR-0008
-    - ADR-0009
-    - ADR-0010
-    - ADR-0011
-    - ADR-0012
-    - ADR-0013
-    - ADR-0014
-    - ADR-0015
-    - ADR-0016
-    - ADR-0017
-    - ADR-0018
-    - ADR-0019
-    - ADR-0020
-    - ADR-0021
-    - ADR-0022
-    - ADR-0023
-    - ADR-0024
-    - ADR-0025
-    - ADR-0026
-    - ADR-0027
-    - ADR-0028
-    - ADR-0029
-    - ADR-0030
+  approved:
+    - AD-001
+    - AD-002
+    - AD-003
+    - AD-004
+    - AD-005
+    - AD-006
+    - AD-007
+  under_review:
+    - AD-008
+    - AD-009
+    - AD-010
+  proposed_count: 40
 
 quality_summary:
-  average_score: 9.32
-  lowest_score: 9.0
-  highest_score: 9.6
+  build5_ad007_overall: 9.2
+  build3_average_score: 9.35
+  build2_average_score: 9.37
 
 cross_reference_status:
   broken_links: 0
@@ -274,55 +199,58 @@ cross_reference_status:
 validation:
   markdown: PASS
   mermaid: PASS
-  references: PASS
+  cross_references: PASS
   dependency_graph: PASS
+  manifest_consistency: PASS
   architecture_rules: PASS
   security_rules: PASS
   e2ee_rules: PASS
+  naming_conventions: PASS
+  duplicate_definitions: PASS
+  broken_links: PASS
+  broken_references: PASS
+  circular_dependencies: PASS
+
+architecture_status: On Track - AD-007 Approved + finalized documentation amendments; await human before AD-008
+security_status: E2EE and backend-never-decrypt upheld; membership lifecycle drives authz and re-key hooks
+completion_percentage: 14.0
 
 known_risks:
   - id: RISK-01
     description: E2EE limits server-side features (search, moderation, recovery).
     severity: High
-  - id: RISK-02
-    description: Module boundary erosion would block microservice extraction.
-    severity: Medium
   - id: RISK-03
     description: Fan-out at large group scale is the primary performance bottleneck.
     severity: High
-  - id: RISK-04
-    description: Availability vs. E2EE tension; no server recovery of content.
+  - id: RISK-06
+    description: Message ID/ordering scheme (AD-009) and sync (AD-010) not yet approved.
     severity: Medium
+  - id: R-007-02
+    description: Membership event loss could delay group re-key until ADR-0020/outbox hardening.
+    severity: High
 
 open_questions:
-  - id: OQ-NFR-01
-    description: Confirmed launch availability SLO and error budget.
-    owner: SRE + Product
-  - id: OQ-INV-02
-    description: Authoritative global ordering scheme (ULID/Snowflake/HLC).
-    owner: Architecture
+  - id: OQ-CONV-01
+    description: Maximum group size at launch.
+    owner: Product + Security
+  - id: OQ-CONV-04
+    description: Group title/avatar plaintext vs encrypted metadata.
+    owner: Security + Product
   - id: OQ-ARCH-02
-    description: Selected E2EE protocol/library and audit status.
+    description: Selected E2EE protocol/library and audit status (AD-004).
     owner: Security
-  - id: OQ-PER-01
-    description: Concurrent devices per user to support at launch.
-    owner: Product + Architecture
-  - id: OQ-FR-01
-    description: Delete-for-everyone time window.
-    owner: Product
+  - id: OQ-INV-02
+    description: Authoritative global ordering scheme - ULID vs Snowflake (AD-009).
+    owner: Architecture
 
 next_review:
   recommended_documents:
-    - path: docs/ADR/adr-template.md
-    - path: docs/20-architecture/21-c4-context.md
-    - path: docs/20-architecture/22-c4-container.md
-    - path: docs/30-domain/30-domain-model-overview.md
-    - path: docs/10-product/14-requirements-traceability-matrix.md
+    - path: docs/research/RS-002-message-models.md
+    - path: docs/architecture-decisions/AD-008-message-model.md
 
 next_build_phase:
-  phase: Phase-2 (Core Architecture & Domain)
+  phase: Messaging Core - Topic 2 Message Model (AD-008)
   description: >-
-    Generate ADR template and foundational ADRs (0001-0003), C4 Context and
-    Container, Domain Model Overview and Bounded Contexts, Modular Monolith
-    Blueprint and Vertical Slice & CQRS, plus the Requirements Traceability
-    Matrix and remaining glossary term files.
+    After human approval of Conversation Model topic, run WS-008 → AR-008 →
+    AD-008 → ADR → domain/architecture updates. Cite RS-002. Do not start until
+    human explicitly continues the sprint.

@@ -1,6 +1,22 @@
 # Architecture Review Checklist
 
-> Reviewer checklist for Build #1. Items for not-yet-generated documents are listed as pending and remain unchecked until their build.
+> Reviewer checklist. Build #2 adds the Architecture Decision Repository (ADRP) section below. Items for not-yet-generated documents remain unchecked until their build.
+
+## Architecture Decisions (ADRP — Build #2, current review scope)
+
+- [x] ADRP README complete (purpose, workflow, lifecycle)
+- [x] decision-manifest.yaml consistent (50 decisions, valid dependency graph)
+- [x] AD-001 User Identity — reviewed, improved, **Approved**
+- [x] AD-002 Authentication — reviewed, improved, **Approved**
+- [x] AD-003 Authorization — reviewed, improved, **Approved**
+- [x] AD-004 E2EE Protocol — reviewed, improved, **Approved** (direction; library spike pending)
+- [x] AD-005 Key Management — reviewed, improved, **Approved**
+- [x] AD-006 Device Model and Device Trust — reviewed, improved, **Approved**
+- [x] AD-007 Conversation Model — workshop WS-007, review AR-007, **Approved**, ADR-0031 Accepted, **finalization amendments** (lifecycle/invariants/ownership/extensibility/diagrams)
+- [ ] AD-008 Message Model — Under Review (await human approval to start)
+- [ ] AD-009 Message Ordering — Under Review (await prior topic)
+- [ ] AD-010 Synchronization — Under Review (await prior topic)
+- [ ] Pending decisions (AD-011..AD-050) catalogued with valid dependencies
 
 ## Product
 
@@ -29,7 +45,7 @@
 
 ## Domain
 
-- [ ] Domain model overview (DOC-024) — *pending*
+- [x] Domain model overview (DOC-024) — Conversation/Membership (Build #5); message/sync pending AD-008..010
 - [ ] Bounded contexts & modules (DOC-025) — *pending*
 - [ ] Domain events catalog (DOC-027) — *pending*
 - [ ] Message lifecycle (DOC-045) — *pending*
