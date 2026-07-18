@@ -1,46 +1,37 @@
 version: 2
 
 build:
-  id: BUILD-0007
-  timestamp: 2026-07-18T13:00:00+03:00
-  phase: Messaging Core Architecture Sprint - Topic 2 Message Model (AD-008)
-  branch: feature/messaging-core-ad-008
-  commit: HEAD of feature/messaging-core-ad-008
+  id: BUILD-0008
+  timestamp: 2026-07-18T13:15:00+03:00
+  phase: Messaging Core Architecture Sprint - Topic 3 Message Ordering (AD-009)
+  branch: feature/messaging-core-ad-009
+  commit: HEAD of feature/messaging-core-ad-009
   base_branch: main
   base_commit: 5305ba6
-  builds_on_branch: feature/messaging-core-ad-007
+  builds_on_branch: feature/messaging-core-ad-008
 
 review_scope:
   description: >-
-    Complete Message Model lifecycle using RS-002: WS-008, AR-008, approve AD-008,
-    ratify ADR-0032, update domain/architecture/glossary. Do not start AD-009
-    until human approval.
-  research_documents:
-    - path: docs/research/RS-002-message-models.md
-      feeds: AD-008
-  workshop_documents:
-    - path: docs/architecture-decisions/workshops/WS-008-message-model.md
-      feeds: AD-008
-  review_documents:
-    - path: docs/architecture-decisions/reviews/AR-008-message-model.md
-      feeds: AD-008
+    Complete Message Ordering lifecycle using RS-003: WS-009, AR-009, approve
+    AD-009, ratify ADR-0008 and ADR-0010, update domain/architecture/glossary.
+    Do not start AD-010 until human approval.
 
 summary:
   total_documents: 153
-  completed_documents: 13
-  documentation_completion_percentage: 8.5
+  completed_documents: 15
+  documentation_completion_percentage: 9.8
   total_decisions: 50
-  decisions_approved: 8
-  decisions_under_review: 2
+  decisions_approved: 9
+  decisions_under_review: 1
   decisions_proposed: 40
-  decision_approval_percentage: 16.0
+  decision_approval_percentage: 18.0
 
 review_status:
-  status: Topic Complete - AD-008 Approved; awaiting human approval to start AD-009
+  status: Topic Complete - AD-009 Approved; awaiting human approval to start AD-010
   reviewed_by: Chief Software Architect (Messaging Core Architecture Sprint)
   review_date: 2026-07-18
   sprint_result:
-    approved: [AD-001, AD-002, AD-003, AD-004, AD-005, AD-006, AD-007, AD-008]
+    approved: [AD-001, AD-002, AD-003, AD-004, AD-005, AD-006, AD-007, AD-008, AD-009]
     rejected: []
     needs_revision: []
 
@@ -53,27 +44,24 @@ decisions_approved:
   - AD-006
   - AD-007
   - AD-008
+  - AD-009
 
 decisions_under_review:
-  - AD-009
   - AD-010
 
 accepted_adrs:
-  - id: ADR-0031
-    title: Unified Conversation Model
-  - id: ADR-0032
-    title: Immutable Message Model
+  - ADR-0031
+  - ADR-0032
+  - ADR-0008
+  - ADR-0010
 
 pending_adrs:
-  - id: ADR-0008
-    title: Message ID and Ordering Strategy
-    reason: Ordering algorithm detail with AD-009
-  - id: ADR-0010
-    title: Message Ordering
-    reason: Awaiting AD-009
   - id: ADR-0016
     title: Offline Synchronization
     reason: Awaiting AD-010
+  - id: ADR-0011
+    title: Cursor Pagination
+    reason: Depends on Sequence cursors from AD-009/AD-010
 
 validation:
   markdown: PASS
@@ -84,12 +72,12 @@ validation:
   broken_links: PASS
   circular_dependencies: PASS
 
-architecture_status: On Track - AD-007/AD-008 Approved; AD-009..AD-010 next after human approval
-security_status: E2EE upheld; plaintext sub-content forbidden in Message envelope
-completion_percentage: 16.0
+architecture_status: On Track - AD-007..AD-009 Approved; AD-010 next after human approval
+security_status: Ordering metadata only; server-authoritative Sequence; INV-05 upheld
+completion_percentage: 18.0
 
 next_build_phase:
-  phase: Messaging Core - Topic 3 Message Ordering (AD-009)
+  phase: Messaging Core - Topic 4 Synchronization (AD-010)
   description: >-
-    After human approval, run WS-009 → AR-009 → AD-009 → ADR using RS-003.
+    After human approval, run WS-010 → AR-010 → AD-010 → ADR using RS-004.
     Do not start until human explicitly continues.

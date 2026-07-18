@@ -2,48 +2,36 @@
 
 > Entry point for reviewers. Start here, then follow the recommended review sequence. For the machine-readable dashboard, open `review-manifest.yaml`. The Git repository is the source of truth.
 
-**Current Build:** #7 — 2026-07-18 (Messaging Core — Message Model) | **Branch:** feature/messaging-core-ad-008
-**Prior Builds:** #6 (AD-007 amendments), #5 (AD-007), #4 (Research), #3, #2, #1
+**Current Build:** #8 — 2026-07-18 (Messaging Core — Message Ordering) | **Branch:** feature/messaging-core-ad-009
+**Prior Builds:** #7 (AD-008), #6 (AD-007 amendments), #5, #4, #3, #2, #1
 
-> Build #7 completes Topic 2 Message Model (WS-008 → AR-008 → AD-008 Approved → ADR-0032). **Await human approval before Topic 3 (AD-009 Message Ordering).**
+> Build #8 completes Topic 3 Message Ordering (WS-009 → AR-009 → AD-009 Approved → ADR-0008/0010). **Await human approval before Topic 4 (AD-010 Synchronization).**
 
 ---
 
 ## Current Project Status
 
-- **Phase:** Messaging Core — Topics 1–2 complete; Topics 3–4 paused for human approval.
-- **Decision coverage:** 8 of 50 Approved; 2 Under Review (AD-009, AD-010); 40 Proposed.
-- **AD-008:** Approved — immutable Message + envelope + relations (RS-002 B).
-- **Defining constraint upheld:** Backend never decrypts message content (INV-01).
+- **Phase:** Messaging Core — Topics 1–3 complete; Topic 4 paused for human approval.
+- **Decision coverage:** 9 of 50 Approved; 1 Under Review (AD-010); 40 Proposed.
+- **AD-009:** Approved — per-conversation server Sequence + ULID MessageId (RS-003 C).
+- **Defining constraint upheld:** Backend never decrypts; INV-05 ordering satisfied.
 
-## Sprint Outcome (Build #7)
+## Sprint Outcome (Build #8)
 
 | Decision | Verdict | Status |
 |---|---|---|
-| AD-008 Message Model | Approve with Changes | Approved |
-
-Workshop: WS-008 · Review: AR-008 · ADR: ADR-0032 Accepted.
+| AD-009 Message Ordering | Approve with Changes | Approved |
 
 ## Recommended Review Sequence
 
-1. RS-002 → WS-008 → AR-008 → AD-008 → ADR-0032
-2. DOC-024 §10 / overview §4.2 / glossary
-3. CROSS-REFERENCE-REPORT Build #7
-4. Human approval → AD-009 Message Ordering
-
-## Critical Documents
-
-| Document | Why critical |
-|---|---|
-| AD-008 / ADR-0032 | Normative Message Model |
-| RS-002 | Evidence |
-| AD-007 | Conversation boundary constraint |
-| DOC-023 | INV-01/02/12 |
+1. RS-003 → WS-009 → AR-009 → AD-009 → ADR-0008 → ADR-0010
+2. DOC-024 §11 / overview §4.3 / glossary
+3. CROSS-REFERENCE-REPORT Build #8
+4. Human approval → AD-010 Synchronization
 
 ## Open Questions
 
 | ID | Description | Owner |
 |---|---|---|
-| OQ-MSG-01 | Edit / delete-for-everyone windows | Product |
-| OQ-MSG-05 | ULID vs UUIDv7 | Architecture |
-| OQ-INV-02 | Ordering scheme detail (AD-009) | Architecture |
+| OQ-ORD-01 | Counter implementation pattern | Backend |
+| OQ-ORD-03 | HLC adoption triggers | Architecture + SRE |

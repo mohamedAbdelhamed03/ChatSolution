@@ -5,29 +5,29 @@
 | **Title** | Domain Model Overview |
 | **Status** | Completed |
 | **Owner** | Architecture |
-| **Version** | 1.2.0 |
+| **Version** | 1.3.0 |
 | **Last Updated** | 2026-07-18 |
 | **Document ID** | DOC-024 |
 
 **Dependencies:** `00-glossary-overview` (DOC-003), `12-functional-requirements` (DOC-010), `20-architecture-overview` (DOC-013), ADR-0031 (DOC-152), ADR-0032 (DOC-153).
 
-**Related Documents:** `31-bounded-contexts-and-modules` (DOC-025), `32-aggregates-and-invariants` (DOC-026), `33-domain-events-catalog` (DOC-027), AD-007, AD-008, ADR-0031, ADR-0032, RS-001, RS-002.
+**Related Documents:** `31-bounded-contexts-and-modules` (DOC-025), AD-007, AD-008, AD-009, ADR-0031, ADR-0032, ADR-0008, ADR-0010, RS-001, RS-002, RS-003.
 
 ---
 
 ## Purpose
 
-This document defines the ubiquitous domain model for the messaging platform: core aggregates, identities, lifecycles, invariants, and relationships that all feature specs and sequences must respect. **Conversation** is ratified by AD-007 / ADR-0031. **Message** is ratified by AD-008 / ADR-0032. Ordering algorithms and sync protocol remain AD-009 / AD-010.
+This document defines the ubiquitous domain model for the messaging platform: core aggregates, identities, lifecycles, invariants, and relationships that all feature specs and sequences must respect. **Conversation** (AD-007), **Message** (AD-008), and **Ordering** (AD-009) are ratified. Sync protocol remains AD-010.
 
 ## Scope
 
-**In scope:** Conversation aggregate; Message aggregate (ciphertext envelope, relations, attachment refs, persistence lifecycle); domain events; terminology.
+**In scope:** Conversation aggregate; Message aggregate; per-conversation Sequence allocation rules; domain events; terminology.
 
-**Out of scope (pending AD-009..AD-010):** Total-order algorithm details, sync cursor protocol, full delivery state machine implementation.
+**Out of scope (pending AD-010):** Sync cursor protocol details, full delivery state machine implementation.
 
 ## Architecture Impact
 
-Conversation + Message aggregates form the messaging engine core. Messages reference conversations by ID only. Immutable messages with relations uphold INV-01/02/12 and enable multi-device sync.
+Conversation + Message + server Sequence form the messaging engine core. Ordering is deterministic and gap-detectable (INV-05), enabling reliable multi-device sync.
 
 ---
 
@@ -300,7 +300,7 @@ classDiagram
     Message *-- Reaction
 ```
 
-**Identity:** client-generated ULID `MessageId`. **`Sequence`:** per-conversation server order (algorithm: AD-009).
+**Identity:** client-generated ULID `MessageId`. **`Sequence`:** per-conversation server order — see §11 (AD-009).
 
 ### 10.2 Persistence lifecycle
 
@@ -349,18 +349,52 @@ sequenceDiagram
     C->>API: Send(MessageId, ConversationId, ciphertext, envelope)
     API->>Conv: Assert Active membership
     Conv-->>API: OK
-    API->>DB: Idempotent insert by MessageId; assign Sequence
+    API->>DB: BEGIN; increment counter; INSERT; COMMIT
     API-->>API: MessageAccepted
     API-->>C: Ack(Sequence, serverReceivedAt)
 ```
 
 ### 10.6 Message domain events
 
-`MessageAccepted`, `MessageEdited`, `MessageRecalled`/`MessageTombstoned`, `MessageExpired`, `ReactionAdded`/`Removed`, `MessagePinned`/`Unpinned`, `AttachmentReferenced`.
+`MessageAccepted`, `MessageEdited`, `MessageRecalled`/`MessageTombstoned`, `MessageExpired`, `ReactionAdded`/`Removed`, `MessagePinned`/`Unpinned`, `AttachmentReferenced`, `DuplicateDetected`.
 
 ---
 
-## 11. Terminology
+## 11. Message Ordering (AD-009 / ADR-0008 / ADR-0010)
+
+### 11.1 Rules
+
+| Rule | Detail |
+|---|---|
+| Authority | Server assigns `Sequence` at accept |
+| Atomicity | Counter increment + insert in one transaction |
+| Uniqueness | `UNIQUE (ConversationId, Sequence)`, `UNIQUE (MessageId)` |
+| Idempotency | Same MessageId → same Sequence |
+| Mutations | Edit/tombstone/reaction → no new Sequence |
+| Client | Optimistic `localOrder` until Ack; then sort by Sequence |
+| Multi-region | Single-region authority now; HLC-ready later |
+
+### 11.2 Invariants (summary)
+
+O-INV-01..08 — exactly one Sequence per Accepted message; monotonic; never reused; immutable; no client-timestamp authority. Full table: AD-009.
+
+### 11.3 Ordering flow
+
+```mermaid
+flowchart LR
+    P[Pending localOrder] --> A[Server Accept]
+    A --> S[Sequence N]
+    S --> Sort[All devices sort by Sequence]
+    S --> Sync[AD-010 cursor = Sequence]
+```
+
+### 11.4 Gap semantics
+
+Missing Sequence in a range ⇒ not yet synced (AD-010) or future purge policy. Tombstones **keep** Sequence. Successful commits do not skip numbers.
+
+---
+
+## 12. Terminology
 
 | Term | Meaning |
 |---|---|
@@ -368,8 +402,9 @@ sequenceDiagram
 | Membership | Entity binding `UserId` to Conversation with state and role |
 | Role | owner / admin / moderator / member (Group); peers (Direct) |
 | Message | Messaging aggregate root; immutable id; ciphertext + envelope |
-| MessageId | Client-generated ULID; immutable global identity |
-| Sequence | Per-conversation server ordering field (AD-009) |
+| MessageId | Client-generated ULID; immutable global identity / dedup key |
+| Sequence | Server-assigned per-conversation monotonic order position |
+| localOrder | Temporary client-only order among Pending messages |
 | Tombstone | Soft-deleted message placeholder retaining id/sequence |
 | AttachmentRef | Pointer to encrypted blob in object storage |
 | Receipt projection | Delivered/Read state outside Message aggregate |
@@ -383,28 +418,29 @@ Aligned with `00-glossary-overview`.
 
 | Risk | Impact | Mitigation |
 |---|---|---|
-| Domain model drifts from AD-007/AD-008 | Inconsistent implementation | ADR-0031/0032 normative |
+| Domain model drifts from AD-007/008/009 | Inconsistent implementation | ADRs normative |
 | Sequence treated as MessageId | Ordering bugs | Explicit field separation |
-| Channel created early | Unsupported scale | Creation gated until FS-03 |
+| Hot conversation lock latency | p99 spikes | Efficient counter; monitor |
 
 ## Future Considerations
 
-- DOC-026 / DOC-027 for invariants and event schemas.
-- Expand sync aggregates when AD-010 approves.
+- AD-010 sync cursors consume Sequence.
+- HLC when multi-region active-active is approved.
 
 ## Open Questions
 
 | ID | Question | Owner |
 |---|---|---|
 | OQ-CONV-01 | Max group size (`maxMembers`) | Product + Security |
-| OQ-CONV-04 | Group title/avatar encryption | Security + Product |
 | OQ-MSG-01 | Edit / delete-for-everyone windows | Product |
-| OQ-MSG-05 | ULID vs UUIDv7 | Architecture |
+| OQ-ORD-01 | Counter implementation pattern | Backend |
+| OQ-ORD-03 | HLC adoption triggers | Architecture + SRE |
 
 ## References
 
 - AD-007 / ADR-0031 / RS-001
 - AD-008 / ADR-0032 / RS-002
+- AD-009 / ADR-0008 / ADR-0010 / RS-003
 - AD-001, AD-003, AD-004, AD-006
 - `20-architecture-overview` (DOC-013)
 - `29.5-system-invariants` (DOC-023)

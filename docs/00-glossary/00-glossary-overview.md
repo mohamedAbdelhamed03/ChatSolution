@@ -5,7 +5,7 @@
 | **Title** | Glossary Overview |
 | **Status** | Completed |
 | **Owner** | Architecture |
-| **Version** | 1.3.0 |
+| **Version** | 1.4.0 |
 | **Last Updated** | 2026-07-18 |
 | **Document ID** | DOC-003 |
 
@@ -63,7 +63,8 @@ A single, shared vocabulary prevents specification drift and contradictory desig
 | Device | A distinct client instance with its own cryptographic identity. |
 | Message | Messaging aggregate root: ciphertext + bounded metadata envelope; relations for edit/reply/reaction; not part of the Conversation aggregate. See AD-008 / ADR-0032. |
 | Message ID | Client-generated ULID; the single immutable global identifier of a message (INV-02). Never reused across logical messages (INV-12). |
-| Sequence | Per-conversation server-assigned ordering field used for total order and gap detection (AD-009). Distinct from Message ID. |
+| Sequence | Server-assigned per-conversation monotonic `int64` position; sole authoritative sort key within a conversation (AD-009 / INV-05). Distinct from Message ID. Allocated in the same DB transaction as message insert. |
+| localOrder | Temporary client-only ordering among Pending (unacked) messages; discarded after Sequence Ack. |
 | Tombstone | Soft-deleted message placeholder that clears ciphertext but retains Message ID and sequence position. |
 | Attachment Ref | Metadata pointer from a Message to an encrypted blob in object storage. |
 

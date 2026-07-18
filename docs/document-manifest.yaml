@@ -1840,12 +1840,12 @@ documents:
     category: ADR
     phase: Phase-3
     priority: Critical
-    status: Pending
+    status: Completed
     owner: Architecture
-    dependencies: [DOC-120, DOC-060]
-    blocks: [DOC-129]
-    blocked_by: [DOC-120, DOC-060]
-    related_documents: [DOC-045, DOC-129]
+    dependencies: [DOC-120, DOC-153]
+    blocks: [DOC-130]
+    blocked_by: [DOC-120, DOC-153]
+    related_documents: [DOC-024, DOC-130, DOC-045]
     estimated_complexity: Medium
 
   - id: DOC-129
@@ -1868,12 +1868,12 @@ documents:
     category: ADR
     phase: Phase-3
     priority: Critical
-    status: Pending
+    status: Completed
     owner: Architecture
     dependencies: [DOC-120, DOC-128]
     blocks: [DOC-045]
     blocked_by: [DOC-120, DOC-128]
-    related_documents: [DOC-060, DOC-091]
+    related_documents: [DOC-024, DOC-060, DOC-091]
     estimated_complexity: Medium
 
   - id: DOC-131
