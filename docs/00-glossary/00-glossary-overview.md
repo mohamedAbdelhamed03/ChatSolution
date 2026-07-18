@@ -5,7 +5,7 @@
 | **Title** | Glossary Overview |
 | **Status** | Completed |
 | **Owner** | Architecture |
-| **Version** | 1.2.0 |
+| **Version** | 1.3.0 |
 | **Last Updated** | 2026-07-18 |
 | **Document ID** | DOC-003 |
 
@@ -61,7 +61,11 @@ A single, shared vocabulary prevents specification drift and contradictory desig
 | Conversation Metadata | Non-content display attributes of a conversation (e.g., display name reference); minimized per privacy posture. |
 | Conversation Settings | Non-content configuration (e.g., `maxMembers`, type-specific flags). |
 | Device | A distinct client instance with its own cryptographic identity. |
-| Message ID | The single immutable global identifier of a message (see invariant INV-02). |
+| Message | Messaging aggregate root: ciphertext + bounded metadata envelope; relations for edit/reply/reaction; not part of the Conversation aggregate. See AD-008 / ADR-0032. |
+| Message ID | Client-generated ULID; the single immutable global identifier of a message (INV-02). Never reused across logical messages (INV-12). |
+| Sequence | Per-conversation server-assigned ordering field used for total order and gap detection (AD-009). Distinct from Message ID. |
+| Tombstone | Soft-deleted message placeholder that clears ciphertext but retains Message ID and sequence position. |
+| Attachment Ref | Metadata pointer from a Message to an encrypted blob in object storage. |
 
 ```mermaid
 flowchart LR

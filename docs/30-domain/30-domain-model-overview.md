@@ -5,29 +5,29 @@
 | **Title** | Domain Model Overview |
 | **Status** | Completed |
 | **Owner** | Architecture |
-| **Version** | 1.1.0 |
+| **Version** | 1.2.0 |
 | **Last Updated** | 2026-07-18 |
 | **Document ID** | DOC-024 |
 
-**Dependencies:** `00-glossary-overview` (DOC-003), `12-functional-requirements` (DOC-010), `20-architecture-overview` (DOC-013), ADR-0031 (DOC-152).
+**Dependencies:** `00-glossary-overview` (DOC-003), `12-functional-requirements` (DOC-010), `20-architecture-overview` (DOC-013), ADR-0031 (DOC-152), ADR-0032 (DOC-153).
 
-**Related Documents:** `31-bounded-contexts-and-modules` (DOC-025), `32-aggregates-and-invariants` (DOC-026), `33-domain-events-catalog` (DOC-027), AD-007, ADR-0031, RS-001.
+**Related Documents:** `31-bounded-contexts-and-modules` (DOC-025), `32-aggregates-and-invariants` (DOC-026), `33-domain-events-catalog` (DOC-027), AD-007, AD-008, ADR-0031, ADR-0032, RS-001, RS-002.
 
 ---
 
 ## Purpose
 
-This document defines the ubiquitous domain model for the messaging platform: core aggregates, identities, lifecycles, invariants, and relationships that all feature specs and sequences must respect. The **Conversation** model is ratified by AD-007 / ADR-0031. Message, ordering, and sync aggregates remain pending AD-008..AD-010.
+This document defines the ubiquitous domain model for the messaging platform: core aggregates, identities, lifecycles, invariants, and relationships that all feature specs and sequences must respect. **Conversation** is ratified by AD-007 / ADR-0031. **Message** is ratified by AD-008 / ADR-0032. Ordering algorithms and sync protocol remain AD-009 / AD-010.
 
 ## Scope
 
-**In scope:** Conversation aggregate (including Membership, Role, Metadata, Settings); conversation and membership lifecycles; ownership; domain events; extensibility strategy; terminology.
+**In scope:** Conversation aggregate; Message aggregate (ciphertext envelope, relations, attachment refs, persistence lifecycle); domain events; terminology.
 
-**Out of scope (pending AD-008..AD-010):** Message payload shape, ordering sequence, sync cursors, delivery state machine detail.
+**Out of scope (pending AD-009..AD-010):** Total-order algorithm details, sync cursor protocol, full delivery state machine implementation.
 
 ## Architecture Impact
 
-A single Conversation aggregate with a first-class Membership entity is the foundation of the messaging engine. Explicit lifecycles and invariants make authorization (AD-003), group crypto hooks (ADR-0020), and sync (AD-010) implementable without redesign.
+Conversation + Message aggregates form the messaging engine core. Messages reference conversations by ID only. Immutable messages with relations uphold INV-01/02/12 and enable multi-device sync.
 
 ---
 
@@ -46,7 +46,7 @@ flowchart LR
 |---|---|---|
 | Identity | User, Device, public-key material | `UserId`, `DeviceId` |
 | Conversations | Conversation aggregate (Membership, Metadata, Settings) | `ConversationId` |
-| Messaging | Message stream (pending AD-008) | `MessageId` |
+| Messaging | Message aggregate, relations, attachment refs | `MessageId` |
 
 No cross-module table access (INV-06). Messages are **not** inside the Conversation aggregate.
 
@@ -274,15 +274,105 @@ Never split the message pipeline by type. Details: AD-007 § Future Extensibilit
 
 ---
 
-## 10. Terminology
+## 10. Message Aggregate (AD-008 / ADR-0032)
+
+### 10.1 Structure
+
+**Root:** `Message`  
+**Owns:** ciphertext (current `editVersion`), envelope metadata, `AttachmentRef`s, reaction/pin relations, tombstone/expiry.  
+**References:** `ConversationId`, `SenderUserId`, `SenderDeviceId`, blob ids.  
+**Does not own:** Conversation, delivery/read receipts (projections), sync cursors, raw media bytes.
+
+```mermaid
+classDiagram
+    class Message {
+        <<aggregate root>>
+        +MessageId id
+        +ConversationId conversationId
+        +long sequence
+        +int editVersion
+        +bytes ciphertext
+        +bool tombstoned
+    }
+    class AttachmentRef
+    class Reaction
+    Message *-- AttachmentRef
+    Message *-- Reaction
+```
+
+**Identity:** client-generated ULID `MessageId`. **`Sequence`:** per-conversation server order (algorithm: AD-009).
+
+### 10.2 Persistence lifecycle
+
+```mermaid
+stateDiagram-v2
+    [*] --> Pending
+    Pending --> Accepted: ServerAccept
+    Pending --> Rejected
+    Accepted --> Accepted: Edit
+    Accepted --> Tombstoned: DeleteOrRecall
+    Accepted --> Expired: TTL
+```
+
+Delivered/Read are **receipt projections**, not Message states.
+
+### 10.3 Invariants (summary)
+
+- Exactly one Conversation; one sender; immutable MessageId (M-INV-01..03).
+- Ciphertext replaced only via `editVersion` (M-INV-04).
+- Reply target same conversation (M-INV-05).
+- Accept requires Active membership (M-INV-06).
+- No plaintext content columns (M-INV-07).
+- Tombstone clears ciphertext (M-INV-08).
+
+Full table: AD-008.
+
+### 10.4 Relations & mutations
+
+| Feature | Model |
+|---|---|
+| Edit | New ciphertext + editVersion++; latest-only at launch |
+| Recall/Delete | Tombstone |
+| Reply | `replyToMessageId` |
+| Reaction | Relation + encrypted emoji |
+| Forward | New message + `isForwarded` |
+| Attachment | Encrypted blob ref |
+
+### 10.5 Sequence — Accept message
+
+```mermaid
+sequenceDiagram
+    participant C as Sender Device
+    participant API as Messaging API
+    participant Conv as Conversations Authz
+    participant DB as Message Store
+    C->>API: Send(MessageId, ConversationId, ciphertext, envelope)
+    API->>Conv: Assert Active membership
+    Conv-->>API: OK
+    API->>DB: Idempotent insert by MessageId; assign Sequence
+    API-->>API: MessageAccepted
+    API-->>C: Ack(Sequence, serverReceivedAt)
+```
+
+### 10.6 Message domain events
+
+`MessageAccepted`, `MessageEdited`, `MessageRecalled`/`MessageTombstoned`, `MessageExpired`, `ReactionAdded`/`Removed`, `MessagePinned`/`Unpinned`, `AttachmentReferenced`.
+
+---
+
+## 11. Terminology
 
 | Term | Meaning |
 |---|---|
 | Conversation | Aggregate root; typed Direct/Group/Channel; has lifecycle state |
 | Membership | Entity binding `UserId` to Conversation with state and role |
 | Role | owner / admin / moderator / member (Group); peers (Direct) |
-| Conversation Metadata | Display attributes (minimized; OQ-CONV-04) |
-| Conversation Settings | Limits and type-specific flags (e.g., `maxMembers`) |
+| Message | Messaging aggregate root; immutable id; ciphertext + envelope |
+| MessageId | Client-generated ULID; immutable global identity |
+| Sequence | Per-conversation server ordering field (AD-009) |
+| Tombstone | Soft-deleted message placeholder retaining id/sequence |
+| AttachmentRef | Pointer to encrypted blob in object storage |
+| Receipt projection | Delivered/Read state outside Message aggregate |
 | Canonical Pair Key | Sorted `(UserId, UserId)` uniqueness for Direct |
 
 Aligned with `00-glossary-overview`.
@@ -293,15 +383,14 @@ Aligned with `00-glossary-overview`.
 
 | Risk | Impact | Mitigation |
 |---|---|---|
-| Domain model drifts from AD-007 | Inconsistent implementation | ADR-0031 + AD-007 normative; this doc cites them |
-| Lifecycle ignored by clients | Authz/sync bugs | States exposed in protocol; reject invalid sends |
+| Domain model drifts from AD-007/AD-008 | Inconsistent implementation | ADR-0031/0032 normative |
+| Sequence treated as MessageId | Ordering bugs | Explicit field separation |
 | Channel created early | Unsupported scale | Creation gated until FS-03 |
 
 ## Future Considerations
 
-- DOC-026 will catalog aggregate invariants platform-wide.
-- DOC-027 will version event schemas.
-- Expand when AD-008..AD-010 approve Message/Sync aggregates.
+- DOC-026 / DOC-027 for invariants and event schemas.
+- Expand sync aggregates when AD-010 approves.
 
 ## Open Questions
 
@@ -309,14 +398,13 @@ Aligned with `00-glossary-overview`.
 |---|---|---|
 | OQ-CONV-01 | Max group size (`maxMembers`) | Product + Security |
 | OQ-CONV-04 | Group title/avatar encryption | Security + Product |
-| OQ-CONV-06 | Direct shared delete vs per-user hide | Product |
-| OQ-CONV-07 | Launch invite UX vs direct-add | Product |
+| OQ-MSG-01 | Edit / delete-for-everyone windows | Product |
+| OQ-MSG-05 | ULID vs UUIDv7 | Architecture |
 
 ## References
 
-- AD-007 Conversation Model (v2.1)
-- ADR-0031 Unified Conversation Model
-- RS-001 Conversation Models
+- AD-007 / ADR-0031 / RS-001
+- AD-008 / ADR-0032 / RS-002
 - AD-001, AD-003, AD-004, AD-006
 - `20-architecture-overview` (DOC-013)
 - `29.5-system-invariants` (DOC-023)

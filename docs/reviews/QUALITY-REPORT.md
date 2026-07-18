@@ -2,8 +2,21 @@
 
 > Per-artifact quality assessment. Scores are out of 10. Regenerated every build.
 
-**Current Build:** #6 — 2026-07-18 (AD-007 Finalization Amendments)
-**Prior Builds:** #5 (AD-007), #4 (Research), #3 (AD-001..AD-006), #2, #1
+**Current Build:** #7 — 2026-07-18 (Message Model AD-008)
+**Prior Builds:** #6 (AD-007 amendments), #5, #4, #3, #2, #1
+
+---
+
+## Build #7 — Message Model Verdict (AD-008)
+
+| Artifact | Verdict | Architecture | Security | Scalability | Maintainability | Documentation | Overall |
+|---|---|---|---|---|---|---|---|
+| WS-008 | Complete | 9 | 10 | 9 | 9 | 9 | 9.2 |
+| AR-008 | Approve with Changes | 9 | 10 | 9 | 9 | 9 | 9.3 |
+| AD-008 | **Approved** | 9 | 10 | 9 | 9 | 9 | 9.3 |
+| ADR-0032 | Accepted | 9 | 10 | 9 | 9 | 9 | 9.2 |
+
+**Evidence gate:** RS-002 Alternative B; AR-008 changes applied.
 
 ---
 

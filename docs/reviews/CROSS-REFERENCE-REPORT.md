@@ -2,8 +2,27 @@
 
 > Automated validation against the manifests. Regenerated every build.
 
-**Current Build:** #6 — 2026-07-18 (AD-007 Finalization Amendments)
-**Prior Builds:** #5 (AD-007 Approved), #4 (Research), #3 (AD-001..006), #2, #1
+**Current Build:** #7 — 2026-07-18 (Message Model AD-008)
+**Prior Builds:** #6 (AD-007 amendments), #5, #4, #3, #2, #1
+
+---
+
+## Build #7 — Message Model Validation
+
+| Check | Result |
+|---|---|
+| AD-008 Approved; cites RS-002 | PASS |
+| Depends only on Approved AD-007, AD-004 | PASS |
+| No contradiction with AD-001..007 / INV-01/02/12 | PASS |
+| Message outside Conversation aggregate | PASS |
+| MessageId ≠ Sequence ownership clear | PASS |
+| Receipts not on Message state | PASS |
+| Reactions encrypted; forward flag-only default | PASS |
+| ADR-0032 Accepted; DOC-153 Completed | PASS |
+| WS-008 → AR-008 → AD-008 → ADR-0032 → DOC-024 chain | PASS |
+| AD-009/AD-010 still Under Review (untouched) | PASS |
+
+**Build #7 result: PASS.**
 
 ---
 

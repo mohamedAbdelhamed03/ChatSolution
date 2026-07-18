@@ -2,55 +2,48 @@
 
 > Entry point for reviewers. Start here, then follow the recommended review sequence. For the machine-readable dashboard, open `review-manifest.yaml`. The Git repository is the source of truth.
 
-**Current Build:** #6 — 2026-07-18 (AD-007 Finalization Amendments) | **Branch:** feature/messaging-core-ad-007
-**Prior Builds:** #5 (AD-007 Approved), #4 (Research), #3 (AD-001..006), #2, #1
+**Current Build:** #7 — 2026-07-18 (Messaging Core — Message Model) | **Branch:** feature/messaging-core-ad-008
+**Prior Builds:** #6 (AD-007 amendments), #5 (AD-007), #4 (Research), #3, #2, #1
 
-> Build #6 strengthens AD-007 documentation (lifecycles, invariants, ownership, extensibility, aggregate diagrams) **without changing the approved design**. Confirm finalization, then approve starting Topic 2 (AD-008).
+> Build #7 completes Topic 2 Message Model (WS-008 → AR-008 → AD-008 Approved → ADR-0032). **Await human approval before Topic 3 (AD-009 Message Ordering).**
 
 ---
 
 ## Current Project Status
 
-- **Phase:** Messaging Core — AD-007 finalization amendments complete; awaiting human confirmation before AD-008.
-- **Decision coverage:** 7 of 50 Approved; 3 Under Review (AD-008..AD-010); 40 Proposed.
-- **AD-007:** Approved + finalization amendments (v2.1); ADR-0031 Accepted.
+- **Phase:** Messaging Core — Topics 1–2 complete; Topics 3–4 paused for human approval.
+- **Decision coverage:** 8 of 50 Approved; 2 Under Review (AD-009, AD-010); 40 Proposed.
+- **AD-008:** Approved — immutable Message + envelope + relations (RS-002 B).
 - **Defining constraint upheld:** Backend never decrypts message content (INV-01).
 
-## Sprint Outcome (Build #6)
+## Sprint Outcome (Build #7)
 
-| Item | Result |
-|---|---|
-| Architectural direction | Unchanged (Alternative B) |
-| Mandatory amendments 1–6 | Complete |
-| Consistency validation | PASS |
-| New Architecture Decision | None |
+| Decision | Verdict | Status |
+|---|---|---|
+| AD-008 Message Model | Approve with Changes | Approved |
 
-## Review Scope (this build)
-
-Documentation-only amendments to AD-007 and related artifacts listed in `CHANGES.md` Build #6.
+Workshop: WS-008 · Review: AR-008 · ADR: ADR-0032 Accepted.
 
 ## Recommended Review Sequence
 
-1. `AD-007` (v2.1) — lifecycle, membership, invariants, ownership, extensibility, diagrams
-2. `ADR-0031` / `DOC-024` / overview §4.1 / glossary
-3. `AR-007` §8 verification table
-4. `CROSS-REFERENCE-REPORT.md` Build #6
-5. Human confirmation → proceed to AD-008 Message Model
+1. RS-002 → WS-008 → AR-008 → AD-008 → ADR-0032
+2. DOC-024 §10 / overview §4.2 / glossary
+3. CROSS-REFERENCE-REPORT Build #7
+4. Human approval → AD-009 Message Ordering
 
 ## Critical Documents
 
 | Document | Why critical |
 |---|---|
-| AD-007 v2.1 | Normative conversation architecture including amendments |
-| ADR-0031 | Ratified ADR |
-| DOC-024 | Domain model lifecycles and invariants |
-| RS-001 | Evidence base |
+| AD-008 / ADR-0032 | Normative Message Model |
+| RS-002 | Evidence |
+| AD-007 | Conversation boundary constraint |
+| DOC-023 | INV-01/02/12 |
 
-## Open Questions (non-blocking)
+## Open Questions
 
 | ID | Description | Owner |
 |---|---|---|
-| OQ-CONV-01 | Max group size | Product + Security |
-| OQ-CONV-04 | Title/avatar encryption | Security + Product |
-| OQ-CONV-06 | Direct delete vs per-user hide | Product |
-| OQ-CONV-07 | Launch invite UX | Product |
+| OQ-MSG-01 | Edit / delete-for-everyone windows | Product |
+| OQ-MSG-05 | ULID vs UUIDv7 | Architecture |
+| OQ-INV-02 | Ordering scheme detail (AD-009) | Architecture |

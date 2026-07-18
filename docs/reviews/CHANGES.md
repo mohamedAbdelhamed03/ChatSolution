@@ -4,6 +4,29 @@
 
 ---
 
+## Build #7 — 2026-07-18 (Messaging Core — Message Model)
+
+**Branch:** feature/messaging-core-ad-008
+
+| File Path | Change | Reason |
+|---|---|---|
+| docs/architecture-decisions/workshops/WS-008-message-model.md | Created | Workshop; 17 investigation topics |
+| docs/architecture-decisions/reviews/AR-008-message-model.md | Created | Critical review; Approve with Changes |
+| docs/architecture-decisions/AD-008-message-model.md | Updated | Approved; cites RS-002; full model |
+| docs/ADR/ADR-0032-immutable-message-model.md | Created | Ratify Message Model |
+| docs/30-domain/30-domain-model-overview.md | Updated | §10 Message aggregate |
+| docs/20-architecture/20-architecture-overview.md | Updated | §4.2 Message Model |
+| docs/00-glossary/00-glossary-overview.md | Updated | Message/Sequence/Tombstone terms |
+| docs/architecture-decisions/decision-manifest.yaml | Updated | AD-008 Approved |
+| docs/document-manifest.yaml | Updated | DOC-153 Added/Completed |
+| docs/reviews/* | Updated | Build #7 |
+
+### Notes
+
+- AD-009/AD-010 untouched. Pause for human approval.
+
+---
+
 ## Build #6 — 2026-07-18 (AD-007 Finalization Amendments)
 
 **Branch:** feature/messaging-core-ad-007

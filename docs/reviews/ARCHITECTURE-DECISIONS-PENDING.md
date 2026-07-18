@@ -7,6 +7,7 @@
 | ADR | Title | Date | Ratifies |
 |---|---|---|---|
 | ADR-0031 | Unified Conversation Model | 2026-07-18 | AD-007 |
+| ADR-0032 | Immutable Message Model | 2026-07-18 | AD-008 |
 
 ---
 

@@ -84,7 +84,7 @@ Documentation generation is **paused** while the ADRP is built. Downstream docum
 | Topic | Workshop | Review | Decision | ADR |
 |---|---|---|---|---|
 | Conversation Model | WS-007 | AR-007 | AD-007 **Approved** (v2.1 amendments) | ADR-0031 **Accepted** |
-| Message Model | — | — | AD-008 Under Review | — |
+| Message Model | WS-008 | AR-008 | AD-008 **Approved** | ADR-0032 **Accepted** |
 | Message Ordering | — | — | AD-009 Under Review | — |
 | Synchronization | — | — | AD-010 Under Review | — |
 

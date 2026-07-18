@@ -356,10 +356,10 @@ documents:
     priority: Critical
     status: Completed
     owner: Architecture
-    dependencies: [DOC-003, DOC-010, DOC-013, DOC-152]
+    dependencies: [DOC-003, DOC-010, DOC-013, DOC-152, DOC-153]
     blocks: [DOC-025, DOC-018]
-    blocked_by: [DOC-003, DOC-010, DOC-013, DOC-152]
-    related_documents: [DOC-004, DOC-152]
+    blocked_by: [DOC-003, DOC-010, DOC-013, DOC-152, DOC-153]
+    related_documents: [DOC-004, DOC-152, DOC-153]
     estimated_complexity: High
 
   - id: DOC-025
@@ -1731,7 +1731,7 @@ documents:
     status: Completed
     owner: Architecture
     dependencies: []
-    blocks: [DOC-121, DOC-122, DOC-123, DOC-124, DOC-125, DOC-126, DOC-127, DOC-128, DOC-129, DOC-130, DOC-131, DOC-132, DOC-133, DOC-134, DOC-135, DOC-136, DOC-137, DOC-138, DOC-139, DOC-140, DOC-141, DOC-142, DOC-143, DOC-144, DOC-145, DOC-146, DOC-147, DOC-148, DOC-149, DOC-150, DOC-152]
+    blocks: [DOC-121, DOC-122, DOC-123, DOC-124, DOC-125, DOC-126, DOC-127, DOC-128, DOC-129, DOC-130, DOC-131, DOC-132, DOC-133, DOC-134, DOC-135, DOC-136, DOC-137, DOC-138, DOC-139, DOC-140, DOC-141, DOC-142, DOC-143, DOC-144, DOC-145, DOC-146, DOC-147, DOC-148, DOC-149, DOC-150, DOC-152, DOC-153]
     blocked_by: []
     related_documents: []
     estimated_complexity: Low
@@ -2167,6 +2167,20 @@ documents:
     dependencies: [DOC-120, DOC-013]
     blocks: [DOC-024, DOC-025, DOC-071]
     blocked_by: [DOC-120, DOC-013]
+    related_documents: [DOC-024, DOC-013]
+    estimated_complexity: Medium
+
+  - id: DOC-153
+    title: ADR-0032 Immutable Message Model
+    path: docs/ADR/ADR-0032-immutable-message-model.md
+    category: ADR
+    phase: Phase-2
+    priority: Critical
+    status: Completed
+    owner: Architecture
+    dependencies: [DOC-120, DOC-152]
+    blocks: [DOC-024, DOC-045]
+    blocked_by: [DOC-120, DOC-152]
     related_documents: [DOC-024, DOC-013]
     estimated_complexity: Medium
 

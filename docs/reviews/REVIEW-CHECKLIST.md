@@ -13,8 +13,8 @@
 - [x] AD-005 Key Management — reviewed, improved, **Approved**
 - [x] AD-006 Device Model and Device Trust — reviewed, improved, **Approved**
 - [x] AD-007 Conversation Model — workshop WS-007, review AR-007, **Approved**, ADR-0031 Accepted, **finalization amendments** (lifecycle/invariants/ownership/extensibility/diagrams)
-- [ ] AD-008 Message Model — Under Review (await human approval to start)
-- [ ] AD-009 Message Ordering — Under Review (await prior topic)
+- [x] AD-008 Message Model — workshop WS-008, review AR-008, **Approved**, ADR-0032 Accepted
+- [ ] AD-009 Message Ordering — Under Review (await human approval to start)
 - [ ] AD-010 Synchronization — Under Review (await prior topic)
 - [ ] Pending decisions (AD-011..AD-050) catalogued with valid dependencies
 

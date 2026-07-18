@@ -1,128 +1,48 @@
 version: 2
 
-# Regenerated every build. The Git repository is the source of truth.
-# The exact reviewable commit SHA is HEAD of the branch below (also reported
-# out-of-band on push). base_commit records the branch point.
-
 build:
-  id: BUILD-0006
-  timestamp: 2026-07-18T12:45:00+03:00
-  phase: Messaging Core - AD-007 finalization amendments (documentation only)
-  branch: feature/messaging-core-ad-007
-  commit: HEAD of feature/messaging-core-ad-007
+  id: BUILD-0007
+  timestamp: 2026-07-18T13:00:00+03:00
+  phase: Messaging Core Architecture Sprint - Topic 2 Message Model (AD-008)
+  branch: feature/messaging-core-ad-008
+  commit: HEAD of feature/messaging-core-ad-008
   base_branch: main
   base_commit: 5305ba6
-  builds_on_branch: feature/research-sprint-2
+  builds_on_branch: feature/messaging-core-ad-007
 
 review_scope:
   description: >-
-    Mandatory documentation amendments to AD-007 (lifecycles, invariants,
-    ownership, extensibility, aggregate diagrams) without redesign. Validate
-    consistency across ADR-0031, DOC-024, overview, glossary, WS-007, AR-007.
-    Do not proceed to AD-008 until human confirms AD-007 finalized.
+    Complete Message Model lifecycle using RS-002: WS-008, AR-008, approve AD-008,
+    ratify ADR-0032, update domain/architecture/glossary. Do not start AD-009
+    until human approval.
   research_documents:
-    - path: docs/research/RS-001-conversation-models.md
-      feeds: AD-007
+    - path: docs/research/RS-002-message-models.md
+      feeds: AD-008
   workshop_documents:
-    - path: docs/architecture-decisions/workshops/WS-007-conversation-model.md
-      feeds: AD-007
+    - path: docs/architecture-decisions/workshops/WS-008-message-model.md
+      feeds: AD-008
   review_documents:
-    - path: docs/architecture-decisions/reviews/AR-007-conversation-model.md
-      feeds: AD-007
-  included_paths:
-    - docs/architecture-decisions/
-    - docs/ADR/
-    - docs/30-domain/
-    - docs/20-architecture/
-    - docs/00-glossary/
-    - docs/reviews/
-  affected_documents:
-    - docs/30-domain/30-domain-model-overview.md
-    - docs/20-architecture/20-architecture-overview.md
-    - docs/00-glossary/00-glossary-overview.md
-    - docs/70-features/FS-01-one-to-one-chat.md
-    - docs/70-features/FS-02-group-chat.md
-  affected_adrs:
-    - ADR-0031
-    - ADR-0020
-  affected_modules:
-    - Conversations
-    - Messaging
-    - Identity
-  breaking_changes: []
+    - path: docs/architecture-decisions/reviews/AR-008-message-model.md
+      feeds: AD-008
 
 summary:
-  total_documents: 152
-  completed_documents: 12
-  documentation_completion_percentage: 7.9
+  total_documents: 153
+  completed_documents: 13
+  documentation_completion_percentage: 8.5
   total_decisions: 50
-  decisions_approved: 7
-  decisions_under_review: 3
+  decisions_approved: 8
+  decisions_under_review: 2
   decisions_proposed: 40
-  decision_recommendation_percentage: 20.0
-  decision_approval_percentage: 14.0
+  decision_approval_percentage: 16.0
 
 review_status:
-  status: AD-007 amendments complete; awaiting human finalization confirmation before AD-008
+  status: Topic Complete - AD-008 Approved; awaiting human approval to start AD-009
   reviewed_by: Chief Software Architect (Messaging Core Architecture Sprint)
   review_date: 2026-07-18
   sprint_result:
-    approved: [AD-001, AD-002, AD-003, AD-004, AD-005, AD-006, AD-007]
+    approved: [AD-001, AD-002, AD-003, AD-004, AD-005, AD-006, AD-007, AD-008]
     rejected: []
     needs_revision: []
-    amendments_applied: [AD-007]
-
-review_order:
-  - path: docs/research/RS-001-conversation-models.md
-    priority: Critical
-    reason: Evidence base for Conversation Model.
-  - path: docs/architecture-decisions/workshops/WS-007-conversation-model.md
-    priority: Critical
-    reason: Workshop preparing the decision.
-  - path: docs/architecture-decisions/reviews/AR-007-conversation-model.md
-    priority: Critical
-    reason: Critical review and required changes.
-  - path: docs/architecture-decisions/AD-007-conversation-model.md
-    priority: Critical
-    reason: Approved architecture decision.
-  - path: docs/ADR/ADR-0031-unified-conversation-model.md
-    priority: Critical
-    reason: Formal ratification.
-  - path: docs/30-domain/30-domain-model-overview.md
-    priority: Critical
-    reason: Domain model for Conversation/Membership.
-
-critical_documents:
-  - path: docs/architecture-decisions/AD-007-conversation-model.md
-    reason: Normative conversation model for the messaging engine.
-  - path: docs/ADR/ADR-0031-unified-conversation-model.md
-    reason: Ratified ADR for Conversation aggregate.
-  - path: docs/research/RS-001-conversation-models.md
-    reason: Evidence cited by AD-007.
-
-files_changed:
-  created:
-    - docs/architecture-decisions/workshops/WS-007-conversation-model.md
-    - docs/architecture-decisions/reviews/AR-007-conversation-model.md
-    - docs/ADR/adr-template.md
-    - docs/ADR/ADR-0031-unified-conversation-model.md
-    - docs/30-domain/30-domain-model-overview.md
-  updated:
-    - docs/architecture-decisions/AD-007-conversation-model.md
-    - docs/architecture-decisions/decision-manifest.yaml
-    - docs/architecture-decisions/README.md
-    - docs/document-manifest.yaml
-    - docs/20-architecture/20-architecture-overview.md
-    - docs/00-glossary/00-glossary-overview.md
-    - docs/reviews/BUILD-REPORT.md
-    - docs/reviews/CHANGES.md
-    - docs/reviews/REVIEW-CHECKLIST.md
-    - docs/reviews/QUALITY-REPORT.md
-    - docs/reviews/CROSS-REFERENCE-REPORT.md
-    - docs/reviews/REVIEW-INDEX.md
-    - docs/reviews/review-manifest.yaml
-    - docs/reviews/ARCHITECTURE-DECISIONS-PENDING.md
-  removed: []
 
 decisions_approved:
   - AD-001
@@ -132,125 +52,44 @@ decisions_approved:
   - AD-005
   - AD-006
   - AD-007
+  - AD-008
 
 decisions_under_review:
-  - AD-008
   - AD-009
   - AD-010
-
-pending_adrs:
-  - id: ADR-0004
-    title: E2EE Client-Only Encryption
-    reason: Recommended in AD-004; library spike pending.
-    impacts: [AD-005, AD-008, AD-020]
-  - id: ADR-0008
-    title: Message ID and Ordering Strategy
-    reason: Recommended in AD-009; awaiting approval to ratify.
-    impacts: [AD-010, AD-027, AD-042]
-  - id: ADR-0010
-    title: Message Ordering
-    reason: Recommended in AD-009; awaiting approval.
-    impacts: [AD-027]
-  - id: ADR-0016
-    title: Offline Synchronization
-    reason: Recommended in AD-010; awaiting approval.
-    impacts: [AD-015]
-  - id: ADR-0019
-    title: Multi-Device
-    reason: Recommended across AD-002/AD-005/AD-006; awaiting approval.
-    impacts: [AD-010]
-  - id: ADR-0020
-    title: Group Encryption
-    reason: Depends on AD-007 membership events; awaiting AD-020 / later ratification.
-    impacts: [AD-007]
 
 accepted_adrs:
   - id: ADR-0031
     title: Unified Conversation Model
-    reason: Ratifies AD-007.
-    impacts: [AD-008, DOC-024]
+  - id: ADR-0032
+    title: Immutable Message Model
 
-architecture_decisions:
-  approved:
-    - AD-001
-    - AD-002
-    - AD-003
-    - AD-004
-    - AD-005
-    - AD-006
-    - AD-007
-  under_review:
-    - AD-008
-    - AD-009
-    - AD-010
-  proposed_count: 40
-
-quality_summary:
-  build5_ad007_overall: 9.2
-  build3_average_score: 9.35
-  build2_average_score: 9.37
-
-cross_reference_status:
-  broken_links: 0
-  missing_dependencies: 0
-  circular_dependencies: 0
-  duplicate_definitions: 0
+pending_adrs:
+  - id: ADR-0008
+    title: Message ID and Ordering Strategy
+    reason: Ordering algorithm detail with AD-009
+  - id: ADR-0010
+    title: Message Ordering
+    reason: Awaiting AD-009
+  - id: ADR-0016
+    title: Offline Synchronization
+    reason: Awaiting AD-010
 
 validation:
   markdown: PASS
   mermaid: PASS
   cross_references: PASS
   dependency_graph: PASS
-  manifest_consistency: PASS
-  architecture_rules: PASS
-  security_rules: PASS
   e2ee_rules: PASS
-  naming_conventions: PASS
-  duplicate_definitions: PASS
   broken_links: PASS
-  broken_references: PASS
   circular_dependencies: PASS
 
-architecture_status: On Track - AD-007 Approved + finalized documentation amendments; await human before AD-008
-security_status: E2EE and backend-never-decrypt upheld; membership lifecycle drives authz and re-key hooks
-completion_percentage: 14.0
-
-known_risks:
-  - id: RISK-01
-    description: E2EE limits server-side features (search, moderation, recovery).
-    severity: High
-  - id: RISK-03
-    description: Fan-out at large group scale is the primary performance bottleneck.
-    severity: High
-  - id: RISK-06
-    description: Message ID/ordering scheme (AD-009) and sync (AD-010) not yet approved.
-    severity: Medium
-  - id: R-007-02
-    description: Membership event loss could delay group re-key until ADR-0020/outbox hardening.
-    severity: High
-
-open_questions:
-  - id: OQ-CONV-01
-    description: Maximum group size at launch.
-    owner: Product + Security
-  - id: OQ-CONV-04
-    description: Group title/avatar plaintext vs encrypted metadata.
-    owner: Security + Product
-  - id: OQ-ARCH-02
-    description: Selected E2EE protocol/library and audit status (AD-004).
-    owner: Security
-  - id: OQ-INV-02
-    description: Authoritative global ordering scheme - ULID vs Snowflake (AD-009).
-    owner: Architecture
-
-next_review:
-  recommended_documents:
-    - path: docs/research/RS-002-message-models.md
-    - path: docs/architecture-decisions/AD-008-message-model.md
+architecture_status: On Track - AD-007/AD-008 Approved; AD-009..AD-010 next after human approval
+security_status: E2EE upheld; plaintext sub-content forbidden in Message envelope
+completion_percentage: 16.0
 
 next_build_phase:
-  phase: Messaging Core - Topic 2 Message Model (AD-008)
+  phase: Messaging Core - Topic 3 Message Ordering (AD-009)
   description: >-
-    After human approval of Conversation Model topic, run WS-008 → AR-008 →
-    AD-008 → ADR → domain/architecture updates. Cite RS-002. Do not start until
-    human explicitly continues the sprint.
+    After human approval, run WS-009 → AR-009 → AD-009 → ADR using RS-003.
+    Do not start until human explicitly continues.
