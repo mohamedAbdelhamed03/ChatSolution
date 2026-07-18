@@ -2,109 +2,90 @@
 
 > Entry point for reviewers. Start here, then follow the recommended review sequence. For the machine-readable dashboard, open `review-manifest.yaml`. The Git repository is the source of truth.
 
-**Current Build:** #4 — 2026-07-15 (Architecture Research Sprint) | **Branch:** feature/research-sprint-2 | **Base:** main
-**Prior Builds:** #3 (Decision Review Sprint, AD-001..006 Approved), #2 (ADRP Wave 1), #1 (documentation foundations)
+**Current Build:** #5 — 2026-07-18 (Messaging Core — Conversation Model) | **Branch:** feature/messaging-core-ad-007
+**Prior Builds:** #4 (Research RS-001..004), #3 (AD-001..006 Approved), #2 (ADRP Wave 1), #1 (documentation foundations)
 
-> Build #4 adds research evidence (RS-001..RS-004) for the next decision sprint (AD-007..AD-010). Research is evidence, not decisions or approvals.
+> Build #5 completes the Conversation Model topic (WS-007 → AR-007 → AD-007 Approved → ADR-0031). **Await human approval before starting Message Model (AD-008).**
 
 ---
 
 ## Current Project Status
 
-- **Phase:** Architecture Decision Review Sprint complete for AD-001..AD-006. Documentation generation paused.
-- **Decision coverage:** 6 of 50 Approved; 4 Under Review (AD-007..AD-010); 40 Proposed.
-- **Documentation completion:** 9 of 151 documents (6.0%) — unchanged this build.
-- **Health:** All six in-scope decisions reviewed, improved, and Approved; average review score 9.35/10.
+- **Phase:** Messaging Core Architecture Sprint — Topic 1 complete; Topics 2–4 paused for human approval.
+- **Decision coverage:** 7 of 50 Approved; 3 Under Review (AD-008..AD-010); 40 Proposed.
+- **Documentation completion:** 12 of 152 documents (~7.9%).
+- **Health:** AD-007 approved with RS-001 evidence, workshop, and critical review; INV-01 upheld.
 - **Defining constraint upheld:** Backend never decrypts message content (INV-01).
 
-## Sprint Outcome (Build #3)
+## Sprint Outcome (Build #5)
 
 | Decision | Verdict | Status |
 |---|---|---|
-| AD-001..AD-006 | Approve with Changes | Approved |
+| AD-007 Conversation Model | Approve with Changes | Approved |
 
-Approved: 6 · Rejected: 0 · Needs Revision: 0. Next sprint reviews AD-007..AD-010.
-
-## Current Build
-
-- Decision source of truth: `docs/architecture-decisions/decision-manifest.yaml`.
-- Documentation source of truth: `docs/document-manifest.yaml`.
-- Build report: `BUILD-REPORT.md` (Build #2). Changes: `CHANGES.md` (Build #2).
+Workshop: WS-007 · Review: AR-007 · ADR: ADR-0031 Accepted · Domain: DOC-024.
 
 ## Review Scope (this build)
 
-Architecture Decision Repository (ADRP) Wave 1: README, decision manifest, and 10 recommendation documents (AD-001..AD-010). No documentation, ADRs, or code changed.
+Conversation Model only: workshop, architecture review, AD-007, ADR-0031, domain/architecture doc updates, review package.
 
-## Artifacts Created (this build)
+## Artifacts Created / Updated (this build)
 
-1. ADRP README
-2. decision-manifest.yaml (50 decisions)
-3. AD-001 User Identity
-4. AD-002 Authentication
-5. AD-003 Authorization
-6. AD-004 E2EE Protocol
-7. AD-005 Key Management
-8. AD-006 Device Model and Device Trust
-9. AD-007 Conversation Model
-10. AD-008 Message Model
-11. AD-009 Message Ordering
-12. AD-010 Synchronization
+1. WS-007 Conversation Model workshop
+2. AR-007 Architecture Review
+3. AD-007 (Approved, RS-001-cited)
+4. ADR template + ADR-0031
+5. Domain model overview (DOC-024)
+6. Architecture overview §4.1 + glossary terms
+7. Review package (this build)
 
 ## Review Order
 
 ```mermaid
 flowchart LR
-    A[AD-001 Identity] --> B[AD-002 Auth]
-    B --> C[AD-003 Authz]
-    A --> D[AD-004 E2EE]
-    D --> E[AD-005 Keys]
-    E --> F[AD-006 Devices]
-    A --> G[AD-007 Conversation]
-    G --> H[AD-008 Message]
-    H --> I[AD-009 Ordering]
-    I --> J[AD-010 Sync]
+    RS[RS-001] --> WS[WS-007]
+    WS --> AR[AR-007]
+    AR --> AD[AD-007]
+    AD --> ADR[ADR-0031]
+    ADR --> DOM[DOC-024]
 ```
 
 ## Critical Documents
 
 | Document | Why critical |
 |---|---|
-| DOC-023 System Invariants | Encodes the absolute rules, including backend-never-decrypts. |
-| DOC-013 Architecture Overview | The solution strategy the whole build follows. |
-| DOC-011 Non-Functional Requirements | Drives scalability, performance, security targets. |
-| DOC-010 Functional Requirements | Scope baseline for all feature work. |
+| AD-007 / ADR-0031 | Normative conversation model for the messaging engine. |
+| RS-001 | Evidence base for AD-007. |
+| DOC-023 System Invariants | Backend-never-decrypts and related rules. |
+| DOC-024 Domain Model | Conversation/Membership aggregates and sequences. |
 
 ## Known Risks
 
 | ID | Description | Severity |
 |---|---|---|
 | RISK-01 | E2EE limits server-side features (search, moderation, recovery). | High |
-| RISK-02 | Module boundary erosion would block microservice extraction. | Medium |
 | RISK-03 | Fan-out at large group scale is the primary performance bottleneck. | High |
-| RISK-04 | Availability vs. E2EE tension (no server recovery of content). | Medium |
+| RISK-06 | Message ID/ordering (AD-009) and sync (AD-010) still Under Review. | Medium |
+| R-007-02 | Membership event loss delaying re-key (mitigated via outbox + AD-020). | High |
 
 ## Open Questions
 
 | ID | Description | Owner |
 |---|---|---|
-| OQ-NFR-01 | Confirmed launch availability SLO and error budget. | SRE + Product |
-| OQ-INV-02 | Authoritative global ordering scheme (ULID/Snowflake/HLC). | Architecture |
+| OQ-CONV-01 | Max group size at launch. | Product + Security |
+| OQ-CONV-04 | Group title/avatar encryption posture. | Security + Product |
+| OQ-INV-02 | Authoritative global ordering scheme (AD-009). | Architecture |
 | OQ-ARCH-02 | Selected E2EE protocol/library and audit status. | Security |
-| OQ-PER-01 | Concurrent devices per user to support at launch. | Product + Architecture |
-| OQ-FR-01 | Delete-for-everyone time window. | Product |
 
 ## Pending ADRs
 
-See `ARCHITECTURE-DECISIONS-PENDING.md`. Highest priority: ADR-0004 (E2EE protocol), ADR-0008/0010 (message ID & ordering), ADR-0020 (group encryption).
+See `ARCHITECTURE-DECISIONS-PENDING.md`. ADR-0031 Accepted. Highest remaining: ADR-0004, ADR-0008/0010, ADR-0020, ADR-0016.
 
 ## Recommended Review Sequence
 
 1. `REVIEW-INDEX.md` (this file)
-2. `review-manifest.yaml` (dashboard)
-3. `BUILD-REPORT.md` (Build #2)
-4. `QUALITY-REPORT.md` (Build #2 decision scores)
-5. `CROSS-REFERENCE-REPORT.md` (Build #2 ADRP validation)
-6. `ARCHITECTURE-DECISIONS-PENDING.md`
-7. `REVIEW-CHECKLIST.md` (ADRP section)
-8. `docs/architecture-decisions/README.md` then `decision-manifest.yaml`
-9. The 10 recommendation documents (AD-001..AD-010) in the review order above.
+2. `review-manifest.yaml`
+3. `BUILD-REPORT.md` (Build #5)
+4. `WS-007` → `AR-007` → `AD-007` → `ADR-0031` → `DOC-024`
+5. `QUALITY-REPORT.md` / `CROSS-REFERENCE-REPORT.md`
+6. Confirm human approval to proceed to AD-008 Message Model

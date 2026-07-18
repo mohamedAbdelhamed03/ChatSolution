@@ -5,13 +5,13 @@
 | **Title** | Architecture Overview |
 | **Status** | Completed |
 | **Owner** | Architecture |
-| **Version** | 1.0.0 |
-| **Last Updated** | 2026-07-14 |
+| **Version** | 1.1.0 |
+| **Last Updated** | 2026-07-18 |
 | **Document ID** | DOC-013 |
 
 **Dependencies:** `10-vision-and-scope` (DOC-001), `12-functional-requirements` (DOC-010), `13-non-functional-requirements` (DOC-011).
 
-**Related Documents:** `29-architecture-principles` (DOC-022), `29.5-system-invariants` (DOC-023), `21-c4-context` (DOC-014), `22-c4-container` (DOC-015), `24-modular-monolith-blueprint` (DOC-017).
+**Related Documents:** `29-architecture-principles` (DOC-022), `29.5-system-invariants` (DOC-023), `21-c4-context` (DOC-014), `22-c4-container` (DOC-015), `24-modular-monolith-blueprint` (DOC-017), `30-domain-model-overview` (DOC-024), AD-007, ADR-0031.
 
 ---
 
@@ -112,6 +112,23 @@ flowchart LR
 ```
 
 Modules communicate via contracts and domain events only; no cross-module database access (INV-06). Module-to-context mapping is detailed in `31-bounded-contexts-and-modules`.
+
+### 4.1 Conversation Model (AD-007 / ADR-0031)
+
+The Conversations module owns a **unified `Conversation` aggregate** with type `Direct` | `Group` | `Channel` (Channel not creatable until FS-03) and a separate **Membership** model keyed by `(ConversationId, UserId)`. Direct conversations are fixed two-party contexts with a canonical user-pair uniqueness constraint. Groups support dynamic membership and roles for authorization (AD-003). Membership changes emit domain events that invalidate authz caches and will drive group sender-key rotation (future ADR-0020). Every message references exactly one `ConversationId` (message shape: AD-008).
+
+```mermaid
+flowchart TB
+    subgraph Conversations Module
+      Conv[Conversation\n id, type]
+      Mem[Membership\n user, role]
+      Conv --> Mem
+    end
+    Msg[Messaging Module\n messages by ConversationId]
+    Conv --> Msg
+```
+
+Normative detail: `30-domain-model-overview` (DOC-024), ADR-0031.
 
 ## 5. Technology Mapping
 

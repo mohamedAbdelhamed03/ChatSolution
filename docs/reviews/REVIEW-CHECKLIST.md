@@ -12,10 +12,10 @@
 - [x] AD-004 E2EE Protocol — reviewed, improved, **Approved** (direction; library spike pending)
 - [x] AD-005 Key Management — reviewed, improved, **Approved**
 - [x] AD-006 Device Model and Device Trust — reviewed, improved, **Approved**
-- [ ] AD-007 Conversation Model — Under Review (next sprint)
-- [ ] AD-008 Message Model — Under Review (next sprint)
-- [ ] AD-009 Message Ordering — Under Review (next sprint)
-- [ ] AD-010 Synchronization — Under Review (next sprint)
+- [x] AD-007 Conversation Model — workshop WS-007, review AR-007, **Approved**, ADR-0031 Accepted
+- [ ] AD-008 Message Model — Under Review (await human approval to start)
+- [ ] AD-009 Message Ordering — Under Review (await prior topic)
+- [ ] AD-010 Synchronization — Under Review (await prior topic)
 - [ ] Pending decisions (AD-011..AD-050) catalogued with valid dependencies
 
 ## Product
@@ -45,7 +45,7 @@
 
 ## Domain
 
-- [ ] Domain model overview (DOC-024) — *pending*
+- [x] Domain model overview (DOC-024) — Conversation/Membership (Build #5); message/sync pending AD-008..010
 - [ ] Bounded contexts & modules (DOC-025) — *pending*
 - [ ] Domain events catalog (DOC-027) — *pending*
 - [ ] Message lifecycle (DOC-045) — *pending*

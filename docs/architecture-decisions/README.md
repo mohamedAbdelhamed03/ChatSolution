@@ -4,8 +4,8 @@
 |---|---|
 | **Status** | Active |
 | **Owner** | Chief Software Architect |
-| **Version** | 1.0.0 |
-| **Last Updated** | 2026-07-15 |
+| **Version** | 1.1.0 |
+| **Last Updated** | 2026-07-18 |
 
 ## Purpose
 
@@ -75,7 +75,18 @@ Documentation generation is **paused** while the ADRP is built. Downstream docum
 |---|---|
 | `decision-manifest.yaml` | Single source of truth: every decision, its status, and dependencies. |
 | `AD-XXX-*.md` | Individual decision recommendation documents. |
+| `workshops/WS-XXX-*.md` | Architecture workshops preparing a decision (evidence + alternatives; no final decision). |
+| `reviews/AR-XXX-*.md` | Critical architecture reviews of workshop recommendations. |
 | `README.md` | This file. |
+
+## Messaging Core Sprint Progress
+
+| Topic | Workshop | Review | Decision | ADR |
+|---|---|---|---|---|
+| Conversation Model | WS-007 | AR-007 | AD-007 **Approved** | ADR-0031 **Accepted** |
+| Message Model | — | — | AD-008 Under Review | — |
+| Message Ordering | — | — | AD-009 Under Review | — |
+| Synchronization | — | — | AD-010 Under Review | — |
 
 ## Validation Gate (per decision)
 

@@ -99,18 +99,24 @@ decisions:
 
   - id: AD-007
     title: Conversation Model
-    status: Under Review
+    status: Approved
     priority: Critical
     category: Product
     owner: Architecture
     depends_on: [AD-001, AD-003]
     blocks: [AD-008, AD-025]
-    related_documents: [docs/70-features/FS-01-one-to-one-chat.md, docs/70-features/FS-02-group-chat.md]
-    related_adrs: [ADR-0020]
+    related_documents:
+      - docs/30-domain/30-domain-model-overview.md
+      - docs/20-architecture/20-architecture-overview.md
+      - docs/70-features/FS-01-one-to-one-chat.md
+      - docs/70-features/FS-02-group-chat.md
+      - docs/architecture-decisions/workshops/WS-007-conversation-model.md
+      - docs/architecture-decisions/reviews/AR-007-conversation-model.md
+    related_adrs: [ADR-0031, ADR-0020]
     related_research: [RS-001]
     affected_modules: [Conversations]
-    decision_date: null
-    review_date: null
+    decision_date: 2026-07-18
+    review_date: 2026-07-18
 
   - id: AD-008
     title: Message Model

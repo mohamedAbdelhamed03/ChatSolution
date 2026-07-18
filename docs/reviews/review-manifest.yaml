@@ -5,138 +5,113 @@ version: 2
 # out-of-band on push). base_commit records the branch point.
 
 build:
-  id: BUILD-0004
-  timestamp: 2026-07-15T10:01:00+03:00
-  phase: Architecture Research Sprint - RS-001..RS-004 (evidence for AD-007..AD-010)
-  branch: feature/research-sprint-2
-  commit: HEAD of feature/research-sprint-2
+  id: BUILD-0005
+  timestamp: 2026-07-18T12:30:00+03:00
+  phase: Messaging Core Architecture Sprint - Topic 1 Conversation Model (AD-007)
+  branch: feature/messaging-core-ad-007
+  commit: HEAD of feature/messaging-core-ad-007
   base_branch: main
   base_commit: 5305ba6
-  builds_on_branch: feature/architecture-decisions-wave-1
+  builds_on_branch: feature/research-sprint-2
 
 review_scope:
   description: >-
-    Engineering research (evidence, not decisions) for the next Architecture
-    Decision Sprint. RS-001..RS-004 compare industry practices and patterns and
-    recommend directions for AD-007..AD-010. No decisions approved, no ADRs, no
-    documentation, no code.
+    Complete Conversation Model lifecycle using RS-001 evidence: workshop WS-007,
+    critical review AR-007, approve AD-007, ratify ADR-0031, update domain and
+    architecture documentation. Do not proceed to AD-008 until human approval.
   research_documents:
-    - path: docs/research/README.md
-      feeds: null
     - path: docs/research/RS-001-conversation-models.md
       feeds: AD-007
-    - path: docs/research/RS-002-message-models.md
-      feeds: AD-008
-    - path: docs/research/RS-003-message-ordering.md
-      feeds: AD-009
-    - path: docs/research/RS-004-synchronization.md
-      feeds: AD-010
+  workshop_documents:
+    - path: docs/architecture-decisions/workshops/WS-007-conversation-model.md
+      feeds: AD-007
+  review_documents:
+    - path: docs/architecture-decisions/reviews/AR-007-conversation-model.md
+      feeds: AD-007
   included_paths:
     - docs/architecture-decisions/
+    - docs/ADR/
+    - docs/30-domain/
+    - docs/20-architecture/
+    - docs/00-glossary/
     - docs/reviews/
   affected_documents:
-    - docs/40-security/41-e2ee-design.md
-    - docs/40-security/42-authn-authz.md
-    - docs/40-security/43-key-management-and-devices.md
-    - docs/30-domain/36-message-lifecycle.md
-    - docs/50-data/54-message-sync-and-storage.md
-    - docs/85-protocol/85.9-synchronization-protocol.md
+    - docs/30-domain/30-domain-model-overview.md
+    - docs/20-architecture/20-architecture-overview.md
+    - docs/00-glossary/00-glossary-overview.md
+    - docs/70-features/FS-01-one-to-one-chat.md
+    - docs/70-features/FS-02-group-chat.md
   affected_adrs:
-    - ADR-0004
-    - ADR-0008
-    - ADR-0010
-    - ADR-0019
+    - ADR-0031
     - ADR-0020
   affected_modules:
-    - Identity
-    - Messaging
     - Conversations
-    - Media
-    - Presence
-    - Sync
+    - Messaging
+    - Identity
   breaking_changes: []
 
 summary:
-  total_documents: 151
-  completed_documents: 9
-  documentation_completion_percentage: 6.0
+  total_documents: 152
+  completed_documents: 12
+  documentation_completion_percentage: 7.9
   total_decisions: 50
-  decisions_approved: 6
-  decisions_under_review: 4
+  decisions_approved: 7
+  decisions_under_review: 3
   decisions_proposed: 40
   decision_recommendation_percentage: 20.0
-  decision_approval_percentage: 12.0
+  decision_approval_percentage: 14.0
 
 review_status:
-  status: Sprint Complete - AD-001..AD-006 Approved
-  reviewed_by: Chief Software Architect (Architecture Decision Review Sprint)
-  review_date: 2026-07-15
+  status: Topic Complete - AD-007 Approved; awaiting human approval to start AD-008
+  reviewed_by: Chief Software Architect (Messaging Core Architecture Sprint)
+  review_date: 2026-07-18
   sprint_result:
-    approved: [AD-001, AD-002, AD-003, AD-004, AD-005, AD-006]
+    approved: [AD-001, AD-002, AD-003, AD-004, AD-005, AD-006, AD-007]
     rejected: []
     needs_revision: []
 
 review_order:
-  - path: docs/architecture-decisions/README.md
+  - path: docs/research/RS-001-conversation-models.md
     priority: Critical
-    reason: Explains the ADRP workflow and how to review decisions.
-  - path: docs/architecture-decisions/decision-manifest.yaml
+    reason: Evidence base for Conversation Model.
+  - path: docs/architecture-decisions/workshops/WS-007-conversation-model.md
     priority: Critical
-    reason: Source of truth for all decisions and dependency order.
-  - path: docs/architecture-decisions/AD-001-user-identity.md
+    reason: Workshop preparing the decision.
+  - path: docs/architecture-decisions/reviews/AR-007-conversation-model.md
     priority: Critical
-    reason: Anchors identity for auth, keys, and all domain data.
-  - path: docs/architecture-decisions/AD-002-authentication.md
-    priority: Critical
-    reason: Session/auth foundation for all requests.
-  - path: docs/architecture-decisions/AD-003-authorization.md
-    priority: Critical
-    reason: Access control over metadata; deny-by-default.
-  - path: docs/architecture-decisions/AD-004-e2ee-protocol.md
-    priority: Critical
-    reason: Defining cryptographic decision; upholds INV-01.
-  - path: docs/architecture-decisions/AD-005-key-management.md
-    priority: Critical
-    reason: Key lifecycle; blind public-key directory.
-  - path: docs/architecture-decisions/AD-006-device-model.md
-    priority: Critical
-    reason: Multi-device and device trust.
+    reason: Critical review and required changes.
   - path: docs/architecture-decisions/AD-007-conversation-model.md
     priority: Critical
-    reason: Container model for 1:1/group/channel.
-  - path: docs/architecture-decisions/AD-008-message-model.md
+    reason: Approved architecture decision.
+  - path: docs/ADR/ADR-0031-unified-conversation-model.md
     priority: Critical
-    reason: Message representation with bounded metadata.
-  - path: docs/architecture-decisions/AD-009-message-ordering.md
+    reason: Formal ratification.
+  - path: docs/30-domain/30-domain-model-overview.md
     priority: Critical
-    reason: Deterministic ordering (INV-05); resolves ADR-0008/0010.
-  - path: docs/architecture-decisions/AD-010-synchronization.md
-    priority: Critical
-    reason: Multi-device convergence; idempotency/dedup (INV-04).
+    reason: Domain model for Conversation/Membership.
 
 critical_documents:
-  - path: docs/architecture-decisions/AD-004-e2ee-protocol.md
-    reason: Most consequential decision; defines confidentiality model.
-  - path: docs/architecture-decisions/AD-009-message-ordering.md
-    reason: Guarantees deterministic ordering; unblocks ADR-0008/0010.
-  - path: docs/architecture-decisions/decision-manifest.yaml
-    reason: Governs all decisions and their dependency order.
+  - path: docs/architecture-decisions/AD-007-conversation-model.md
+    reason: Normative conversation model for the messaging engine.
+  - path: docs/ADR/ADR-0031-unified-conversation-model.md
+    reason: Ratified ADR for Conversation aggregate.
+  - path: docs/research/RS-001-conversation-models.md
+    reason: Evidence cited by AD-007.
 
 files_changed:
   created:
-    - docs/architecture-decisions/README.md
-    - docs/architecture-decisions/decision-manifest.yaml
-    - docs/architecture-decisions/AD-001-user-identity.md
-    - docs/architecture-decisions/AD-002-authentication.md
-    - docs/architecture-decisions/AD-003-authorization.md
-    - docs/architecture-decisions/AD-004-e2ee-protocol.md
-    - docs/architecture-decisions/AD-005-key-management.md
-    - docs/architecture-decisions/AD-006-device-model.md
-    - docs/architecture-decisions/AD-007-conversation-model.md
-    - docs/architecture-decisions/AD-008-message-model.md
-    - docs/architecture-decisions/AD-009-message-ordering.md
-    - docs/architecture-decisions/AD-010-synchronization.md
+    - docs/architecture-decisions/workshops/WS-007-conversation-model.md
+    - docs/architecture-decisions/reviews/AR-007-conversation-model.md
+    - docs/ADR/adr-template.md
+    - docs/ADR/ADR-0031-unified-conversation-model.md
+    - docs/30-domain/30-domain-model-overview.md
   updated:
+    - docs/architecture-decisions/AD-007-conversation-model.md
+    - docs/architecture-decisions/decision-manifest.yaml
+    - docs/architecture-decisions/README.md
+    - docs/document-manifest.yaml
+    - docs/20-architecture/20-architecture-overview.md
+    - docs/00-glossary/00-glossary-overview.md
     - docs/reviews/BUILD-REPORT.md
     - docs/reviews/CHANGES.md
     - docs/reviews/REVIEW-CHECKLIST.md
@@ -144,6 +119,7 @@ files_changed:
     - docs/reviews/CROSS-REFERENCE-REPORT.md
     - docs/reviews/REVIEW-INDEX.md
     - docs/reviews/review-manifest.yaml
+    - docs/reviews/ARCHITECTURE-DECISIONS-PENDING.md
   removed: []
 
 decisions_approved:
@@ -153,9 +129,9 @@ decisions_approved:
   - AD-004
   - AD-005
   - AD-006
+  - AD-007
 
 decisions_under_review:
-  - AD-007
   - AD-008
   - AD-009
   - AD-010
@@ -163,7 +139,7 @@ decisions_under_review:
 pending_adrs:
   - id: ADR-0004
     title: E2EE Client-Only Encryption
-    reason: Recommended in AD-004; awaiting approval to ratify.
+    reason: Recommended in AD-004; library spike pending.
     impacts: [AD-005, AD-008, AD-020]
   - id: ADR-0008
     title: Message ID and Ordering Strategy
@@ -171,16 +147,26 @@ pending_adrs:
     impacts: [AD-010, AD-027, AD-042]
   - id: ADR-0010
     title: Message Ordering
-    reason: Recommended in AD-009 (total order); awaiting approval.
+    reason: Recommended in AD-009; awaiting approval.
     impacts: [AD-027]
+  - id: ADR-0016
+    title: Offline Synchronization
+    reason: Recommended in AD-010; awaiting approval.
+    impacts: [AD-015]
   - id: ADR-0019
     title: Multi-Device
     reason: Recommended across AD-002/AD-005/AD-006; awaiting approval.
     impacts: [AD-010]
   - id: ADR-0020
     title: Group Encryption
-    reason: Recommended direction in AD-004/AD-007; awaiting approval.
+    reason: Depends on AD-007 membership events; awaiting AD-020 / later ratification.
     impacts: [AD-007]
+
+accepted_adrs:
+  - id: ADR-0031
+    title: Unified Conversation Model
+    reason: Ratifies AD-007.
+    impacts: [AD-008, DOC-024]
 
 architecture_decisions:
   approved:
@@ -190,17 +176,17 @@ architecture_decisions:
     - AD-004
     - AD-005
     - AD-006
-  under_review:
     - AD-007
+  under_review:
     - AD-008
     - AD-009
     - AD-010
   proposed_count: 40
 
 quality_summary:
+  build5_ad007_overall: 9.2
+  build3_average_score: 9.35
   build2_average_score: 9.37
-  build2_lowest_score: 9.1
-  build2_highest_score: 9.7
 
 cross_reference_status:
   broken_links: 0
@@ -223,9 +209,9 @@ validation:
   broken_references: PASS
   circular_dependencies: PASS
 
-architecture_status: On Track - AD-001..AD-006 approved; AD-007..AD-010 next sprint; documentation paused
-security_status: E2EE and backend-never-decrypt upheld and validated across all approved decisions
-completion_percentage: 12.0
+architecture_status: On Track - AD-007 Approved; AD-008..AD-010 next after human approval
+security_status: E2EE and backend-never-decrypt upheld; membership events mandated for re-key hooks
+completion_percentage: 14.0
 
 known_risks:
   - id: RISK-01
@@ -234,39 +220,35 @@ known_risks:
   - id: RISK-03
     description: Fan-out at large group scale is the primary performance bottleneck.
     severity: High
-  - id: RISK-05
-    description: E2EE protocol/library selection (AD-004) not yet approved; downstream design blocked until ratified.
-    severity: High
   - id: RISK-06
-    description: Message ID/ordering scheme (AD-009) not yet approved; sync and lifecycle depend on it.
+    description: Message ID/ordering scheme (AD-009) and sync (AD-010) not yet approved.
     severity: Medium
+  - id: R-007-02
+    description: Membership event loss could delay group re-key until ADR-0020/outbox hardening.
+    severity: High
 
 open_questions:
+  - id: OQ-CONV-01
+    description: Maximum group size at launch.
+    owner: Product + Security
+  - id: OQ-CONV-04
+    description: Group title/avatar plaintext vs encrypted metadata.
+    owner: Security + Product
   - id: OQ-ARCH-02
     description: Selected E2EE protocol/library and audit status (AD-004).
     owner: Security
   - id: OQ-INV-02
     description: Authoritative global ordering scheme - ULID vs Snowflake (AD-009).
     owner: Architecture
-  - id: OQ-PER-01
-    description: Concurrent devices per user to support at launch (AD-006).
-    owner: Product + Architecture
-  - id: OQ-NFR-01
-    description: Confirmed launch availability SLO and error budget.
-    owner: SRE + Product
 
 next_review:
   recommended_documents:
-    - path: docs/research/README.md
-    - path: docs/research/RS-001-conversation-models.md
     - path: docs/research/RS-002-message-models.md
-    - path: docs/research/RS-003-message-ordering.md
-    - path: docs/research/RS-004-synchronization.md
+    - path: docs/architecture-decisions/AD-008-message-model.md
 
 next_build_phase:
-  phase: Architecture Decision Sprint 2 - AD-007..AD-010 (evidence-based)
+  phase: Messaging Core - Topic 2 Message Model (AD-008)
   description: >-
-    Using RS-001..RS-004 as evidence, draft and review AD-007 Conversation Model,
-    AD-008 Message Model, AD-009 Message Ordering, and AD-010 Synchronization.
-    Each decision must cite its corresponding research document. Do not begin
-    documentation generation until decisions are approved.
+    After human approval of Conversation Model topic, run WS-008 → AR-008 →
+    AD-008 → ADR → domain/architecture updates. Cite RS-002. Do not start until
+    human explicitly continues the sprint.

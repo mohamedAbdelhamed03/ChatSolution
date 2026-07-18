@@ -2,8 +2,24 @@
 
 > Per-artifact quality assessment. Scores are out of 10. Regenerated every build.
 
-**Current Build:** #3 — 2026-07-15 (Architecture Decision Review Sprint — AD-001..AD-006)
-**Prior Builds:** #2 (ADRP Wave 1), #1 (Documentation foundations)
+**Current Build:** #5 — 2026-07-18 (Messaging Core — Conversation Model)
+**Prior Builds:** #4 (Research), #3 (AD-001..AD-006), #2 (ADRP Wave 1), #1
+
+---
+
+## Build #5 — Conversation Model Verdict (AD-007)
+
+| Artifact | Verdict | Architecture | Security | Scalability | Maintainability | Documentation | Overall |
+|---|---|---|---|---|---|---|---|
+| WS-007 Workshop | Complete | 9 | 9 | 9 | 9 | 9 | 9.0 |
+| AR-007 Review | Approve with Changes | 9 | 9 | 9 | 9 | 9 | 9.2 |
+| AD-007 Decision | **Approved** | 9 | 9 | 9 | 9 | 9 | 9.2 |
+| ADR-0031 | Accepted | 9 | 9 | 9 | 9 | 9 | 9.0 |
+| DOC-024 Domain | Completed | 9 | 9 | 9 | 9 | 9 | 9.0 |
+
+**Average (Build #5 decision path):** 9.1 | **Rejected:** 0 | **Needs Revision:** 0.
+
+**Evidence gate:** AD-007 cites RS-001; alternatives aligned to research lettering; AR-007 required changes applied (pair key, per-type invariants, Channel gate, membership events, per-user membership).
 
 ---
 

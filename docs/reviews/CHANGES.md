@@ -4,6 +4,38 @@
 
 ---
 
+## Build #5 — 2026-07-18 (Messaging Core — Conversation Model)
+
+**Branch:** feature/messaging-core-ad-007
+
+| File Path | Change | Reason | Related Documents |
+|---|---|---|---|
+| docs/architecture-decisions/workshops/WS-007-conversation-model.md | Created | Workshop preparing AD-007; no final decision. | RS-001, AD-007 |
+| docs/architecture-decisions/reviews/AR-007-conversation-model.md | Created | Critical review; Approve with Changes. | WS-007, AD-007 |
+| docs/architecture-decisions/AD-007-conversation-model.md | Updated | Cite RS-001; apply AR-007 changes; status Approved. | RS-001, ADR-0031 |
+| docs/ADR/adr-template.md | Created | Formal ADR template (DOC-120). | — |
+| docs/ADR/ADR-0031-unified-conversation-model.md | Created | Ratify unified Conversation model. | AD-007, DOC-024 |
+| docs/30-domain/30-domain-model-overview.md | Created | Domain model with Conversation/Membership + sequences. | AD-007, ADR-0031 |
+| docs/20-architecture/20-architecture-overview.md | Updated | Add §4.1 Conversation Model. | AD-007, DOC-024 |
+| docs/00-glossary/00-glossary-overview.md | Updated | Conversation + Membership definitions. | DOC-024 |
+| docs/architecture-decisions/decision-manifest.yaml | Updated | AD-007 Approved; ADR-0031 linked. | — |
+| docs/architecture-decisions/README.md | Updated | Workshop/review paths; sprint progress. | — |
+| docs/document-manifest.yaml | Updated | DOC-024/120/152 Completed; DOC-152 added. | — |
+| docs/reviews/BUILD-REPORT.md | Updated | Append Build #5. | — |
+| docs/reviews/CHANGES.md | Updated | Append Build #5. | — |
+| docs/reviews/QUALITY-REPORT.md | Updated | AD-007 review scores. | — |
+| docs/reviews/CROSS-REFERENCE-REPORT.md | Updated | Build #5 validation. | — |
+| docs/reviews/REVIEW-CHECKLIST.md | Updated | Check off AD-007. | — |
+| docs/reviews/REVIEW-INDEX.md | Updated | Entry point for Build #5. | — |
+| docs/reviews/review-manifest.yaml | Updated | Regenerate dashboard for Build #5. | — |
+| docs/reviews/ARCHITECTURE-DECISIONS-PENDING.md | Updated | Note ADR-0031 accepted. | — |
+
+### Notes
+
+- No code changes. AD-008..AD-010 untouched. Sprint pauses for human approval before Message Model.
+
+---
+
 ## Build #4 — 2026-07-15 (Architecture Research Sprint)
 
 **Branch:** feature/research-sprint-2

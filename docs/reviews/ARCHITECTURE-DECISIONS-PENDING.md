@@ -2,6 +2,12 @@
 
 > Decisions not yet finalized. Each is catalogued as an ADR document in `document-manifest.yaml` (status Pending). None currently blocks documentation generation, but the flagged ones must be resolved before their dependent documents can be promoted from Draft to Approved.
 
+### Recently Accepted
+
+| ADR | Title | Date | Ratifies |
+|---|---|---|---|
+| ADR-0031 | Unified Conversation Model | 2026-07-18 | AD-007 |
+
 ---
 
 ## DEC-01 — E2EE Protocol / Library (ADR-0004)

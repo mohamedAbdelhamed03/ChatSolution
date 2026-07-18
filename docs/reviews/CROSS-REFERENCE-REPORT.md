@@ -2,8 +2,29 @@
 
 > Automated validation against the manifests. Regenerated every build.
 
-**Current Build:** #3 — 2026-07-15 (Review Sprint)
-**Prior Builds:** #2 (ADRP Wave 1), #1
+**Current Build:** #5 — 2026-07-18 (Messaging Core — Conversation Model)
+**Prior Builds:** #4 (Research), #3 (AD-001..006), #2 (ADRP), #1
+
+---
+
+## Build #5 — Conversation Model Validation
+
+**Scope validated:** WS-007, AR-007, AD-007, ADR-0031, DOC-024, DOC-013 §4.1, glossary, manifests.
+
+| Check | Result |
+|---|---|
+| AD-007 status Approved with decision_date/review_date | PASS |
+| AD-007 cites RS-001 (Related Research) | PASS |
+| Alternatives lettering matches RS-001 (A/B/C) | PASS |
+| ADR-0031 Accepted and linked from AD-007 / decision-manifest | PASS |
+| DOC-024 / DOC-120 / DOC-152 Completed in document-manifest | PASS |
+| Dependency graph: AD-007 depends only on Approved AD-001, AD-003 | PASS |
+| INV-01 upheld (metadata-only conversation model) | PASS |
+| No Channel creatable at launch stated consistently | PASS |
+| Workshop → Review → Decision → ADR → Domain chain present | PASS |
+| AD-008..AD-010 untouched (still Under Review) | PASS |
+
+**Build #5 result: PASS.**
 
 ---
 

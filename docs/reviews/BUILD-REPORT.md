@@ -4,6 +4,68 @@
 
 ---
 
+## Build #5 — 2026-07-18 (Messaging Core — Conversation Model)
+
+| Field | Value |
+|---|---|
+| **Build ID** | BUILD-0005 |
+| **Build Timestamp** | 2026-07-18T12:30:00+03:00 |
+| **Branch** | feature/messaging-core-ad-007 |
+| **Base Branch** | feature/research-sprint-2 (from main) |
+| **Current Phase** | Messaging Core Architecture Sprint — Topic 1 Conversation Model |
+| **Build Duration** | ~45 minutes |
+
+### Scope
+
+Complete the Conversation Model lifecycle: Workshop → Architecture Review → Architecture Decision (AD-007) → ADR-0031 → architecture/domain documentation → review package. Topics Message Model, Ordering, and Synchronization are **not** in this build.
+
+### Lifecycle Completed
+
+| Step | Artifact |
+|---|---|
+| Research (existing) | RS-001 |
+| Architecture Workshop | WS-007 |
+| Architecture Review | AR-007 (Approve with Changes) |
+| Architecture Decision | AD-007 **Approved** |
+| ADR | ADR-0031 **Accepted** |
+| Architecture Documentation | DOC-013 §4.1, glossary terms |
+| Domain Model | DOC-024 |
+| Review Package | This build |
+
+### Artifacts Generated / Updated
+
+| Artifact | Path |
+|---|---|
+| Workshop | docs/architecture-decisions/workshops/WS-007-conversation-model.md |
+| Review | docs/architecture-decisions/reviews/AR-007-conversation-model.md |
+| Decision | docs/architecture-decisions/AD-007-conversation-model.md |
+| ADR template | docs/ADR/adr-template.md |
+| ADR | docs/ADR/ADR-0031-unified-conversation-model.md |
+| Domain model | docs/30-domain/30-domain-model-overview.md |
+| Architecture overview | docs/20-architecture/20-architecture-overview.md |
+| Glossary | docs/00-glossary/00-glossary-overview.md |
+
+### Decision Outcome
+
+| Decision | Verdict | Status |
+|---|---|---|
+| AD-007 Conversation Model | Approve with Changes | **Approved** |
+
+- Alternatives aligned to RS-001; Direct pair uniqueness, per-type invariants, Channel gate, membership events mandated.
+- **Human gate:** Do not begin AD-008 (Message Model) until product owner confirms continuation.
+
+### Manifest Updates
+
+- decision-manifest.yaml: AD-007 → Approved; related_adrs includes ADR-0031.
+- document-manifest.yaml: DOC-024, DOC-120, DOC-152 → Completed; DOC-152 added.
+
+### Blocking / Next
+
+- AD-008..AD-010 remain Under Review (await human approval to continue sprint).
+- ADR-0020 (Group Encryption) still Pending (depends on later work).
+
+---
+
 ## Build #4 — 2026-07-15 (Architecture Research Sprint)
 
 | Field | Value |
