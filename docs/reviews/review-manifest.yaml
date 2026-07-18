@@ -1,19 +1,18 @@
 version: 2
 
 build:
-  id: BUILD-0011
-  timestamp: 2026-07-18T14:15:00+03:00
-  phase: Phase 4 Plan - Messaging Services Architecture (DOC-156)
-  branch: docs/phase-4-messaging-services-plan
-  commit: HEAD of docs/phase-4-messaging-services-plan
+  id: BUILD-0012
+  timestamp: 2026-07-18T14:30:00+03:00
+  phase: Phase 4 Sprint 1 - RS-005 / WS-042 Delivery (pre-decision)
+  branch: feature/messaging-services-ad-042
+  commit: HEAD of feature/messaging-services-ad-042
   base_branch: main
-  base_commit: 5305ba6
+  base_commit: a8c2f23
 
 review_scope:
   description: >-
-    Publish Phase 4 plan (DOC-156), reconcile service sprint AD IDs with the
-    decision catalog, and catalogue AD-051..AD-054. Do not start Sprint 1
-    (AD-042) until human authorization.
+    Author RS-005 and WS-042 for AD-042 Delivery Semantics. Workshop complete;
+    await human approval to proceed to AR-042 and AD-042 recommendation.
 
 summary:
   total_documents: 156
@@ -26,7 +25,7 @@ summary:
   decision_approval_percentage: 18.5
 
 review_status:
-  status: Phase 3 COMPLETE; Phase 4 PLANNED (DOC-156); await auth to start AD-042
+  status: Phase 4 IN PROGRESS — Sprint 1 WS-042 awaiting decision gate
   reviewed_by: Chief Software Architect
   review_date: 2026-07-18
   sprint_result:
@@ -65,12 +64,12 @@ validation:
   broken_links: PASS
   circular_dependencies: PASS
 
-architecture_status: Phase 3 COMPLETE; Phase 4 PLANNED (DOC-156); next sprint AD-042 when authorized
+architecture_status: Phase 4 IN PROGRESS — RS-005/WS-042 complete; AD-042 decision pending
 security_status: E2EE and INV-01/04/05 upheld; Phase 4 must preserve INV-01
 completion_percentage: 18.5
 
 next_build_phase:
-  phase: Phase 4 Sprint 1 - AD-042 Delivery and Acknowledgements
+  phase: Phase 4 Sprint 1 - AR-042 / AD-042
   description: >-
-    After human authorization, run RS/WS/AR/AD/ADR lifecycle for AD-042.
-    Do not redesign AD-007..AD-010. Follow DOC-156 sprint order.
+    After workshop approval, write AR-042 and AD-042 recommendation, then await
+    human approval before ADR-0018 ratification and domain/realtime docs.

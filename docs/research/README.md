@@ -5,22 +5,23 @@
 | **Status** | Active |
 | **Owner** | Principal Software Architect |
 | **Version** | 1.0.0 |
-| **Last Updated** | 2026-07-15 |
+| **Last Updated** | 2026-07-18 |
 
 ## Purpose
 
-The Research Repository holds **objective engineering research** that precedes and informs Architecture Decisions. Its goal is to ensure that each decision in the next Architecture Decision Sprint (AD-007..AD-010) is grounded in **evidence** — comparative analysis of publicly documented practices, common industry patterns, and critically evaluated trade-offs — rather than assumptions.
+The Research Repository holds **objective engineering research** that precedes and informs Architecture Decisions. Its goal is to ensure that each Architecture Decision Sprint is grounded in **evidence** — comparative analysis of publicly documented practices, common industry patterns, and critically evaluated trade-offs — rather than assumptions.
 
 Research documents (`RS-XXX`) are **evidence, not decisions**. They compare options and recommend a direction, but they never approve architecture.
 
 ## Relationship to Architecture Decisions (ADRP)
 
-- Each research document maps to one upcoming decision:
+- Research documents map to decisions:
   - `RS-001 Conversation Models` → **AD-007 Conversation Model**
   - `RS-002 Message Models` → **AD-008 Message Model**
   - `RS-003 Message Ordering` → **AD-009 Message Ordering**
   - `RS-004 Synchronization` → **AD-010 Synchronization**
-- Every Sprint-2 Architecture Decision **must cite** its corresponding research document.
+  - `RS-005 Delivery & Acknowledgements` → **AD-042 Delivery Semantics**
+- Every Architecture Decision **must cite** its corresponding research document when research was authored.
 - Research recommends; the ADRP decision records the chosen option and its consequences; a human approves.
 
 ## Relationship to ADRs
@@ -64,3 +65,4 @@ Undocumented vendor internals are not speculated upon.
 | RS-002 | Message Models | AD-008 |
 | RS-003 | Message Ordering | AD-009 |
 | RS-004 | Synchronization | AD-010 |
+| RS-005 | Delivery & Acknowledgements | AD-042 |
