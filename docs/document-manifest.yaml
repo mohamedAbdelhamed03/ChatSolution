@@ -200,10 +200,24 @@ documents:
     status: Completed
     owner: Architecture
     dependencies: [DOC-001, DOC-010, DOC-011]
-    blocks: [DOC-014, DOC-015, DOC-017, DOC-018, DOC-024]
+    blocks: [DOC-014, DOC-015, DOC-017, DOC-018, DOC-024, DOC-154]
     blocked_by: []
-    related_documents: [DOC-022, DOC-023]
+    related_documents: [DOC-022, DOC-023, DOC-154]
     estimated_complexity: High
+
+  - id: DOC-154
+    title: Messaging Core Architecture
+    path: docs/20-architecture/20.1-messaging-core-architecture.md
+    category: Architecture
+    phase: Phase-3
+    priority: Critical
+    status: Completed
+    owner: Architecture
+    dependencies: [DOC-013, DOC-022, DOC-023, DOC-024]
+    blocks: []
+    blocked_by: [DOC-013, DOC-022, DOC-023, DOC-024]
+    related_documents: [DOC-013, DOC-024]
+    estimated_complexity: Medium
 
   - id: DOC-014
     title: C4 Context Diagram

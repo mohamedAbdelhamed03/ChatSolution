@@ -11,7 +11,7 @@
 
 **Dependencies:** `10-vision-and-scope` (DOC-001), `12-functional-requirements` (DOC-010), `13-non-functional-requirements` (DOC-011).
 
-**Related Documents:** `29-architecture-principles` (DOC-022), `29.5-system-invariants` (DOC-023), `21-c4-context` (DOC-014), `22-c4-container` (DOC-015), `24-modular-monolith-blueprint` (DOC-017), `30-domain-model-overview` (DOC-024), AD-007..AD-010, ADR-0031, ADR-0032, ADR-0008, ADR-0010, ADR-0016, ADR-0011.
+**Related Documents:** `29-architecture-principles` (DOC-022), `29.5-system-invariants` (DOC-023), `20.1-messaging-core-architecture` (DOC-154), `21-c4-context` (DOC-014), `22-c4-container` (DOC-015), `24-modular-monolith-blueprint` (DOC-017), `30-domain-model-overview` (DOC-024), AD-007..AD-010, ADR-0031, ADR-0032, ADR-0008, ADR-0010, ADR-0016, ADR-0011.
 
 ---
 
@@ -188,6 +188,8 @@ flowchart LR
 ```
 
 Normative detail: AD-010, ADR-0016, ADR-0011, DOC-024 §12.
+
+Consolidated entry point for the messaging engine: `20.1-messaging-core-architecture` (DOC-154).
 
 ## 5. Technology Mapping
 
