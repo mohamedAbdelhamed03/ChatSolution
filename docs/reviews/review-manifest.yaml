@@ -1,38 +1,38 @@
 version: 2
 
 build:
-  id: BUILD-0013
-  timestamp: 2026-07-18T14:45:00+03:00
-  phase: Phase 4 Sprint 1 - AR-042 / AD-042 Delivery (decision gate)
-  branch: feature/messaging-services-ad-042
-  commit: HEAD of feature/messaging-services-ad-042
+  id: BUILD-0015
+  timestamp: 2026-07-18T15:15:00+03:00
+  phase: Phase 4 Sprint 2 - AR-044 / AD-044 Read Receipts (decision gate)
+  branch: feature/messaging-services-ad-044
+  commit: HEAD of feature/messaging-services-ad-044
   base_branch: main
   base_commit: a8c2f23
 
 review_scope:
   description: >-
-    Record AR-042 approval and AD-042 decision recommendation (Under Review).
-    Await human approval of AD-042 before ADR-0018 ratification.
+    Record AR-044 approval and AD-044 decision recommendation (Under Review).
+    Await human approval of AD-044 to close Sprint 2.
 
 summary:
   total_documents: 156
-  completed_documents: 20
-  documentation_completion_percentage: 12.8
+  completed_documents: 21
+  documentation_completion_percentage: 13.5
   total_decisions: 54
-  decisions_approved: 10
+  decisions_approved: 11
   decisions_under_review: 1
-  decisions_proposed: 43
-  decision_approval_percentage: 18.5
+  decisions_proposed: 42
+  decision_approval_percentage: 20.4
 
 review_status:
-  status: Phase 4 IN PROGRESS — AD-042 Under Review (AR-042 approved)
+  status: Phase 4 IN PROGRESS — Sprint 2 AD-044 Under Review (AR-044 approved)
   reviewed_by: Chief Software Architect
   review_date: 2026-07-18
   sprint_result:
-    approved: [AD-001, AD-002, AD-003, AD-004, AD-005, AD-006, AD-007, AD-008, AD-009, AD-010]
+    approved: [AD-001, AD-002, AD-003, AD-004, AD-005, AD-006, AD-007, AD-008, AD-009, AD-010, AD-042]
     rejected: []
     needs_revision: []
-    under_review: [AD-042]
+    under_review: [AD-044]
 
 decisions_approved:
   - AD-001
@@ -45,9 +45,10 @@ decisions_approved:
   - AD-008
   - AD-009
   - AD-010
+  - AD-042
 
 decisions_under_review:
-  - AD-042
+  - AD-044
 
 accepted_adrs:
   - ADR-0031
@@ -56,6 +57,7 @@ accepted_adrs:
   - ADR-0010
   - ADR-0011
   - ADR-0016
+  - ADR-0018
 
 validation:
   markdown: PASS
@@ -66,12 +68,12 @@ validation:
   broken_links: PASS
   circular_dependencies: PASS
 
-architecture_status: Phase 4 IN PROGRESS — AR-042 approved; AD-042 Under Review
-security_status: E2EE and INV-01/04/05 upheld; delivery projections metadata-only
-completion_percentage: 18.5
+architecture_status: Phase 4 IN PROGRESS — AR-044 approved; AD-044 Under Review
+security_status: E2EE and INV-01/04/05 upheld; read metadata-only; privacy gate at emission
+completion_percentage: 20.4
 
 next_build_phase:
-  phase: Phase 4 Sprint 1 - AD-042 Approval + ADR-0018
+  phase: Phase 4 Sprint 2 - AD-044 Approval + ADR ratification
   description: >-
-    After human approval of AD-042, ratify ADR-0018, update realtime/protocol
-    docs (DOC-066, DOC-091), and close Sprint 1.
+    After human approval of AD-044, ratify supporting ADR, update domain and
+    realtime docs, close Sprint 2, then Sprint 3 (AD-011/AD-043) on authorization.

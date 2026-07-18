@@ -21,6 +21,7 @@ Research documents (`RS-XXX`) are **evidence, not decisions**. They compare opti
   - `RS-003 Message Ordering` → **AD-009 Message Ordering**
   - `RS-004 Synchronization` → **AD-010 Synchronization**
   - `RS-005 Delivery & Acknowledgements` → **AD-042 Delivery Semantics**
+  - `RS-006 Read Receipts` → **AD-044 Read Receipts**
 - Every Architecture Decision **must cite** its corresponding research document when research was authored.
 - Research recommends; the ADRP decision records the chosen option and its consequences; a human approves.
 
@@ -66,3 +67,4 @@ Undocumented vendor internals are not speculated upon.
 | RS-003 | Message Ordering | AD-009 |
 | RS-004 | Synchronization | AD-010 |
 | RS-005 | Delivery & Acknowledgements | AD-042 |
+| RS-006 | Read Receipts | AD-044 |

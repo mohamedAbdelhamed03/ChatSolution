@@ -2,9 +2,9 @@
 
 | Field | Value |
 |---|---|
-| **Status** | Under Review |
+| **Status** | Approved |
 | **Owner** | Architecture |
-| **Version** | 1.0.0 |
+| **Version** | 2.0.0 |
 | **Last Updated** | 2026-07-18 |
 | **Workshop** | [WS-042](workshops/WS-042-delivery-and-acknowledgements.md) |
 | **Architecture Review** | [AR-042](reviews/AR-042-delivery-and-acknowledgements.md) |
@@ -314,8 +314,8 @@ Rejected as primary guarantee; at-least-once + idempotency adopted.
 
 ## Approval
 
-- **Status:** Under Review
+- **Status:** Approved
 - **Owner:** Architecture
 - **Reviewed by:** Chief Software Architect (Phase 4 — Delivery & Acknowledgements)
 - **Review Date:** 2026-07-18
-- **Decision Date:** *(pending human approval)*
+- **Decision Date:** 2026-07-18

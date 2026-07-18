@@ -92,13 +92,19 @@ Documentation generation is **paused** while the ADRP is built. Downstream docum
 
 **Phase 3 closure:** [`docs/20-architecture/20.2-phase-3-messaging-core-completion.md`](../20-architecture/20.2-phase-3-messaging-core-completion.md) (DOC-155) — Messaging Core **COMPLETE**.
 
-**Phase 4 plan:** [`docs/20-architecture/20.3-phase-4-messaging-services-plan.md`](../20-architecture/20.3-phase-4-messaging-services-plan.md) (DOC-156) — Messaging Services **IN PROGRESS** (Sprint 1: AD-042).
+**Phase 4 plan:** [`docs/20-architecture/20.3-phase-4-messaging-services-plan.md`](../20-architecture/20.3-phase-4-messaging-services-plan.md) (DOC-156) — Messaging Services **IN PROGRESS** (Sprint 2: AD-044).
 
 ### Messaging Services Sprint Progress (Phase 4)
 
 | Topic | Research | Workshop | Review | Decision | ADR |
 |---|---|---|---|---|---|
-| Delivery & Acknowledgements | RS-005 | WS-042 | AR-042 | AD-042 Under Review | ADR-0018 (planned) |
+| Delivery & Acknowledgements | RS-005 | WS-042 | AR-042 | AD-042 **Approved** | ADR-0018 **Accepted** |
+
+### Messaging Services Sprint Progress (Phase 4) — continued
+
+| Topic | Research | Workshop | Review | Decision | ADR |
+|---|---|---|---|---|---|
+| Read Receipts | RS-006 | WS-044 | AR-044 | AD-044 Under Review | TBD |
 
 ## Validation Gate (per decision)
 
