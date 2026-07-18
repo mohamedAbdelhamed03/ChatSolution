@@ -1,37 +1,37 @@
 version: 2
 
 build:
-  id: BUILD-0008
-  timestamp: 2026-07-18T13:15:00+03:00
-  phase: Messaging Core Architecture Sprint - Topic 3 Message Ordering (AD-009)
-  branch: feature/messaging-core-ad-009
-  commit: HEAD of feature/messaging-core-ad-009
+  id: BUILD-0009
+  timestamp: 2026-07-18T13:30:00+03:00
+  phase: Messaging Core Architecture Sprint - Topic 4 Synchronization (AD-010)
+  branch: feature/messaging-core-ad-010
+  commit: HEAD of feature/messaging-core-ad-010
   base_branch: main
   base_commit: 5305ba6
-  builds_on_branch: feature/messaging-core-ad-008
+  builds_on_branch: feature/messaging-core-ad-009
 
 review_scope:
   description: >-
-    Complete Message Ordering lifecycle using RS-003: WS-009, AR-009, approve
-    AD-009, ratify ADR-0008 and ADR-0010, update domain/architecture/glossary.
-    Do not start AD-010 until human approval.
+    Complete Synchronization lifecycle using RS-004: WS-010, AR-010, approve
+    AD-010, ratify ADR-0016 and ADR-0011. Completes Messaging Core AD-007..AD-010.
+    Do not start next phase until human approval.
 
 summary:
   total_documents: 153
-  completed_documents: 15
-  documentation_completion_percentage: 9.8
+  completed_documents: 17
+  documentation_completion_percentage: 11.1
   total_decisions: 50
-  decisions_approved: 9
-  decisions_under_review: 1
+  decisions_approved: 10
+  decisions_under_review: 0
   decisions_proposed: 40
-  decision_approval_percentage: 18.0
+  decision_approval_percentage: 20.0
 
 review_status:
-  status: Topic Complete - AD-009 Approved; awaiting human approval to start AD-010
+  status: Messaging Core Complete - AD-007..AD-010 Approved; awaiting human approval for next phase
   reviewed_by: Chief Software Architect (Messaging Core Architecture Sprint)
   review_date: 2026-07-18
   sprint_result:
-    approved: [AD-001, AD-002, AD-003, AD-004, AD-005, AD-006, AD-007, AD-008, AD-009]
+    approved: [AD-001, AD-002, AD-003, AD-004, AD-005, AD-006, AD-007, AD-008, AD-009, AD-010]
     rejected: []
     needs_revision: []
 
@@ -45,23 +45,17 @@ decisions_approved:
   - AD-007
   - AD-008
   - AD-009
-
-decisions_under_review:
   - AD-010
+
+decisions_under_review: []
 
 accepted_adrs:
   - ADR-0031
   - ADR-0032
   - ADR-0008
   - ADR-0010
-
-pending_adrs:
-  - id: ADR-0016
-    title: Offline Synchronization
-    reason: Awaiting AD-010
-  - id: ADR-0011
-    title: Cursor Pagination
-    reason: Depends on Sequence cursors from AD-009/AD-010
+  - ADR-0011
+  - ADR-0016
 
 validation:
   markdown: PASS
@@ -72,12 +66,12 @@ validation:
   broken_links: PASS
   circular_dependencies: PASS
 
-architecture_status: On Track - AD-007..AD-009 Approved; AD-010 next after human approval
-security_status: Ordering metadata only; server-authoritative Sequence; INV-05 upheld
-completion_percentage: 18.0
+architecture_status: Messaging Core spine complete (AD-007..AD-010); await human before next phase
+security_status: Sync ciphertext-only; authz and device trust enforced; INV-01/04/05 upheld
+completion_percentage: 20.0
 
 next_build_phase:
-  phase: Messaging Core - Topic 4 Synchronization (AD-010)
+  phase: Next Architecture Phase (post Messaging Core)
   description: >-
-    After human approval, run WS-010 → AR-010 → AD-010 → ADR using RS-004.
-    Do not start until human explicitly continues.
+    Human selects next wave (e.g., realtime protocol docs, storage, presence,
+    or remaining ADRP decisions). Do not start until explicitly approved.

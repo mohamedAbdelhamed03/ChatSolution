@@ -2,8 +2,21 @@
 
 > Per-artifact quality assessment. Scores are out of 10. Regenerated every build.
 
-**Current Build:** #8 — 2026-07-18 (Message Ordering AD-009)
-**Prior Builds:** #7 (AD-008), #6, #5, #4, #3, #2, #1
+**Current Build:** #9 — 2026-07-18 (Synchronization AD-010)
+**Prior Builds:** #8 (AD-009), #7, #6, #5, #4, #3, #2, #1
+
+---
+
+## Build #9 — Synchronization Verdict (AD-010)
+
+| Artifact | Verdict | Overall |
+|---|---|---|
+| WS-010 | Complete | 9.2 |
+| AR-010 | Approve with Changes | 9.4 |
+| AD-010 | **Approved** | 9.4 |
+| ADR-0016 / ADR-0011 | Accepted | 9.3 |
+
+**Messaging Core AD-007..AD-010:** All Approved.
 
 ---
 

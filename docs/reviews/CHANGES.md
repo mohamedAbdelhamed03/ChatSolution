@@ -4,6 +4,30 @@
 
 ---
 
+## Build #9 — 2026-07-18 (Messaging Core — Synchronization)
+
+**Branch:** feature/messaging-core-ad-010
+
+| File Path | Change | Reason |
+|---|---|---|
+| docs/architecture-decisions/workshops/WS-010-synchronization.md | Created | Workshop; 14 investigation topics |
+| docs/architecture-decisions/reviews/AR-010-synchronization.md | Created | Critical review |
+| docs/architecture-decisions/AD-010-synchronization.md | Updated | Approved; cites RS-004 Alt B |
+| docs/ADR/ADR-0016-offline-synchronization.md | Created | Ratify sync architecture |
+| docs/ADR/ADR-0011-cursor-pagination.md | Created | Sequence-range pagination |
+| docs/30-domain/30-domain-model-overview.md | Updated | §12 Synchronization |
+| docs/20-architecture/20-architecture-overview.md | Updated | §4.4 Synchronization |
+| docs/00-glossary/00-glossary-overview.md | Updated | Sync cursor / delta sync terms |
+| docs/architecture-decisions/decision-manifest.yaml | Updated | AD-010 Approved |
+| docs/document-manifest.yaml | Updated | DOC-131/136 Completed |
+| docs/reviews/* | Updated | Build #9 |
+
+### Notes
+
+- Messaging Core AD-007..AD-010 complete. Pause for human approval before next phase.
+
+---
+
 ## Build #8 — 2026-07-18 (Messaging Core — Message Ordering)
 
 **Branch:** feature/messaging-core-ad-009
