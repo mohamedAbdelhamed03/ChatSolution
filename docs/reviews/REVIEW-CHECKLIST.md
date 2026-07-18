@@ -12,7 +12,7 @@
 - [x] AD-004 E2EE Protocol — reviewed, improved, **Approved** (direction; library spike pending)
 - [x] AD-005 Key Management — reviewed, improved, **Approved**
 - [x] AD-006 Device Model and Device Trust — reviewed, improved, **Approved**
-- [x] AD-007 Conversation Model — workshop WS-007, review AR-007, **Approved**, ADR-0031 Accepted
+- [x] AD-007 Conversation Model — workshop WS-007, review AR-007, **Approved**, ADR-0031 Accepted, **finalization amendments** (lifecycle/invariants/ownership/extensibility/diagrams)
 - [ ] AD-008 Message Model — Under Review (await human approval to start)
 - [ ] AD-009 Message Ordering — Under Review (await prior topic)
 - [ ] AD-010 Synchronization — Under Review (await prior topic)

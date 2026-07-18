@@ -5,7 +5,7 @@
 | **Title** | Architecture Overview |
 | **Status** | Completed |
 | **Owner** | Architecture |
-| **Version** | 1.1.0 |
+| **Version** | 1.2.0 |
 | **Last Updated** | 2026-07-18 |
 | **Document ID** | DOC-013 |
 
@@ -115,20 +115,28 @@ Modules communicate via contracts and domain events only; no cross-module databa
 
 ### 4.1 Conversation Model (AD-007 / ADR-0031)
 
-The Conversations module owns a **unified `Conversation` aggregate** with type `Direct` | `Group` | `Channel` (Channel not creatable until FS-03) and a separate **Membership** model keyed by `(ConversationId, UserId)`. Direct conversations are fixed two-party contexts with a canonical user-pair uniqueness constraint. Groups support dynamic membership and roles for authorization (AD-003). Membership changes emit domain events that invalidate authz caches and will drive group sender-key rotation (future ADR-0020). Every message references exactly one `ConversationId` (message shape: AD-008).
+The Conversations module owns a **unified `Conversation` aggregate** (root) containing **Membership** entities and **Role**, **ConversationMetadata**, and **ConversationSettings** value objects. Types: `Direct` | `Group` | `Channel` (Channel not creatable until FS-03). Messages reference `ConversationId` but live in the Messaging module (outside the aggregate).
+
+- **Direct:** exactly two `Active` peers; canonical pair uniqueness; no owner hierarchy.
+- **Group:** roles `owner` | `admin` | `moderator` | `member`; ≥1 owner; last owner cannot leave without transfer.
+- **Lifecycles:** Conversation (`Created`/`Active`/`Archived`/`Frozen`/`Deleted`); Membership (`Invited`/`Pending`/`Active`/`Left`/`Removed`/`Blocked`).
+- **Events:** membership and lifecycle events drive authz invalidation, sync projections, notifications, and future sender-key rotation (ADR-0020).
+- **Extensibility:** additive types/settings/role packs or wrapper aggregates (e.g., Community); never a second message pipeline.
 
 ```mermaid
 flowchart TB
-    subgraph Conversations Module
-      Conv[Conversation\n id, type]
-      Mem[Membership\n user, role]
+    subgraph Conversations Module - Aggregate
+      Conv[Conversation root\n type, lifecycle]
+      Mem[Membership\n state, role]
+      Meta[Metadata / Settings]
       Conv --> Mem
+      Conv --> Meta
     end
     Msg[Messaging Module\n messages by ConversationId]
-    Conv --> Msg
+    Conv -.->|ID only| Msg
 ```
 
-Normative detail: `30-domain-model-overview` (DOC-024), ADR-0031.
+Normative detail: AD-007, ADR-0031, `30-domain-model-overview` (DOC-024).
 
 ## 5. Technology Mapping
 

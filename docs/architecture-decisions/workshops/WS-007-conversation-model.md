@@ -4,10 +4,10 @@
 |---|---|
 | **Workshop ID** | WS-007 |
 | **Topic** | Conversation Model |
-| **Status** | Completed — Awaiting Decision |
+| **Status** | Completed — Decision Approved (AD-007); amendments applied in AD-007 v2.1 |
 | **Owner** | Principal Software Architect |
 | **Facilitators** | Distributed Systems Engineer, Backend Architect, Security Architect, Product Architect |
-| **Version** | 1.0.0 |
+| **Version** | 1.1.0 |
 | **Date** | 2026-07-18 |
 | **Feeds Decision** | AD-007 Conversation Model |
 | **Evidence Base** | [RS-001 Conversation Models](../../research/RS-001-conversation-models.md) |
@@ -236,10 +236,25 @@ This matches RS-001 Alternative B and keeps AD-008..AD-010, AD-020, and FS-01/FS
 
 ---
 
+## Post-Decision Note (Finalization Amendments)
+
+AD-007 was approved on Alternative B. A subsequent finalization pass (2026-07-18) **did not change the recommendation**; it made implicit rules explicit in AD-007 / ADR-0031 / DOC-024:
+
+- Conversation lifecycle (`Created` / `Active` / `Archived` / `Frozen` / `Deleted`)
+- Membership lifecycle (`Invited` / `Pending` / `Active` / `Left` / `Removed` / `Blocked`)
+- Domain invariants with enforcement layers
+- Ownership model (including Direct N/A)
+- Future extensibility strategy
+- Aggregate structure diagrams (Metadata, Settings, Role, boundaries)
+
+This workshop remains historical evidence for the decision; normative rules live in AD-007 v2.1+.
+
+---
+
 ## References
 
 - [RS-001 Conversation Models](../../research/RS-001-conversation-models.md)
 - [AD-001..AD-006](../) (Approved constraints)
-- [AD-007 draft](../AD-007-conversation-model.md)
+- [AD-007](../AD-007-conversation-model.md) (Approved v2.1)
 - `docs/10-product/12-functional-requirements.md` (FR-004, FR-005, FR-006)
 - `docs/20-architecture/29.5-system-invariants.md` (INV-01)

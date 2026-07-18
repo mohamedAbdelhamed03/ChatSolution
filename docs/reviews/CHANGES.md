@@ -4,6 +4,28 @@
 
 ---
 
+## Build #6 — 2026-07-18 (AD-007 Finalization Amendments)
+
+**Branch:** feature/messaging-core-ad-007
+
+| File Path | Change | Reason |
+|---|---|---|
+| docs/architecture-decisions/AD-007-conversation-model.md | Updated | Lifecycles, invariants, ownership, extensibility, aggregate diagrams (v2.1) |
+| docs/ADR/ADR-0031-unified-conversation-model.md | Updated | Mirror finalization rules; point to AD-007 normative detail |
+| docs/30-domain/30-domain-model-overview.md | Updated | Lifecycles, ownership, invariants, aggregate structure (v1.1) |
+| docs/20-architecture/20-architecture-overview.md | Updated | §4.1 expanded for aggregate/lifecycle/extensibility |
+| docs/00-glossary/00-glossary-overview.md | Updated | Role, Metadata, Settings; richer Conversation/Membership |
+| docs/architecture-decisions/workshops/WS-007-conversation-model.md | Updated | Post-decision finalization note |
+| docs/architecture-decisions/reviews/AR-007-conversation-model.md | Updated | §8 amendment verification |
+| docs/reviews/* | Updated | Build #6 reports and manifest |
+
+### Notes
+
+- No new AD; architectural direction unchanged.
+- OQ-CONV-06/07 added (Direct delete semantics; launch invite UX).
+
+---
+
 ## Build #5 — 2026-07-18 (Messaging Core — Conversation Model)
 
 **Branch:** feature/messaging-core-ad-007

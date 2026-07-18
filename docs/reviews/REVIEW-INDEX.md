@@ -2,90 +2,55 @@
 
 > Entry point for reviewers. Start here, then follow the recommended review sequence. For the machine-readable dashboard, open `review-manifest.yaml`. The Git repository is the source of truth.
 
-**Current Build:** #5 — 2026-07-18 (Messaging Core — Conversation Model) | **Branch:** feature/messaging-core-ad-007
-**Prior Builds:** #4 (Research RS-001..004), #3 (AD-001..006 Approved), #2 (ADRP Wave 1), #1 (documentation foundations)
+**Current Build:** #6 — 2026-07-18 (AD-007 Finalization Amendments) | **Branch:** feature/messaging-core-ad-007
+**Prior Builds:** #5 (AD-007 Approved), #4 (Research), #3 (AD-001..006), #2, #1
 
-> Build #5 completes the Conversation Model topic (WS-007 → AR-007 → AD-007 Approved → ADR-0031). **Await human approval before starting Message Model (AD-008).**
+> Build #6 strengthens AD-007 documentation (lifecycles, invariants, ownership, extensibility, aggregate diagrams) **without changing the approved design**. Confirm finalization, then approve starting Topic 2 (AD-008).
 
 ---
 
 ## Current Project Status
 
-- **Phase:** Messaging Core Architecture Sprint — Topic 1 complete; Topics 2–4 paused for human approval.
+- **Phase:** Messaging Core — AD-007 finalization amendments complete; awaiting human confirmation before AD-008.
 - **Decision coverage:** 7 of 50 Approved; 3 Under Review (AD-008..AD-010); 40 Proposed.
-- **Documentation completion:** 12 of 152 documents (~7.9%).
-- **Health:** AD-007 approved with RS-001 evidence, workshop, and critical review; INV-01 upheld.
+- **AD-007:** Approved + finalization amendments (v2.1); ADR-0031 Accepted.
 - **Defining constraint upheld:** Backend never decrypts message content (INV-01).
 
-## Sprint Outcome (Build #5)
+## Sprint Outcome (Build #6)
 
-| Decision | Verdict | Status |
-|---|---|---|
-| AD-007 Conversation Model | Approve with Changes | Approved |
-
-Workshop: WS-007 · Review: AR-007 · ADR: ADR-0031 Accepted · Domain: DOC-024.
+| Item | Result |
+|---|---|
+| Architectural direction | Unchanged (Alternative B) |
+| Mandatory amendments 1–6 | Complete |
+| Consistency validation | PASS |
+| New Architecture Decision | None |
 
 ## Review Scope (this build)
 
-Conversation Model only: workshop, architecture review, AD-007, ADR-0031, domain/architecture doc updates, review package.
+Documentation-only amendments to AD-007 and related artifacts listed in `CHANGES.md` Build #6.
 
-## Artifacts Created / Updated (this build)
+## Recommended Review Sequence
 
-1. WS-007 Conversation Model workshop
-2. AR-007 Architecture Review
-3. AD-007 (Approved, RS-001-cited)
-4. ADR template + ADR-0031
-5. Domain model overview (DOC-024)
-6. Architecture overview §4.1 + glossary terms
-7. Review package (this build)
-
-## Review Order
-
-```mermaid
-flowchart LR
-    RS[RS-001] --> WS[WS-007]
-    WS --> AR[AR-007]
-    AR --> AD[AD-007]
-    AD --> ADR[ADR-0031]
-    ADR --> DOM[DOC-024]
-```
+1. `AD-007` (v2.1) — lifecycle, membership, invariants, ownership, extensibility, diagrams
+2. `ADR-0031` / `DOC-024` / overview §4.1 / glossary
+3. `AR-007` §8 verification table
+4. `CROSS-REFERENCE-REPORT.md` Build #6
+5. Human confirmation → proceed to AD-008 Message Model
 
 ## Critical Documents
 
 | Document | Why critical |
 |---|---|
-| AD-007 / ADR-0031 | Normative conversation model for the messaging engine. |
-| RS-001 | Evidence base for AD-007. |
-| DOC-023 System Invariants | Backend-never-decrypts and related rules. |
-| DOC-024 Domain Model | Conversation/Membership aggregates and sequences. |
+| AD-007 v2.1 | Normative conversation architecture including amendments |
+| ADR-0031 | Ratified ADR |
+| DOC-024 | Domain model lifecycles and invariants |
+| RS-001 | Evidence base |
 
-## Known Risks
-
-| ID | Description | Severity |
-|---|---|---|
-| RISK-01 | E2EE limits server-side features (search, moderation, recovery). | High |
-| RISK-03 | Fan-out at large group scale is the primary performance bottleneck. | High |
-| RISK-06 | Message ID/ordering (AD-009) and sync (AD-010) still Under Review. | Medium |
-| R-007-02 | Membership event loss delaying re-key (mitigated via outbox + AD-020). | High |
-
-## Open Questions
+## Open Questions (non-blocking)
 
 | ID | Description | Owner |
 |---|---|---|
-| OQ-CONV-01 | Max group size at launch. | Product + Security |
-| OQ-CONV-04 | Group title/avatar encryption posture. | Security + Product |
-| OQ-INV-02 | Authoritative global ordering scheme (AD-009). | Architecture |
-| OQ-ARCH-02 | Selected E2EE protocol/library and audit status. | Security |
-
-## Pending ADRs
-
-See `ARCHITECTURE-DECISIONS-PENDING.md`. ADR-0031 Accepted. Highest remaining: ADR-0004, ADR-0008/0010, ADR-0020, ADR-0016.
-
-## Recommended Review Sequence
-
-1. `REVIEW-INDEX.md` (this file)
-2. `review-manifest.yaml`
-3. `BUILD-REPORT.md` (Build #5)
-4. `WS-007` → `AR-007` → `AD-007` → `ADR-0031` → `DOC-024`
-5. `QUALITY-REPORT.md` / `CROSS-REFERENCE-REPORT.md`
-6. Confirm human approval to proceed to AD-008 Message Model
+| OQ-CONV-01 | Max group size | Product + Security |
+| OQ-CONV-04 | Title/avatar encryption | Security + Product |
+| OQ-CONV-06 | Direct delete vs per-user hide | Product |
+| OQ-CONV-07 | Launch invite UX | Product |

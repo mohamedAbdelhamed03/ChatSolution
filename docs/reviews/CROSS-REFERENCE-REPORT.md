@@ -2,8 +2,33 @@
 
 > Automated validation against the manifests. Regenerated every build.
 
-**Current Build:** #5 — 2026-07-18 (Messaging Core — Conversation Model)
-**Prior Builds:** #4 (Research), #3 (AD-001..006), #2 (ADRP), #1
+**Current Build:** #6 — 2026-07-18 (AD-007 Finalization Amendments)
+**Prior Builds:** #5 (AD-007 Approved), #4 (Research), #3 (AD-001..006), #2, #1
+
+---
+
+## Build #6 — Finalization Consistency Review
+
+**Scope:** AD-007 v2.1, ADR-0031, DOC-024, DOC-013 §4.1, glossary, WS-007, AR-007.
+
+| Check | Result |
+|---|---|
+| Design still Alternative B (unified Conversation + Membership) | PASS |
+| No new Architecture Decision introduced | PASS |
+| Conversation lifecycle complete + Mermaid state diagram | PASS |
+| Membership lifecycle complete + effects (authz/notify/keys/sync/RM) | PASS |
+| Domain invariants explicit with D/A/DB enforcement | PASS |
+| Ownership model unambiguous; Direct N/A stated | PASS |
+| Future extensibility strategy documented (not implemented) | PASS |
+| Aggregate diagrams include Metadata, Settings, Role, boundaries | PASS |
+| Messages outside Conversation aggregate (consistent) | PASS |
+| Glossary terms aligned with AD-007/DOC-024 | PASS |
+| ADR-0031 / DOC-024 / overview do not contradict AD-007 | PASS |
+| No duplicate competing state machines | PASS |
+| Channel still gated until FS-03 | PASS |
+| INV-01 upheld (metadata-only) | PASS |
+
+**Build #6 result: PASS.**
 
 ---
 

@@ -5,7 +5,7 @@
 | **Title** | Glossary Overview |
 | **Status** | Completed |
 | **Owner** | Architecture |
-| **Version** | 1.1.0 |
+| **Version** | 1.2.0 |
 | **Last Updated** | 2026-07-18 |
 | **Document ID** | DOC-003 |
 
@@ -55,8 +55,11 @@ A single, shared vocabulary prevents specification drift and contradictory desig
 | Ciphertext | Encrypted message content produced on a client. The only form of content the backend stores or routes. |
 | Envelope | The transport structure carrying ciphertext plus non-sensitive routing metadata. Defined authoritatively in `85.4-encryption-envelope`. |
 | Metadata | Non-content data the backend may store/route on (IDs, timestamps, participants). Minimized per `85.6-message-metadata`. |
-| Conversation | A messaging context identified by an opaque `ConversationId`, with type `Direct` (fixed two-party), `Group` (mutable membership/roles), or `Channel` (future; not creatable at launch). See AD-007 / ADR-0031. |
-| Membership | Binding of a `UserId` to a Conversation (with role for groups). Devices inherit the user's membership for authorization. |
+| Conversation | Aggregate root for a messaging context (`ConversationId`), typed `Direct` / `Group` / `Channel`, with lifecycle state (`Created`, `Active`, `Archived`, `Frozen`, `Deleted`). See AD-007 / ADR-0031. |
+| Membership | Entity binding a `UserId` to a Conversation, with membership state (`Invited`, `Pending`, `Active`, `Left`, `Removed`, `Blocked`) and role. Devices inherit the user's membership for authorization. |
+| Role | Authorization rank within a Group/Channel: `owner`, `admin`, `moderator`, or `member`. Direct conversations have peer members only (no owner hierarchy). |
+| Conversation Metadata | Non-content display attributes of a conversation (e.g., display name reference); minimized per privacy posture. |
+| Conversation Settings | Non-content configuration (e.g., `maxMembers`, type-specific flags). |
 | Device | A distinct client instance with its own cryptographic identity. |
 | Message ID | The single immutable global identifier of a message (see invariant INV-02). |
 

@@ -4,13 +4,14 @@
 |---|---|
 | **Review ID** | AR-007 |
 | **Topic** | Conversation Model |
-| **Status** | Completed |
+| **Status** | Completed — Finalization amendments verified |
 | **Reviewer** | Chief Software Architect (Architecture Review Board) |
 | **Reviewed Artifact** | [WS-007](../workshops/WS-007-conversation-model.md) |
 | **Evidence** | [RS-001](../../research/RS-001-conversation-models.md) |
 | **Decision Under Review** | [AD-007](../AD-007-conversation-model.md) |
 | **Date** | 2026-07-18 |
 | **Verdict** | Approve with Changes |
+| **Version** | 1.1.0 |
 
 > Assumption for this review: every workshop recommendation is wrong until it survives critical challenge.
 
@@ -133,3 +134,22 @@ Alternative B is the correct foundation for the messaging engine. The workshop r
 | Security Architect | Architecture Review Board | Approve with Changes (membership events mandatory) |
 | Distributed Systems Engineer | Architecture Review Board | Approve with Changes (pair uniqueness + projections) |
 | Product Architect | Architecture Review Board | Approve with Changes (Channel gated) |
+
+---
+
+## 8. Finalization Amendment Verification (2026-07-18)
+
+Mandatory documentation amendments were applied to AD-007 without redesigning Alternative B. Consistency check:
+
+| Amendment | Present in AD-007 | Mirrored in DOC-024 / ADR-0031 |
+|---|---|---|
+| Conversation lifecycle + state diagram | Yes | Yes |
+| Membership lifecycle + effects | Yes | Yes |
+| Domain invariants + enforcement layers | Yes | Yes |
+| Ownership model (Direct N/A explicit) | Yes | Yes |
+| Future extensibility strategy | Yes | Yes |
+| Aggregate structure diagrams | Yes | Yes |
+
+**Gaps closed:** lifecycle/ownership/invariants are no longer implicit.  
+**Design unchanged:** Unified Conversation aggregate, first-class Membership, canonical Direct, event-driven membership.  
+**Verdict unchanged:** Approve with Changes (amendments strengthen documentation only).

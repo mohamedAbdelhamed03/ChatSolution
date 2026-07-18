@@ -2,8 +2,21 @@
 
 > Per-artifact quality assessment. Scores are out of 10. Regenerated every build.
 
-**Current Build:** #5 — 2026-07-18 (Messaging Core — Conversation Model)
-**Prior Builds:** #4 (Research), #3 (AD-001..AD-006), #2 (ADRP Wave 1), #1
+**Current Build:** #6 — 2026-07-18 (AD-007 Finalization Amendments)
+**Prior Builds:** #5 (AD-007), #4 (Research), #3 (AD-001..AD-006), #2, #1
+
+---
+
+## Build #6 — Finalization Documentation Quality
+
+| Artifact | Completeness | Consistency | Clarity | Overall |
+|---|---|---|---|---|
+| AD-007 v2.1 amendments | 10 | 10 | 9 | 9.7 |
+| ADR-0031 amended | 9 | 10 | 9 | 9.3 |
+| DOC-024 v1.1 | 10 | 10 | 9 | 9.7 |
+| Cross-doc alignment | 10 | 10 | 9 | 9.7 |
+
+**Design change:** None. **New AD:** None. Gaps (lifecycle/ownership/invariants/extensibility/diagrams) closed.
 
 ---
 

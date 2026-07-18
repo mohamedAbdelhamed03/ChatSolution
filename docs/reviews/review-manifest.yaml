@@ -5,9 +5,9 @@ version: 2
 # out-of-band on push). base_commit records the branch point.
 
 build:
-  id: BUILD-0005
-  timestamp: 2026-07-18T12:30:00+03:00
-  phase: Messaging Core Architecture Sprint - Topic 1 Conversation Model (AD-007)
+  id: BUILD-0006
+  timestamp: 2026-07-18T12:45:00+03:00
+  phase: Messaging Core - AD-007 finalization amendments (documentation only)
   branch: feature/messaging-core-ad-007
   commit: HEAD of feature/messaging-core-ad-007
   base_branch: main
@@ -16,9 +16,10 @@ build:
 
 review_scope:
   description: >-
-    Complete Conversation Model lifecycle using RS-001 evidence: workshop WS-007,
-    critical review AR-007, approve AD-007, ratify ADR-0031, update domain and
-    architecture documentation. Do not proceed to AD-008 until human approval.
+    Mandatory documentation amendments to AD-007 (lifecycles, invariants,
+    ownership, extensibility, aggregate diagrams) without redesign. Validate
+    consistency across ADR-0031, DOC-024, overview, glossary, WS-007, AR-007.
+    Do not proceed to AD-008 until human confirms AD-007 finalized.
   research_documents:
     - path: docs/research/RS-001-conversation-models.md
       feeds: AD-007
@@ -62,13 +63,14 @@ summary:
   decision_approval_percentage: 14.0
 
 review_status:
-  status: Topic Complete - AD-007 Approved; awaiting human approval to start AD-008
+  status: AD-007 amendments complete; awaiting human finalization confirmation before AD-008
   reviewed_by: Chief Software Architect (Messaging Core Architecture Sprint)
   review_date: 2026-07-18
   sprint_result:
     approved: [AD-001, AD-002, AD-003, AD-004, AD-005, AD-006, AD-007]
     rejected: []
     needs_revision: []
+    amendments_applied: [AD-007]
 
 review_order:
   - path: docs/research/RS-001-conversation-models.md
@@ -209,8 +211,8 @@ validation:
   broken_references: PASS
   circular_dependencies: PASS
 
-architecture_status: On Track - AD-007 Approved; AD-008..AD-010 next after human approval
-security_status: E2EE and backend-never-decrypt upheld; membership events mandated for re-key hooks
+architecture_status: On Track - AD-007 Approved + finalized documentation amendments; await human before AD-008
+security_status: E2EE and backend-never-decrypt upheld; membership lifecycle drives authz and re-key hooks
 completion_percentage: 14.0
 
 known_risks:

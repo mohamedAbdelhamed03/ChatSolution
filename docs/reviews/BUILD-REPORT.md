@@ -4,6 +4,41 @@
 
 ---
 
+## Build #6 — 2026-07-18 (AD-007 Finalization Amendments)
+
+| Field | Value |
+|---|---|
+| **Build ID** | BUILD-0006 |
+| **Build Timestamp** | 2026-07-18T12:45:00+03:00 |
+| **Branch** | feature/messaging-core-ad-007 |
+| **Current Phase** | Messaging Core — AD-007 mandatory documentation amendments |
+| **Design change** | None (Alternative B retained) |
+
+### Scope
+
+Strengthen AD-007 / ADR-0031 / DOC-024 and related docs with: Conversation lifecycle, Membership lifecycle, domain invariants (enforcement layers), ownership model, future extensibility strategy, aggregate structure diagrams. No new Architecture Decision. No redesign.
+
+### Amendments Completed
+
+| # | Amendment | Status |
+|---|---|---|
+| 1 | Conversation lifecycle + Mermaid state diagram | Done |
+| 2 | Membership lifecycle + cross-cutting effects | Done |
+| 3 | Domain invariants (Direct/Group/Channel) + D/A/DB | Done |
+| 4 | Ownership model (Owner/Admin/Moderator/Member) | Done |
+| 5 | Future extensibility strategy | Done |
+| 6 | Aggregate structure class + ER diagrams | Done |
+
+### Artifacts Updated
+
+AD-007 v2.1, ADR-0031, DOC-024, DOC-013 §4.1, glossary, WS-007, AR-007 §8, review package.
+
+### Validation
+
+Cross-reference and consistency review: PASS (see CROSS-REFERENCE-REPORT Build #6). Awaiting human confirmation that AD-007 is finalized; then Topic 2 (AD-008) may proceed.
+
+---
+
 ## Build #5 — 2026-07-18 (Messaging Core — Conversation Model)
 
 | Field | Value |
