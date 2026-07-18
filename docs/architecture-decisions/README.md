@@ -98,7 +98,13 @@ Documentation generation is **paused** while the ADRP is built. Downstream docum
 
 | Topic | Research | Workshop | Review | Decision | ADR |
 |---|---|---|---|---|---|
-| Delivery & Acknowledgements | RS-005 | WS-042 | AR-042 | AD-042 Under Review | ADR-0018 (planned) |
+| Delivery & Acknowledgements | RS-005 | WS-042 | AR-042 | AD-042 **Approved** | ADR-0018 **Accepted** |
+
+### Messaging Services Sprint Progress (Phase 4) — continued
+
+| Topic | Research | Workshop | Review | Decision | ADR |
+|---|---|---|---|---|---|
+| Read Receipts | RS-006 | WS-044 | — | AD-044 Proposed | TBD |
 
 ## Validation Gate (per decision)
 

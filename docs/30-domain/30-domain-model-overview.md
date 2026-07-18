@@ -524,6 +524,6 @@ Aligned with `00-glossary-overview`.
 - AD-008 / ADR-0032 / RS-002
 - AD-009 / ADR-0008 / ADR-0010 / RS-003
 - AD-010 / ADR-0016 / ADR-0011 / RS-004
-- AD-042 / RS-005 / ADR-0018 (planned)
+- AD-042 / RS-005 / ADR-0018 **Accepted**
 - `20-architecture-overview` (DOC-013)
 - `29.5-system-invariants` (DOC-023)

@@ -2022,7 +2022,7 @@ documents:
     category: ADR
     phase: Phase-2
     priority: Critical
-    status: Pending
+    status: Completed
     owner: Architecture
     dependencies: [DOC-120, DOC-020, DOC-023]
     blocks: []
