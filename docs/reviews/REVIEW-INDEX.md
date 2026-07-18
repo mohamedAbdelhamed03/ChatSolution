@@ -11,8 +11,8 @@
 ## Current Project Status
 
 - **Phase 3:** Closed. AD-007..AD-010 Approved. Baseline established.
-- **Phase 4:** In progress. Sprint 1 research/workshop complete (RS-005, WS-042).
-- **Decision gate:** Approve WS-042 lean → proceed to AR-042 / AD-042.
+- **Phase 4:** In progress. Sprint 1: AR-042 approved; AD-042 Under Review.
+- **Decision gate:** Approve AD-042 → ratify ADR-0018 + realtime/protocol docs.
 - **Decision coverage:** 10 of 54 Approved (AD-001..AD-010); AD-051..AD-054 newly catalogued Proposed.
 
 ## Messaging Core (baseline)
@@ -43,11 +43,12 @@ Do **not** use retired placeholder labels that conflict with catalog AD-011..AD-
 | Artifact | Path | Status |
 |---|---|---|
 | RS-005 | [research/RS-005-delivery-and-acknowledgements.md](../research/RS-005-delivery-and-acknowledgements.md) | Complete |
-| WS-042 | [workshops/WS-042-delivery-and-acknowledgements.md](../architecture-decisions/workshops/WS-042-delivery-and-acknowledgements.md) | Awaiting Decision |
-| AR-042 / AD-042 | — | Not started |
+| WS-042 | [workshops/WS-042-delivery-and-acknowledgements.md](../architecture-decisions/workshops/WS-042-delivery-and-acknowledgements.md) | Complete |
+| AR-042 | [reviews/AR-042-delivery-and-acknowledgements.md](../architecture-decisions/reviews/AR-042-delivery-and-acknowledgements.md) | Approved |
+| AD-042 | [AD-042-delivery-semantics.md](../architecture-decisions/AD-042-delivery-semantics.md) | Under Review |
 
 ## Recommended Reading
 
 1. DOC-154 → DOC-155 → DOC-156
-2. RS-005 → WS-042
-3. Approve workshop lean to authorize AR-042 / AD-042
+2. RS-005 → WS-042 → AR-042 → AD-042
+3. Approve AD-042 to authorize ADR-0018 ratification

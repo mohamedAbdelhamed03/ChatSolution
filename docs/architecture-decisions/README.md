@@ -98,7 +98,7 @@ Documentation generation is **paused** while the ADRP is built. Downstream docum
 
 | Topic | Research | Workshop | Review | Decision | ADR |
 |---|---|---|---|---|---|
-| Delivery & Acknowledgements | RS-005 | WS-042 | — | AD-042 Proposed | ADR-0018 (planned) |
+| Delivery & Acknowledgements | RS-005 | WS-042 | AR-042 | AD-042 Under Review | ADR-0018 (planned) |
 
 ## Validation Gate (per decision)
 

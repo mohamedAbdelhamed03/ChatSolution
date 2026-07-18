@@ -428,7 +428,51 @@ S-INV-01..08 — forward-only contiguous cursor; idempotent pages; authz; Messag
 
 ---
 
-## 13. Terminology
+## 13. Delivery & Acknowledgements (AD-042)
+
+### 13.1 Model
+
+**Dual acknowledgement:** **AcceptAck** (AD-009) + **DeliveryAck** (AD-042 per-device projection). Delivery state is **operational**, not part of the Message aggregate (AD-008).
+
+| Ack | Meaning | Scope |
+|---|---|---|
+| AcceptAck | Server durable accept + Sequence | One per MessageId |
+| DeliveryAck | Device successfully applied message | One per (MessageId, DeviceId) |
+
+Push (AD-010) is liveness only. Sync remains authoritative for recovery. DeliveryAck does not imply read (AD-044).
+
+### 13.2 Delivery flow
+
+```mermaid
+sequenceDiagram
+    participant API as Messaging API
+    participant D as Recipient Device
+    participant P as Delivery Projection
+    API->>API: AcceptAck(MessageId, Sequence)
+    API->>D: Push and/or Sync envelope
+    D->>D: Verify; dedup; durable local apply
+    D->>P: DeliveryAck(MessageId, DeviceId)
+```
+
+### 13.3 DeliveryAck emission (all required)
+
+1. Integrity verified.
+2. Authorization validated.
+3. Duplicate detection complete.
+4. Durable local apply.
+5. Available for presentation.
+
+### 13.4 Invariants (summary)
+
+D-INV-01..10 — projections only; idempotent per (MessageId, DeviceId); AcceptAck precedes DeliveryAck; push not sole authority; Sequence unchanged. Full table: AD-042.
+
+### 13.5 Events
+
+`MessageAccepted` (existing), `MessageDeliveredToDevice`, optional `DeliveryAckBatch`.
+
+---
+
+## 14. Terminology
 
 | Term | Meaning |
 |---|---|
@@ -442,6 +486,8 @@ S-INV-01..08 — forward-only contiguous cursor; idempotent pages; authz; Messag
 | Tombstone | Soft-deleted message placeholder retaining id/sequence |
 | Delta sync | Fetch envelopes with Sequence greater than cursor |
 | Receipt projection | Delivered/Read state outside Message aggregate |
+| AcceptAck | Server acknowledgement of durable accept + Sequence (AD-009) |
+| DeliveryAck | Per-device acknowledgement of successful local apply (AD-042) |
 
 Aligned with `00-glossary-overview`.
 
@@ -454,16 +500,20 @@ Aligned with `00-glossary-overview`.
 | Domain model drifts from AD-007..010 | Inconsistent implementation | ADRs normative |
 | Push-only clients | Lost messages | Mandatory reconnect sync |
 | Cursor skip over gaps | Divergence | Contiguous advancement tests |
+| DeliveryAck on push only | False "delivered" UX | AD-042 emission gate + SDK contract |
 
 ## Future Considerations
 
 - Optional global changefeed; HLC multi-region alignment.
-- Wire protocol DOC `85.9`.
+- Wire protocol DOC `85.9`; delivery state machine DOC `85.5`.
+- AD-044 read receipts on DeliveryAck foundation.
 
 ## Open Questions
 
 | ID | Question | Owner |
 |---|---|---|
+| OQ-DEL-01 | User-level delivered rollup policy | Product |
+| OQ-DEL-03 | Offline retention TTL | Product + SRE |
 | OQ-SYNC-01 | New-device backfill window | Product |
 | OQ-SYNC-04 | Offline ciphertext retention TTL | Product + SRE |
 | OQ-ORD-01 | Counter implementation pattern | Backend |
@@ -474,5 +524,6 @@ Aligned with `00-glossary-overview`.
 - AD-008 / ADR-0032 / RS-002
 - AD-009 / ADR-0008 / ADR-0010 / RS-003
 - AD-010 / ADR-0016 / ADR-0011 / RS-004
+- AD-042 / RS-005 / ADR-0018 (planned)
 - `20-architecture-overview` (DOC-013)
 - `29.5-system-invariants` (DOC-023)
