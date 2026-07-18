@@ -90,6 +90,8 @@ Documentation generation is **paused** while the ADRP is built. Downstream docum
 
 **Entry-point overview:** [`docs/20-architecture/20.1-messaging-core-architecture.md`](../20-architecture/20.1-messaging-core-architecture.md) (DOC-154).
 
+**Phase 3 closure:** [`docs/20-architecture/20.2-phase-3-messaging-core-completion.md`](../20-architecture/20.2-phase-3-messaging-core-completion.md) (DOC-155) — Messaging Core **COMPLETE**.
+
 ## Validation Gate (per decision)
 
 Before a recommendation is saved it must satisfy: alternatives compared; trade-offs explained; risks documented; industry practices summarized; security impact analyzed; scalability impact analyzed; related documents listed; related ADRs listed; dependencies valid; recommendation justified.

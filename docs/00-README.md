@@ -103,7 +103,7 @@ flowchart TD
 
 ## 4. Reading Order
 
-For newcomers, read top-down: **Vision → Requirements → Architecture Principles & Invariants → Architecture Overview → Messaging Core Architecture (DOC-154) → Domain → Security (E2EE) → Data → Realtime → Protocol → Features → API → Infrastructure → Quality → Operations.** ADRs are read alongside the documents they govern. The build/write order is governed by `document-manifest.yaml`, not by this list.
+For newcomers, read top-down: **Vision → Requirements → Architecture Principles & Invariants → Architecture Overview → Messaging Core Architecture (DOC-154) → Phase 3 Completion (DOC-155) → Domain → Security (E2EE) → Data → Realtime → Protocol → Features → API → Infrastructure → Quality → Operations.** ADRs are read alongside the documents they govern. The build/write order is governed by `document-manifest.yaml`, not by this list.
 
 ## 5. Naming Conventions
 
